@@ -5,7 +5,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-class BookCatalogPage extends React.Component {
+export class BookCatalogPage extends React.Component {
     constructor(props, context) {
         super(props, context);
     }

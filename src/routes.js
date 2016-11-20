@@ -3,7 +3,7 @@ import { Route, IndexRoute } from 'react-router';
 
 /* Page Components */
 import App from './components/App';
-import BookCatalogPage from './components/bookCatalog/BookCatalogPage';
+import BookCatalogPage from './components/bookCatalog/BookCatalogPage'; //eslint-disable-line import/no-named-as-default
 import DisplayPage from './components/display/DisplayPage';
 import HomePage from './components/home/HomePage';
 

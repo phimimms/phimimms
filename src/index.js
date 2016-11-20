@@ -1,3 +1,4 @@
+/* eslint-disable import/default */
 import 'babel-polyfill';
 import configureStore from './store/configureStore';
 import { loadBooks } from './actions/bookActions';
