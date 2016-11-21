@@ -1,4 +1,10 @@
 html, body {
     cursor:             default;
-    font-family:        'Helvetica', 'Arial', sans-serif;
+    font-family:        'Roboto', 'Helvetica', 'Arial', sans-serif;
+    margin:             0;
+}
+
+/* Removes Underline on Route Links (React-Router) */
+a {
+    text-decoration:    none;
 }

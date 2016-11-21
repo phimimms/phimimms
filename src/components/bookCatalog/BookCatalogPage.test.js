@@ -1,7 +1,12 @@
 import { BookCatalogPage } from './BookCatalogPage';
 //import expect from 'expect';
 import { mount } from 'enzyme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React from 'react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+/* Needed for Material-UI click events */
+injectTapEventPlugin();
 
 function setup({ actions = {}, books = [] } = {}) {
     const props = {
@@ -9,7 +14,7 @@ function setup({ actions = {}, books = [] } = {}) {
         books
     };
 
-    return mount(<BookCatalogPage {...props} />);
+    return mount(<MuiThemeProvider><BookCatalogPage {...props} /></MuiThemeProvider>);
 }
 
 describe('Book Catalog Page', () => {

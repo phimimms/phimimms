@@ -1,12 +1,15 @@
-/* eslint-disable import/default */
 import 'babel-polyfill';
-import configureStore from './store/configureStore';
+import configureStore from './store/configureStore'; //eslint-disable-line import/default
 import { loadBooks } from './actions/bookActions';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, browserHistory } from 'react-router';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import routes from './routes';
+
+/* Needed for Material-UI click events */
+injectTapEventPlugin();
 
 /* Creates Redux Store */
 const store = configureStore();

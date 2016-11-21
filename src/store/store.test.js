@@ -1,4 +1,3 @@
-/*
 import * as bookActions from '../actions/bookActions';
 import expect from 'expect';
 import initialState from '../reducers/initialState';
@@ -10,7 +9,7 @@ describe('Store', () => {
         const store = createStore(rootReducer, initialState);
 
         const book = {
-            title: 'Dune'
+            id: 'Dune'
         };
 
         const action = bookActions.saveBookSuccess(book);
@@ -19,7 +18,28 @@ describe('Store', () => {
         const actual = store.getState().books[0];
 
         expect(actual).toEqual(book);
-        expect(actual.id).toExist();
+    });
+
+    it('Save Existing Book', () => {
+        const store = createStore(rootReducer, initialState);
+
+        const book = {
+            id: 'Dune'
+        };
+
+        let action = bookActions.saveBookSuccess(book);
+        store.dispatch(action);
+
+        const newBook = {
+            id: 'Dune',
+            authorId: 'frank-herbert'
+        };
+
+        action = bookActions.saveBookSuccess(newBook);
+        store.dispatch(action);
+
+        const actual = store.getState().books[0];
+
+        expect(actual).toEqual(newBook);
     });
 });
-*/
