@@ -1,4 +1,5 @@
 /* The Initial State of the Redux Store */
 export default {
-    books: []
+    books: [],
+    home: {}
 };

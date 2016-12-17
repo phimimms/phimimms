@@ -6,6 +6,10 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 
 const Header = () => {
+    const classNames = {
+        el: 'unselectable'
+    };
+
     const styles = {
         el: {
             backgroundColor: colors.indigo500
@@ -18,14 +22,15 @@ const Header = () => {
     /**
      * Returns the application to the home page
      */
-    const onHomeButtonClick = () => {
+    const onHomeButtonClick = function() {
         browserHistory.push('/');
     };
 
     return (
         <AppBar
-            onLeftIconButtonTouchTap={onHomeButtonClick}
+            className={classNames.el}
             iconElementLeft={<IconButton><ActionHome color={colors.grey100}/></IconButton>}
+            onLeftIconButtonTouchTap={onHomeButtonClick}
             style={styles.el}
             title={<span style={styles.title}>The Daily Phi</span>}
         />

@@ -1,6 +1,5 @@
 import * as bookActions from '../../actions/bookActions';
 import BookList from './BookList';
-import Header from '../common/Header';
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -15,7 +14,6 @@ export class BookCatalogPage extends React.Component {
 
         return (
             <div>
-                <Header />
                 <h1>Book Catalog</h1>
                 <BookList books={books} />
             </div>
