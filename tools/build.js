@@ -5,9 +5,9 @@ process.env.NODE_ENV = 'production';
 
 console.log('Generating minified bundle for production...');
 
-webpack(webpackConfig).run((error, stats) => {
-    if (error) {
-        console.log(error);
+webpack(webpackConfig).run((err, stats) => {
+    if (err) {
+        console.log(err);
         return 1;
     }
 

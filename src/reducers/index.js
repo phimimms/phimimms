@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux';
 
 /* Reducers */
-import books from './bookReducer';
+import bookCatalog from './bookCatalogReducer';
+import home from './homeReducer';
 
 /* Builds the Root Reducer */
 const rootReducer = combineReducers({
-    books
+    bookCatalog,
+    home
 });
 
 export default rootReducer;

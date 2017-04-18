@@ -1,16 +1,16 @@
-import { BookCatalogPage } from './BookCatalogPage';
+/*
+import { BookCatalogPage } from '../BookCatalogPage';
 //import expect from 'expect';
 import { mount } from 'enzyme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React from 'react';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-/* Needed for Material-UI click events */
+/* Needed for Material-UI click events
 injectTapEventPlugin();
 
-function setup({ actions = {}, books = [] } = {}) {
+function setup({ books = [] } = {}) {
     const props = {
-        actions,
         books
     };
 
@@ -22,3 +22,4 @@ describe('Book Catalog Page', () => {
         setup();
     });
 });
+*/

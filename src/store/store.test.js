@@ -1,5 +1,7 @@
 import * as bookActions from '../actions/bookActions';
 import expect from 'expect';
+import * as homeActions from '../actions/homeActions';
+import * as homeViews from '../dictionary/homeViews';
 import initialState from '../reducers/initialState';
 import rootReducer from '../reducers';
 import { createStore } from 'redux';
@@ -9,13 +11,13 @@ describe('Store', () => {
         const store = createStore(rootReducer, initialState);
 
         const book = {
-            id: 'Dune'
+            title: 'Dune'
         };
 
         const action = bookActions.saveBookSuccess(book);
         store.dispatch(action);
 
-        const actual = store.getState().books[0];
+        const actual = store.getState().bookCatalog.books[0];
 
         expect(actual).toEqual(book);
     });
@@ -24,22 +26,35 @@ describe('Store', () => {
         const store = createStore(rootReducer, initialState);
 
         const book = {
-            id: 'Dune'
+            title: 'Dune'
         };
 
         let action = bookActions.saveBookSuccess(book);
         store.dispatch(action);
 
         const newBook = {
-            id: 'Dune',
-            authorId: 'frank-herbert'
+            authorId: 'frank-herbert',
+            title: 'Dune'
         };
 
         action = bookActions.saveBookSuccess(newBook);
         store.dispatch(action);
 
-        const actual = store.getState().books[0];
+        const actual = store.getState().bookCatalog.books[0];
 
         expect(actual).toEqual(newBook);
+    });
+
+    it('Set Home View', () => {
+        const store = createStore(rootReducer, initialState);
+
+        const componentName = homeViews.BOOK_CATALOG;
+
+        let action = homeActions.setHomeViewSuccess(componentName);
+        store.dispatch(action);
+
+        const actual = store.getState().home.componentName;
+
+        expect(actual).toEqual(componentName);
     });
 });

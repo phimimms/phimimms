@@ -1,9 +1,9 @@
 import cheerio from 'cheerio';
 import fs from 'fs';
 
-fs.readFile('src/index.html', 'utf8', (error, markup) => {
-    if (error) {
-        return console.log(error);
+fs.readFile('src/index.html', 'utf8', (err, markup) => {
+    if (err) {
+        return console.log(err);
     }
 
     const $ = cheerio.load(markup);

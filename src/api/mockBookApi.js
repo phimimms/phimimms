@@ -1,18 +1,6 @@
-import delay from './delay';
-
 /**
- * The entity to represent a book
- * @typedef     {Object}    mockBookApi~Book
- * @property    {String}    id          The identifier of the book
- * @property    {String}    title       The title of the book
- * @property    {String}    authorId    The identifier of the book's author
- * @property    {Number}    length      The number of pages in the books
- * @property    {Number}    progress    The reading completion percentage
- */
-
-/**
- * The mock book data
- * @type {Array.<module:mockBookApi~Book>}
+ * The mock book data.
+ * @type {Array.<module:bookApi~Book>}
  */
 const books = [
     {
@@ -47,13 +35,13 @@ const books = [
 
 /**
  * Generates a book's identifier based on its title.
- * @param {module:mockBookApi~Book} book    The book entity
+ * @param {module:bookApi~Book} book    The book entity
  */
-const generateId = (book) => {
+const generateId = function(book) {
     return book.title.replace(new RegExp(' ', 'g'), '-');
 };
 
-class BookApi {
+export default class BookApi {
     /**
      * Deletes the book corresponding to the given identifier value.
      * @param   {String}    bookId  The identifier of the book to delete
@@ -61,18 +49,14 @@ class BookApi {
      */
     static deleteBook(bookId) {
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const indexOfBookToDelete = books.findIndex(book => {
-                    book.id === bookId;
-                });
+            const indexOfBookToDelete = books.findIndex(book => book.id === bookId);
 
-                if (~indexOfBookToDelete) {
-                    reject(`A book with the identifier '${bookId}' does not exist.`);
-                }
+            if (~indexOfBookToDelete) {
+                return reject(`A book with the identifier '${bookId}' does not exist.`);
+            }
 
-                books.splice(indexOfBookToDelete, 1);
-                resolve();
-            }, delay);
+            books.splice(indexOfBookToDelete, 1);
+            resolve();
         });
     }
 
@@ -82,9 +66,7 @@ class BookApi {
      */
     static getAllBooks() {
         return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(Object.assign([], books));
-            }, delay);
+            resolve(Object.assign([], books));
         });
     }
 
@@ -92,33 +74,35 @@ class BookApi {
      * Saves the given book to the list.
      * If the book is new to the list, then it is added to the list.
      * If the book is in the list, then its entry is updated with the given entity.
-     * @param   {module:mockBookApi~Book}   book    The book entity to save
+     * @param   {module:bookApi~Book}   book    The book entity to save
      * @return  {Promise}
      */
     static saveBook(book) {
         book = Object.assign({}, book);
 
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                const minBookTitleLength = 1;
-                if (book.title.length < minBookTitleLength) {
-                    reject(`Title must be at least ${minBookTitleLength} characters.`);
-                }
+            const minBookTitleLength = 1;
+            if (book.title.length < minBookTitleLength) {
+                return reject(`Title must be at least ${minBookTitleLength} characters.`);
+            }
 
-                if (book.id) {
-                    /* Replaces the corresponding entry with the updated book data */
-                    const existingBookIndex = books.findIndex(a => a.id == book.id);
-                    books.splice(existingBookIndex, 1, book);
-                } else {
-                    /* Adds the new book */
-                    book.id = generateId(book);
-                    books.push(book);
-                }
+            let bookIndex = books.length;
 
-                resolve(book);
-            }, delay);
+            if (book.id) {
+                /* Replaces the corresponding entry with the updated book entity */
+                bookIndex = books.findIndex(a => a.id == book.id);
+                if (~bookIndex) {
+                    return reject(`A book with the identifier '${book.id}' does not exist.`);
+                }
+            } else {
+                /* Adds the new book */
+                book.id = generateId(book);
+            }
+
+            /* Updates the book list */
+            books.splice(bookIndex, 1, book);
+
+            resolve(book);
         });
     }
 }
-
-export default BookApi;
