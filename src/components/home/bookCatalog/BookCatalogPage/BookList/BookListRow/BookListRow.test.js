@@ -1,12 +1,14 @@
-/*
 import BookListRow from '../BookListRow';
 import expect from 'expect';
 import { shallow } from 'enzyme';
 import React from 'react';
+import { TableRow } from 'material-ui/Table';
 
-function setup(book) {
+function setup({ book = {}, deleteBook, saveBook }) {
     const props = {
-        book
+        book,
+        deleteBook: deleteBook || Function.prototype,
+        saveBook: saveBook || Function.prototype
     };
 
     return shallow(<BookListRow {...props} />);
@@ -14,9 +16,7 @@ function setup(book) {
 
 describe('Book List Row', () => {
     it('Renders <div> with Book Title as innerHTML', () => {
-        const wrapper = setup({title: 'Batman'});
-        expect(wrapper.find('div').length).toBe(1);
-        expect(wrapper.find('div').text()).toEqual('Batman');
+        const wrapper = setup({});
+        expect(wrapper.find(TableRow).length).toBe(1);
     });
 });
-*/
