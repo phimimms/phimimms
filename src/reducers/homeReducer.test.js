@@ -6,7 +6,7 @@ import expect from 'expect';
 describe('Home Reducer', () => {
     it('Set Home View', () => {
         const initialState = {
-            componentName: homeViews.LANDING
+            componentName: homeViews.MENU
         };
 
         const componentName = homeViews.BOOK_CATALOG;

@@ -7,6 +7,6 @@ export default {
         deadline: null
     },
     home: {
-        componentName: homeViews.LANDING
+        componentName: homeViews.MENU
     }
 };

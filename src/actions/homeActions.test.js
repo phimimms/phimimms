@@ -1,4 +1,3 @@
-/*
 import * as actionTypes from './actionTypes';
 import expect from 'expect';
 import * as homeActions from './homeActions';
@@ -22,7 +21,7 @@ describe('Home Actions', () => {
             { type: 'SET_HOME_VIEW', componentName }
         ];
 
-        const store = mockStore({ componentName: homeViews.LANDING }, expectedActions);
+        const store = mockStore({ componentName: homeViews.MENU }, expectedActions);
         store.dispatch(homeActions.setHomeView(componentName))
             .then(
                 () => {
@@ -34,4 +33,3 @@ describe('Home Actions', () => {
             );
     });
 });
-*/

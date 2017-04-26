@@ -37,7 +37,7 @@ TextField.propTypes = {
     isFloating: PropTypes.bool,
     label: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    onChange: PropTypes.func,
+    onChange: PropTypes.func.isRequired,
     value: PropTypes.string.isRequired
 };
 

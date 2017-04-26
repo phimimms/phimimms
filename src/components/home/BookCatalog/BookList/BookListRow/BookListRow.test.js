@@ -1,6 +1,7 @@
-import BookListRow from '../BookListRow';
+import { BookListRow } from '../BookListRow';
 import expect from 'expect';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import React from 'react';
 import { TableRow } from 'material-ui/Table';
 
@@ -11,11 +12,11 @@ function setup({ book = {}, deleteBook, saveBook }) {
         saveBook: saveBook || Function.prototype
     };
 
-    return shallow(<BookListRow {...props} />);
+    return mount(<MuiThemeProvider><BookListRow {...props} /></MuiThemeProvider>);
 }
 
 describe('Book List Row', () => {
-    it('Renders <div> with Book Title as innerHTML', () => {
+    it('Renders <TableRow>', () => {
         const wrapper = setup({});
         expect(wrapper.find(TableRow).length).toBe(1);
     });

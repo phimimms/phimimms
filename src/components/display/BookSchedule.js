@@ -2,6 +2,7 @@ import './BookSchedule/BookSchedule.scss';
 import { getDailySchedule } from '../../util/bookSchedule';
 import BookScheduleRow from './BookSchedule/BookScheduleRow';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 const BookSchedule = ({ bookDeadline, books }) => {
     const schedule = getDailySchedule(bookDeadline, books);
@@ -24,4 +25,11 @@ BookSchedule.propTypes = {
     books: PropTypes.array.isRequired
 };
 
-export default BookSchedule;
+function mapStateToProps(state) {
+    return {
+        bookDeadline: state.bookCatalog.deadline,
+        books: state.bookCatalog.books
+    };
+}
+
+export default connect(mapStateToProps)(BookSchedule);

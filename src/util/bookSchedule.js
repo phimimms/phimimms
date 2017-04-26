@@ -47,7 +47,7 @@ export const getDailySchedule = function(deadline, books) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const duration = Math.ceil((deadline.valueOf() - today) / 1000 / 60 / 60 / 24);
+    const duration = Math.ceil((deadline.valueOf() - today.valueOf()) / 1000 / 60 / 60 / 24);
 
     let avgProgress = Math.ceil(getRemainingProgress(books) / duration);
 

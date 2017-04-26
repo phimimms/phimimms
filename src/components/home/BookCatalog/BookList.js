@@ -1,8 +1,9 @@
 import BookListRow from './BookList/BookListRow';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
 
-const BookList = ({ books, deleteBook, saveBook }) => {
+const BookList = ({ books }) => {
     return (
         <div className="BookList">
             <Table>
@@ -22,8 +23,6 @@ const BookList = ({ books, deleteBook, saveBook }) => {
                         <BookListRow
                             key={book._id}
                             book={book}
-                            deleteBook={deleteBook}
-                            saveBook={saveBook}
                             />
                     )}
                 </TableBody>
@@ -33,9 +32,13 @@ const BookList = ({ books, deleteBook, saveBook }) => {
 };
 
 BookList.propTypes = {
-    books: PropTypes.array.isRequired,
-    deleteBook: PropTypes.func.isRequired,
-    saveBook: PropTypes.func.isRequired
+    books: PropTypes.array.isRequired
 };
 
-export default BookList;
+function mapStateToProps(state) {
+    return {
+        books: state.bookCatalog.books
+    };
+}
+
+export default connect(mapStateToProps)(BookList);

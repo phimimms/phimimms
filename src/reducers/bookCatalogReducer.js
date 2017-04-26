@@ -5,11 +5,11 @@ export default function bookCatalogReducer(state = initialState.bookCatalog, act
     switch(action.type) {
         case actionTypes.DELETE_BOOK_SUCCESS:
             return deleteBook(state, action.bookId);
-        case actionTypes.LOAD_BOOKS_SUCCESS:
+        case actionTypes.FETCH_BOOKS_SUCCESS:
             return Object.assign({}, state, { books: action.books });
         case actionTypes.SAVE_BOOK_SUCCESS:
             return saveBook(state, action.book);
-        case actionTypes.LOAD_BOOK_DEADLINE_SUCCESS:
+        case actionTypes.FETCH_BOOK_DEADLINE_SUCCESS:
         case actionTypes.SAVE_BOOK_DEADLINE_SUCCESS:
             return Object.assign({}, state, { deadline: action.deadline });
         default:

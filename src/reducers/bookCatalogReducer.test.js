@@ -12,7 +12,7 @@ describe('Book Catalog Reducer', () => {
             { title: 'b' }
         ];
 
-        const action = actions.loadBooksSuccess(books);
+        const action = actions.fetchBooksSuccess(books);
 
         const newState = bookCatalogReducer(initialState, action);
 

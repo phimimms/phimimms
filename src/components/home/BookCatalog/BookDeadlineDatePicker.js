@@ -1,6 +1,8 @@
 import './BookDeadlineDatePicker/BookDeadlineDatePicker.scss';
-import DatePicker from '../../../common/DatePicker';
+import { saveBookDeadline } from '../../../actions/bookActions';
+import DatePicker from '../../common/DatePicker';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 class BookDeadlineDatePicker extends React.Component {
     /**
@@ -25,10 +27,7 @@ class BookDeadlineDatePicker extends React.Component {
             return console.warn(err);
         }
 
-        const deadline = new Date(dateStr);
-        deadline.setHours(23, 59, 59, 999);
-
-        this.props.saveBookDeadline(deadline);
+        this.props.saveBookDeadline(new Date(dateStr));
     }
 
     /**
@@ -44,8 +43,8 @@ class BookDeadlineDatePicker extends React.Component {
             <div className="BookDeadlineDatePicker">
                 <div className="BookDeadlineDatePicker__label user-select--none">Deadline:</div>
                 <DatePicker
-                    name="book-deadline"
                     minDate={tomorrow}
+                    name="book-deadline"
                     onChange={this._onDateChange}
                     value={bookDeadline || tomorrow}
                     />
@@ -59,4 +58,18 @@ BookDeadlineDatePicker.propTypes = {
     saveBookDeadline: PropTypes.func.isRequired
 };
 
-export default BookDeadlineDatePicker;
+function mapStateToProps(state) {
+    return {
+        bookDeadline: state.bookCatalog.deadline
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        saveBookDeadline: (date) => {
+            dispatch(saveBookDeadline(date));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookDeadlineDatePicker);

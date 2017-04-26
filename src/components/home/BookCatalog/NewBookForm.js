@@ -1,8 +1,10 @@
 import './NewBookForm/NewBookForm.scss';
-import Button from '../../../common/Button';
-import Checkbox from '../../../common/Checkbox';
-import TextField from '../../../common/TextField';
+import { saveBook } from '../../../actions/bookActions';
+import Button from '../../common/Button';
+import Checkbox from '../../common/Checkbox';
+import TextField from '../../common/TextField';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 
 const defaultState = {
     authorName: '',
@@ -149,4 +151,16 @@ NewBookForm.propTypes = {
     saveBook: PropTypes.func.isRequired
 };
 
-export default NewBookForm;
+function mapStateToProps() {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        saveBook: (book) => {
+            dispatch(saveBook(book));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewBookForm);

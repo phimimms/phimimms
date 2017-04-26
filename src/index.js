@@ -1,6 +1,6 @@
 import 'babel-polyfill';
 import configureStore from './store/configureStore'; // eslint-disable-line import/default
-import { loadBookDeadline, loadBooks } from './actions/bookActions';
+import { fetchBookDeadline, fetchBooks } from './actions/bookActions';
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -15,8 +15,8 @@ injectTapEventPlugin();
 const store = configureStore();
 
 /* Load the Application Data */
-store.dispatch(loadBookDeadline());
-store.dispatch(loadBooks());
+store.dispatch(fetchBookDeadline());
+store.dispatch(fetchBooks());
 
 /* Renders the Application to the DOM */
 render(

@@ -1,5 +1,5 @@
 import CheckboxUI from 'material-ui/Checkbox';
-import * as colors from 'material-ui/styles/colors';
+import { indigo500 } from 'material-ui/styles/colors';
 import React, { PropTypes } from 'react';
 
 const styles = {
@@ -8,10 +8,10 @@ const styles = {
         userSelect: 'none'
     },
     icon: {
-        fill: colors.indigo500
+        fill: indigo500
     },
     label: {
-        color: colors.indigo500
+        color: indigo500
     }
 };
 

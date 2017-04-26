@@ -19,7 +19,7 @@ export default function homeReducer(state = initialState.home, action) {
 function setHomeView(state, componentName) {
     switch (componentName) {
         case homeViews.BOOK_CATALOG:
-        case homeViews.LANDING:
+        case homeViews.MENU:
             return Object.assign({}, state, { componentName });
         default:
             return state;

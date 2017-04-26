@@ -1,9 +1,11 @@
-import Button from '../../../../common/Button';
+import { deleteBook, saveBook } from '../../../../actions/bookActions';
+import Button from '../../../common/Button';
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
 import { TableRow, TableRowColumn } from 'material-ui/Table';
-import TextField from '../../../../common/TextField';
+import TextField from '../../../common/TextField';
 
-class BookListRow extends React.Component {
+export class BookListRow extends React.Component {
     /**
      * Instantiates the component.
      * @param {Object}  props   The initial values of instance properties
@@ -90,4 +92,19 @@ BookListRow.propTypes = {
     saveBook: PropTypes.func.isRequired
 };
 
-export default BookListRow;
+function mapStateToProps() {
+    return {};
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        deleteBook: (bookId) => {
+            dispatch(deleteBook(bookId));
+        },
+        saveBook: (book) => {
+            dispatch(saveBook(book));
+        }
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookListRow);

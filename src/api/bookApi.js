@@ -1,4 +1,4 @@
-import rest from './rest';
+import axios from 'axios';
 
 /**
  * The entity to represent a book.
@@ -20,10 +20,14 @@ const url = `${protocol}//${hostname}:${port}/api/books`;
  * @return  {Promise}
  */
 export const deleteBook = function(bookId) {
-    return rest({
+    return axios({
         method: 'DELETE',
         url: `${url}/${bookId}`
-    });
+    }).then(
+        (res) => {
+            return res.data;
+        }
+    );
 };
 
 /**
@@ -31,10 +35,14 @@ export const deleteBook = function(bookId) {
  * @return {Promise}
  */
 export const getAllBooks = function() {
-    return rest({
+    return axios({
         method: 'GET',
         url
-    });
+    }).then(
+        (res) => {
+            return res.data;
+        }
+    );
 };
 
 /**
@@ -42,15 +50,14 @@ export const getAllBooks = function() {
  * @return {Promise}
  */
 export const getDeadline = function() {
-    return rest({
+    return axios({
         method: 'GET',
         url: `${url}/deadline`
-    }).then((deadline) => {
-        if (!deadline) {
-            return null;
+    }).then(
+        (res) => {
+            return new Date(res.data.date);
         }
-        return new Date(deadline.date);
-    });
+    );
 };
 
 /**
@@ -63,19 +70,27 @@ export const saveBook = function(book) {
 
     if (book._id) {
         /* Updates the existing book */
-        return rest({
+        return axios({
             data: book,
             method: 'PUT',
             url: `${url}/${book._id}`
-        });
+        }).then(
+            (res) => {
+                return res.data;
+            }
+        );
     }
 
     /* Saves the new book */
-    return rest({
+    return axios({
         data: Object.assign(book, { progress: 0 }),
         method: 'POST',
         url
-    });
+    }).then(
+        (res) => {
+            return res.data;
+        }
+    );
 };
 
 /**
@@ -84,11 +99,13 @@ export const saveBook = function(book) {
  * @return  {Promise}
  */
 export const saveDeadline = function(date) {
-    return rest({
+    return axios({
         data: { date },
         method: 'PUT',
         url: `${url}/deadline`
-    }).then((deadline) => {
-        return new Date(deadline.date);
-    });
+    }).then(
+        (res) => {
+            return new Date(res.data.date);
+        }
+    );
 };
