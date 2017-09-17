@@ -1,0 +1,14 @@
+@import '~assets/css/colors';
+
+.App {
+  display:    flex;
+  flex-flow:  column;
+  height:     100%;
+  width:      100%;
+}
+
+.App__content {
+  background-color: $background-color;
+  height:           100%;
+  width:            100%;
+}
