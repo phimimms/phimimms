@@ -22,8 +22,5 @@ export const BOOK_DEADLINE__FETCH = createActionType('BOOK_DEADLINE__FETCH');
 
 export const BOOK_DEADLINE__SAVE = createActionType('BOOK_DEADLINE__SAVE');
 
-/* home */
-export const HOME_VIEW__UPDATE = 'HOME_VIEW__UPDATE';
-
 /* localization */
 export const LANGUAGE__UPDATE = createActionType('LANGUAGE__UPDATE');

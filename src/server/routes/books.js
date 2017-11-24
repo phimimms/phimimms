@@ -51,9 +51,9 @@ router.route('/books/deadline')
    * Upserts the deadline of the books.
    */
   .put((req, res) => {
-    const { date } = req.body;
+    let { date } = req.body;
 
-    // TODO Respond with error upon providing an invalid date object
+    // TODO: Respond with error upon providing an invalid date object
     date = date.setHours(23, 59, 59, 999);
 
     BookDeadline.findOneAndUpdate({ _id: deadlineId }, { date }, { new: true, upsert: true },
@@ -91,7 +91,7 @@ router.route('/books/:id')
 
       book = Object.assign(book, req.body);
 
-      // TODO Determine variable alias naming convention for shared-scoped error objects
+      // TODO: Determine variable alias naming convention for shared-scoped error objects
       book.save((e) => {
         if (e) {
           return res.status(500).send(e);

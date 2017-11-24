@@ -18,6 +18,9 @@ module.exports = function getWebpackConfig() {
       historyApiFallback: true,
       hot: true,
       port: 3001,
+      proxy: {
+        '/api': 'http://localhost:3000',
+      },
       stats: 'errors-only',
     },
 

@@ -8,21 +8,39 @@ import { ConnectedRouter } from 'react-router-redux';
 import 'assets/icomoon/style.css';
 import { history } from 'store/configureStore';
 
-import './style.css';
+import './App.scss';
 
 function App({ directionality }) {
-  // const Dashboard = asyncComponent({
-  //   resolve: () => import('routes/Dashboard'),
-  // });
-  //
-  // const Display = asyncComponent({
-  //   resolve: () => import('routes/Display'),
-  // });
+  const BookCatalog = asyncComponent({
+    resolve: () => import('routes/BookCatalog/BookCatalog'),
+  });
+  const Dashboard = asyncComponent({
+    resolve: () => import('routes/Dashboard/Dashboard'),
+  });
+  const Display = asyncComponent({
+    resolve: () => import('routes/Display/Display'),
+  });
 
   return (
     <ConnectedRouter history={history}>
       <div className={`App ${directionality}`} dir={directionality}>
-        <div className="App__content" />
+        <div className="App__content">
+          <Route
+            exact
+            component={Dashboard}
+            path="/"
+          />
+          <Route
+            exact
+            component={BookCatalog}
+            path="/bookCatalog"
+          />
+          <Route
+            exact
+            component={Display}
+            path="/display"
+          />
+        </div>
       </div>
     </ConnectedRouter>
   );

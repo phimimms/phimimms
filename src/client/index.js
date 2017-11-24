@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import App from 'components/App';
+import App from 'components/App/App';
 import configureStore from 'store/configureStore';
 import initialState from 'store/initialState';
 
@@ -38,7 +38,7 @@ renderApplication(App);
 
 if (module.hot) {
   /* Enables React Hot Reloading */
-  module.hot.accept('components/App', () => {
-    renderApplication(require('components/App').default);
+  module.hot.accept('components/App/App', () => {
+    renderApplication(require('components/App/App').default);
   });
 }

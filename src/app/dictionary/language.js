@@ -1,7 +1,7 @@
 /**
 * An enum of language directionalities.
 * @readonly
-* @type    {Object}
+* @type     {Object}
 */
 export const directionality = {
   ltr: 'ltr',
@@ -11,7 +11,7 @@ export const directionality = {
 /**
 * The static text of the application.
 * @readonly
-* @type    {Object}
+* @type     {Object}
 */
 export const staticText = {
   en: {},
@@ -20,7 +20,7 @@ export const staticText = {
 /**
 * The map of supported language codes to their localized name.
 * @readonly
-* @type    {Object}
+* @type     {Object}
 */
 export const supportedLanguages = {
   en: 'English',
