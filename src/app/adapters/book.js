@@ -51,7 +51,7 @@ export function getDeadline() {
   return axios({
     method: 'GET',
     url: `${url}/deadline`,
-  }).then(res => new Date(res.data.date));
+  }).then(res => res.data.date);
 }
 
 /**
@@ -89,5 +89,5 @@ export function saveDeadline(date) {
     data: { date },
     method: 'PUT',
     url: `${url}/deadline`,
-  }).then(res => new Date(res.data.date));
+  }).then(res => res.data.date);
 }

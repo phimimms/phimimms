@@ -11,8 +11,8 @@ export default {
      */
     books: [],
     /**
-     * The date by which to complete all of the books.
-     * @type {Date}
+     * The string representation of the date by which to complete all of the books.
+     * @type {string}
      */
     deadline: null,
   },

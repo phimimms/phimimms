@@ -3,3 +3,4 @@ coverage
 docs
 node_modules
 src/client/dist
+src/server/server.compiled.js
