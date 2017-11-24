@@ -10,7 +10,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 /* Connects to MongoDB */
-mongoose.connect('mongodb://localhost:27017/dailyphiDB', { useMongoClient: true });
+mongoose.connect('mongodb://localhost:27017/phimimms', { useMongoClient: true });
 
 /* Response Body Compression Middleware */
 app.use(compression());

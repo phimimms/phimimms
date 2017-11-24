@@ -1,5 +1,5 @@
 {
-  "name": "dailyphi",
+  "name": "phimimms",
   "version": "0.0.0",
   "scripts": {
     "prebuild": "npm-run-all clean:client clean:server build:html build:server",
@@ -19,7 +19,7 @@
     "test": "jest src/app --config jest.json"
   },
   "author": "Philippe Mimms",
-  "description": "A personal scheduler",
+  "description": "All Things Philippe Mimms",
   "license": "UNLICENSED",
   "private": true,
   "dependencies": {
