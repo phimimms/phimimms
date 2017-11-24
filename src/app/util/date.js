@@ -1,3 +1,7 @@
+/**
+ * @module util/date
+ */
+
 // TODO: Support localization
 const months = [
   'January', 'February', 'March', 'April',

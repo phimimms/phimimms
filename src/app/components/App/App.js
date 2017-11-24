@@ -1,3 +1,7 @@
+/**
+ * @module components/App
+ */
+
 import PropTypes from 'prop-types';
 import React from 'react';
 import { asyncComponent } from 'react-async-component';

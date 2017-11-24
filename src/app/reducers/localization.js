@@ -1,3 +1,7 @@
+/**
+ * @module reducers/localization
+ */
+
 import { LANGUAGE__UPDATE } from 'actions/actionTypes';
 import initialState from 'store/initialState';
 import { getApplicationTokens, getLanguageDirectionality } from 'util/localization';

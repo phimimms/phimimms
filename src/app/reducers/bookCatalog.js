@@ -1,3 +1,7 @@
+/**
+ * @module reducers/bookCatalog
+ */
+
 import {
   BOOK__DELETE,
   BOOK__FETCH,

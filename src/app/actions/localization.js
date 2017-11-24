@@ -1,3 +1,7 @@
+/**
+ * @module actions/localization
+ */
+
 import { supportedLanguages } from 'dictionary/language';
 
 import { LANGUAGE__UPDATE } from './actionTypes';

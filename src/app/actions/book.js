@@ -1,3 +1,7 @@
+/**
+ * @module actions/book
+ */
+
 import {
   deleteBook as deleteBookAdapter,
   getAllBooks,

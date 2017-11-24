@@ -1,3 +1,7 @@
+/**
+ * @module adapters/book
+ */
+
 import axios from 'axios';
 
 import { defaultURL } from 'dictionary/network';

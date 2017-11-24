@@ -1,4 +1,8 @@
 /**
+ * @module util/book
+ */
+
+/**
  * The entity to represent the schedule for a book.
  * @typedef   {Object}                    BookSchedule
  * @property  {module:adapters/book~Book} book          The book entity.

@@ -1,3 +1,7 @@
+/**
+ * @module util/localization
+ */
+
 import LocalizedStrings from 'react-localization';
 
 import { directionality, staticText } from 'dictionary/language';

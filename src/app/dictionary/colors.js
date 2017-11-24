@@ -1,3 +1,7 @@
+/**
+ * @module dictionary/colors
+ */
+
 export const backgroundColor = '#0496FF';
 export const primaryColor = '#031A6B';
 export const secondaryColor = '#2541B2';

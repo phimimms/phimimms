@@ -1,4 +1,8 @@
 /**
+ * @module actions/actionTypes
+ */
+
+/**
  * Creates the failure, request, and success type derivatives for the given action type.
  * @param   {string}  type  The action type.
  * @returns {Object}
