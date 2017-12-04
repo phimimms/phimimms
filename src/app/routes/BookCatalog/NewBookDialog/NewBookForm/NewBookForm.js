@@ -193,7 +193,6 @@ export default class NewBookForm extends PureComponent {
       title,
     } = this.state;
 
-    // TODO: Address transition delay in toggling visibility.
     return (
       <div className="NewBookForm">
         <div className="NewBookForm__row">

@@ -17,4 +17,8 @@
 
 .NewBookForm__field--hidden {
   visibility: hidden;
+
+  label {
+    transition: none !important;
+  }
 }
