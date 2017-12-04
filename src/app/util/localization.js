@@ -4,7 +4,8 @@
 
 import LocalizedStrings from 'react-localization';
 
-import { directionality, staticText } from 'dictionary/language';
+import { directionality } from 'dictionary/language';
+import staticText from 'assets/json/staticText';
 
 /**
  * Returns the localized static text of the application.

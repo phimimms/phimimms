@@ -21,9 +21,6 @@ function App({ directionality }) {
   const Dashboard = asyncComponent({
     resolve: () => import('routes/Dashboard/Dashboard'),
   });
-  const Display = asyncComponent({
-    resolve: () => import('routes/Display/Display'),
-  });
 
   return (
     <ConnectedRouter history={history}>
@@ -38,11 +35,6 @@ function App({ directionality }) {
             exact
             component={BookCatalog}
             path="/bookCatalog"
-          />
-          <Route
-            exact
-            component={Display}
-            path="/display"
           />
         </div>
       </div>

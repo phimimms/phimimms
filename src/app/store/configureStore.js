@@ -12,10 +12,7 @@ export default function configureStore(initialState = {}) {
   /* The Root Reducer */
   const rootReducer = createReducer();
 
-  const enhancements = [
-    /* Persist State in Local Storage */
-    persistState(),
-  ];
+  const enhancements = [];
 
   const middlewares = [
     routerMiddleware(history),
@@ -23,14 +20,19 @@ export default function configureStore(initialState = {}) {
   ];
 
   if (process.env.NODE_ENV !== 'production') {
-    /* Enables Redux DevTools Browser Extension */
     enhancements.push(
+      /* Enables Redux DevTools Browser Extension */
       window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 
     middlewares.push(
       /* Middleware to Detect Redux State Mutation */
       require('redux-immutable-state-invariant').default()
+    );
+  } else {
+    enhancements.push(
+      /* Persist State in Local Storage */
+      persistState(),
     );
   }
 

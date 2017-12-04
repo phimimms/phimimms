@@ -13,15 +13,6 @@ export const directionality = {
 };
 
 /**
- * The static text of the application.
- * @readonly
- * @type     {Object}
- */
-export const staticText = {
-  en: {},
-};
-
-/**
  * The map of supported language codes to their localized name.
  * @readonly
  * @type     {Object}

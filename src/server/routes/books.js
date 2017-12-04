@@ -91,7 +91,6 @@ router.route('/books/:id')
 
       book = Object.assign(book, req.body);
 
-      // TODO: Determine variable alias naming convention for shared-scoped error objects
       book.save((e) => {
         if (e) {
           return res.status(500).send(e);

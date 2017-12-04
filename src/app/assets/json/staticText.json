@@ -1,0 +1,20 @@
+{
+  "en": {
+    "BookCatalog": {
+      "addBook": "Add New Book"
+    },
+    "global": {
+      "bookProperty": {
+        "author": "Author",
+        "currentPage": "Current Page Number",
+        "firstPage": "First Page Number",
+        "isKindle": "is Kindle",
+        "lastPage": "Last Page Number",
+        "length": "Length",
+        "title": "Title"
+      },
+      "close": "Close",
+      "save": "Save"
+    }
+  }
+}
