@@ -133,10 +133,13 @@ export default class NewBookForm extends PureComponent {
   }
 
   /**
-   * Toggles the Kindle format indicator of the new book.
+   * Toggles the Kindle format indicator value of the new book.
    */
   onIsKindleChange = () => {
-    this.setState({ isKindle: !this.state.isKindle });
+    this.setState({
+      isKindle: !this.state.isKindle,
+      length: defaultState.length,
+    });
   }
 
   /**
@@ -245,7 +248,7 @@ export default class NewBookForm extends PureComponent {
           <InputField
             className={`NewBookForm__field ${isKindle ? '' : 'NewBookForm__field--hidden'}`}
             label={tokens.global.bookProperty.length}
-            onChange={this.onLengthChange}
+            onChange={isKindle ? this.onLengthChange : Function.prototype}
             value={length}
           />
         </div>
