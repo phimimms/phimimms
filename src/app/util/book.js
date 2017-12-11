@@ -70,6 +70,36 @@ function getTotalRemainingNumberOfPages(books) {
 }
 
 /**
+ * Returns the reading completion percentage of the given book.
+ * @param   {module:adapters/book~Book} book  The book entity.
+ * @returns {number}
+ */
+export function getReadingCompletionPercentage(book) {
+  return Math.floor(
+    (book.currentPageNumber - book.firstPageNumber) /
+    (book.lastPageNumber - book.firstPageNumber) * 100
+  );
+}
+
+/**
+ * Returns the presentational string of the given book's schedule.
+ * @param   {module:util/book~BookSchedule} bookSchedule  The schedule of the book.
+ * @returns {string}
+ */
+export function getPresentationSchedule({ book, readingGoal }) {
+  // TODO: Support localization
+  if (readingGoal === book.lastPageNumber) {
+    return `Finish "${book.title}"`;
+  }
+
+  if (book.isKindle) {
+    return `Read "${book.title}" to ${readingGoal}%`;
+  }
+
+  return `Read "${book.title}" to Page ${readingGoal}`;
+}
+
+/**
  * Returns today's schedule to complete all of the given books by the deadline.
  * @param   {Array.<module:adapters/book~Book>} books     The book entities.
  * @param   {Date}                              deadline  The deadline for the books.
@@ -119,24 +149,4 @@ export function getSchedule(books, deadline) {
 
     return schedule;
   }
-}
-
-/**
- * Returns the presentational string of the given book's schedule.
- * @param   {module:util/book~BookSchedule} bookSchedule  The schedule of the book.
- * @returns {string}
- */
-export function getPresentationSchedule(bookSchedule) {
-  const { book, readingGoal } = bookSchedule;
-
-  // TODO: Support localization
-  if (readingGoal === book.lastPageNumber) {
-    return `Finish "${book.title}"`;
-  }
-
-  if (book.isKindle) {
-    return `Read "${book.title}" to ${readingGoal}%`;
-  }
-
-  return `Read "${book.title}" to Page ${readingGoal}`;
 }

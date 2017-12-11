@@ -3,22 +3,25 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
 import {
+  deleteBook as deleteBookAction,
   fetchBookDeadline,
   fetchBooks,
   saveBook as saveBookAction,
 } from 'actions/book';
 import Button from 'components/Button/Button';
 
+import BookList from './BookList/BookList';
 import NewBookDialog from './NewBookDialog/NewBookDialog';
 
-class BookCatalog extends PureComponent {
+class BookCatalog extends React.PureComponent {
   static propTypes = {
     bookDeadline: PropTypes.string,
     books: PropTypes.array.isRequired,
+    deleteBook: PropTypes.func.isRequired,
     fetchBookDeadline: PropTypes.func.isRequired,
     fetchBooks: PropTypes.func.isRequired,
     saveBook: PropTypes.func.isRequired,
@@ -47,14 +50,14 @@ class BookCatalog extends PureComponent {
   /**
    * Closes the New Book Dialog.
    */
-  closeNewBookDialog = () => {
+  onCloseNewBookDialog = () => {
     this.setState({ isNewBookDialogOpen: false });
   }
 
   /**
    * Opens the New Book Dialog.
    */
-  openNewBookDialog = () => {
+  onOpenNewBookDialog = () => {
     this.setState({ isNewBookDialogOpen: true });
   }
 
@@ -63,19 +66,26 @@ class BookCatalog extends PureComponent {
    * @returns {Element}
    */
   render() {
-    const { saveBook, tokens } = this.props;
+    const { books, deleteBook, saveBook, tokens } = this.props;
     const { isNewBookDialogOpen } = this.state;
 
     return (
       <div className="BookCatalog">
         <Button
           label={tokens.BookCatalog.addBook}
-          onClick={this.openNewBookDialog}
+          onClick={this.onOpenNewBookDialog}
+        />
+
+        <BookList
+          books={books}
+          deleteBook={deleteBook}
+          saveBook={saveBook}
+          tokens={tokens}
         />
 
         <NewBookDialog
           isOpen={isNewBookDialogOpen}
-          onClose={this.closeNewBookDialog}
+          onClose={this.onCloseNewBookDialog}
           saveBook={saveBook}
           title={tokens.BookCatalog.addBook}
           tokens={tokens}
@@ -94,6 +104,7 @@ function mapStateToProps({ bookCatalog: { books, deadline }, localization: { tok
 }
 
 const mapDispatchToProps = {
+  deleteBook: deleteBookAction,
   fetchBookDeadline,
   fetchBooks,
   saveBook: saveBookAction,

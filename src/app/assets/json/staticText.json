@@ -3,6 +3,10 @@
     "BookCatalog": {
       "addBook": "Add New Book"
     },
+    "BookListItem": {
+      "confirmDeleteBook": "Are you sure you want to delete \"{0}\"?",
+      "deleteBook": "Delete Book"
+    },
     "global": {
       "bookProperty": {
         "author": "Author",
@@ -11,9 +15,14 @@
         "isKindle": "is Kindle",
         "lastPage": "Last Page Number",
         "length": "Length",
+        "progress": "Progress",
         "title": "Title"
       },
       "close": "Close",
+      "confirm": "Confirm",
+      "edit": "Edit",
+      "delete": "Delete",
+      "options": "Options",
       "save": "Save"
     }
   }

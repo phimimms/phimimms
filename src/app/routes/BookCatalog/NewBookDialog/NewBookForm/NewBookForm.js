@@ -3,7 +3,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Checkbox from 'components/Checkbox/Checkbox';
 import InputField from 'components/InputField/InputField';
@@ -28,7 +28,7 @@ const defaultState = {
   title: '',
 };
 
-export default class NewBookForm extends PureComponent {
+export default class NewBookForm extends React.PureComponent {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,

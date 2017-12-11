@@ -1,0 +1,11 @@
+@import '~assets/scss/sizes';
+
+.BookListItem {
+  margin-bottom:  $small;
+  user-select:    none;
+}
+
+.BookListItem__options {
+  display:          flex;
+  justify-content:  space-evenly;
+}

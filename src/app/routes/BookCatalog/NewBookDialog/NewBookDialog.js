@@ -3,14 +3,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
 
 import NewBookForm from './NewBookForm/NewBookForm';
 
-export default class NewBookDialog extends PureComponent {
+export default class NewBookDialog extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
@@ -52,7 +52,7 @@ export default class NewBookDialog extends PureComponent {
   /**
    * Saves the new book.
    */
-  saveNewBook = () => {
+  onSaveNewBook = () => {
     const { onClose, saveBook } = this.props;
 
     saveBook(this._newBook);
@@ -81,7 +81,7 @@ export default class NewBookDialog extends PureComponent {
               isDisabled={!isNewBookValid}
               isFlat={true}
               label={tokens.global.save}
-              onClick={this.saveNewBook}
+              onClick={this.onSaveNewBook}
             />,
           ]
         }

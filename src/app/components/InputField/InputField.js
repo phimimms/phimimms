@@ -4,9 +4,9 @@
 
 import TextField from 'material-ui/TextField';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
+import React from 'react';
 
-export default class InputField extends PureComponent {
+export default class InputField extends React.PureComponent {
   static propTypes = {
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,

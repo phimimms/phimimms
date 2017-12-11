@@ -1,0 +1,25 @@
+@import '~assets/scss/sizes';
+
+.BookList {
+  display:          flex;
+  justify-content:  center;
+  width:            100%;
+}
+
+.BookList__content {
+  width:    $max-content-width;
+}
+
+.BookList__grid {
+  align-items:            center;
+  display:                grid;
+  grid-template-columns:  repeat(4, 1fr);
+}
+
+.BookList__header {
+  border-bottom:  $small--3x solid black;
+  cursor:         default;
+  font-weight:    bold;
+  margin-bottom:  $medium;
+  user-select:    none;
+}
