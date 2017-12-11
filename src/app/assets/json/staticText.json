@@ -1,7 +1,8 @@
 {
   "en": {
-    "BookCatalog": {
-      "addBook": "Add New Book"
+    "BookList": {
+      "addBook": "Add New Book",
+      "bookCatalog": "Book Catalog"
     },
     "BookListItem": {
       "confirmDeleteBook": "Are you sure you want to delete \"{0}\"?",

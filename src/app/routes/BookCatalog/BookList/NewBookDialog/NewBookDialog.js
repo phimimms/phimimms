@@ -1,5 +1,5 @@
 /**
- * @module BookCatalog/NewBookDialog
+ * @module BookList/NewBookDialog
  */
 
 import PropTypes from 'prop-types';

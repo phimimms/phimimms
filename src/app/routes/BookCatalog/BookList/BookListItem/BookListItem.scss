@@ -1,11 +1,16 @@
+@import '~assets/scss/colors';
 @import '~assets/scss/sizes';
 
 .BookListItem {
-  margin-bottom:  $small;
-  user-select:    none;
+  background-color: $text-background-color;
+  border-radius:    $small--2x;
+  margin-bottom:    $small;
+  padding:          $small--1x;
+  user-select:      none;
 }
 
 .BookListItem__options {
   display:          flex;
-  justify-content:  space-evenly;
+  justify-content:  space-around;
+  width:            100%;
 }

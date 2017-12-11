@@ -1,3 +1,4 @@
+@import '~assets/scss/colors';
 @import '~assets/scss/sizes';
 
 .BookList {
@@ -7,19 +8,40 @@
 }
 
 .BookList__content {
-  width:    $max-content-width;
+  width:  $max-content-width;
+}
+
+.BookList__divider {
+  background-color:   black;
+  border-radius:      $small--3x;
+  height:             $small--3x;
+  margin:             $small--1x 0;
+  width:              100%;
 }
 
 .BookList__grid {
   align-items:            center;
+  color:                  $text-color;
   display:                grid;
   grid-template-columns:  repeat(4, 1fr);
+  justify-items:          center;
 }
 
 .BookList__header {
-  border-bottom:  $small--3x solid black;
-  cursor:         default;
-  font-weight:    bold;
-  margin-bottom:  $medium;
-  user-select:    none;
+  background-color: $text-background-color;
+  border-radius:    $small--2x;
+  cursor:           default;
+  font-weight:      bold;
+  padding:          $small--2x;
+  user-select:      none;
+}
+
+.BookList__title {
+  align-items:      center;
+  display:          flex;
+  font-size:        $medium--2x;
+  font-weight:      bold;
+  justify-content:  space-between;
+  padding:          $medium $medium--2x;
+  user-select:      none;
 }
