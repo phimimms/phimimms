@@ -1,5 +1,5 @@
 /**
- * @module BookList/NewBookDialog
+ * @module BookList/EditBookDialog
  */
 
 import PropTypes from 'prop-types';
@@ -8,10 +8,11 @@ import React from 'react';
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
 
-import NewBookForm from './NewBookForm/NewBookForm';
+import BookForm from './BookForm/BookForm';
 
 export default class NewBookDialog extends React.PureComponent {
   static propTypes = {
+    book: PropTypes.object.isRequired,
     isOpen: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     saveBook: PropTypes.func.isRequired,
@@ -27,36 +28,36 @@ export default class NewBookDialog extends React.PureComponent {
     super(props);
 
     this.state = {
-      isNewBookValid: false,
+      isSaveValid: false,
     };
 
     /**
-     * The values of the new book.
+     * The new values of the book.
      * @private
      * @type {Object|null}
      */
-    this._newBook = null;
+    this._book = { ...this.props.book };
   }
 
   /**
-   * Updates the values of the new book.
-   * @param {Object}  evt                 The event object.
-   * @param {boolean} evt.isNewBookValid  Indicates whether all values for the new book are defined.
-   * @param {Object}  evt.newBook         The values of the new book.
+   * Updates the values of the book.
+   * @param {Object}  evt             The event object.
+   * @param {Object}  evt.book        The values of the book.
+   * @param {boolean} evt.isSaveValid Indicates whether the book can be saved.
    */
-  onFormChange = ({ isNewBookValid, newBook }) => {
-    this._newBook = newBook;
-    this.setState({ isNewBookValid });
+  onFormChange = ({ book, isSaveValid }) => {
+    this._book = book;
+    this.setState({ isSaveValid });
   }
 
   /**
-   * Saves the new book.
+   * Saves the book.
    */
-  onSaveNewBook = () => {
+  onSaveBook = () => {
     const { onClose, saveBook } = this.props;
 
-    saveBook(this._newBook);
-    this._newBook = null;
+    saveBook(this._book);
+    this._book = { ...this.props.book };
     onClose();
   }
 
@@ -65,8 +66,8 @@ export default class NewBookDialog extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { isOpen, onClose, title, tokens } = this.props;
-    const { isNewBookValid } = this.state;
+    const { book, isOpen, onClose, title, tokens } = this.props;
+    const { isSaveValid } = this.state;
 
     return (
       <Dialog
@@ -78,17 +79,18 @@ export default class NewBookDialog extends React.PureComponent {
               onClick={onClose}
             />,
             <Button
-              isDisabled={!isNewBookValid}
+              isDisabled={!isSaveValid}
               isFlat={true}
               label={tokens.global.save}
-              onClick={this.onSaveNewBook}
+              onClick={this.onSaveBook}
             />,
           ]
         }
         isOpen={isOpen}
         title={title}
       >
-        <NewBookForm
+        <BookForm
+          book={book}
           onChange={this.onFormChange}
           tokens={tokens}
         />

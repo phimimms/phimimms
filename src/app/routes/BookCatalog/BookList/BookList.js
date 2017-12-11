@@ -7,10 +7,26 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/Button/Button';
+import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
 import './BookList.scss';
 import BookListItem from './BookListItem/BookListItem';
-import NewBookDialog from './NewBookDialog/NewBookDialog';
+
+/**
+ * The default values of the new book.
+ * @readonly
+ * @static
+ * @type      {Object}
+ */
+const defaultBook = {
+  authorName: '',
+  currentPageNumber: 0,
+  firstPageNumber: 0,
+  isKindle: false,
+  lastPageNumber: 0,
+  length: 0,
+  title: '',
+};
 
 export default class BookList extends React.PureComponent {
   static propTypes = {
@@ -21,21 +37,21 @@ export default class BookList extends React.PureComponent {
   }
 
   state = {
-    isNewBookDialogOpen: false,
+    isEditBookDialogOpen: false,
   }
 
   /**
-   * Closes the New Book Dialog.
+   * Closes the Edit Book Dialog.
    */
-  onCloseNewBookDialog = () => {
-    this.setState({ isNewBookDialogOpen: false });
+  onCloseEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: false });
   }
 
   /**
-   * Opens the New Book Dialog.
+   * Opens the Edit Book Dialog.
    */
-  onOpenNewBookDialog = () => {
-    this.setState({ isNewBookDialogOpen: true });
+  onOpenEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: true });
   }
 
   /**
@@ -44,7 +60,7 @@ export default class BookList extends React.PureComponent {
    */
   render() {
     const { books, deleteBook, saveBook, tokens } = this.props;
-    const { isNewBookDialogOpen } = this.state;
+    const { isEditBookDialogOpen } = this.state;
 
     return (
       <div className="BookList">
@@ -55,14 +71,13 @@ export default class BookList extends React.PureComponent {
 
             <Button
               icon={<AddIcon />}
-              onClick={this.onOpenNewBookDialog}
+              onClick={this.onOpenEditBookDialog}
               title={tokens.BookList.addBook}
             />
           </div>
 
           <div className="BookList__header BookList__grid">
             <div>{tokens.global.bookProperty.title}</div>
-            <div>{tokens.global.bookProperty.author}</div>
             <div>{tokens.global.bookProperty.progress}</div>
             <div>{tokens.global.options}</div>
           </div>
@@ -74,6 +89,7 @@ export default class BookList extends React.PureComponent {
               return (
                 <BookListItem
                   book={book}
+                  className="BookList__grid"
                   deleteBook={deleteBook}
                   key={book._id}
                   saveBook={saveBook}
@@ -84,9 +100,10 @@ export default class BookList extends React.PureComponent {
           }
         </div>
 
-        <NewBookDialog
-          isOpen={isNewBookDialogOpen}
-          onClose={this.onCloseNewBookDialog}
+        <EditBookDialog
+          book={defaultBook}
+          isOpen={isEditBookDialogOpen}
+          onClose={this.onCloseEditBookDialog}
           saveBook={saveBook}
           title={tokens.BookList.addBook}
           tokens={tokens}

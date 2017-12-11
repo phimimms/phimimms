@@ -9,6 +9,7 @@ import React from 'react';
 
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
+import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 import { getReadingCompletionPercentage } from 'util/book';
 
 import './BookListItem.scss';
@@ -16,6 +17,7 @@ import './BookListItem.scss';
 export default class BookListItem extends React.PureComponent {
   static propTypes = {
     book: PropTypes.object.isRequired,
+    className: PropTypes.string.isRequired,
     deleteBook: PropTypes.func.isRequired,
     saveBook: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
@@ -23,6 +25,7 @@ export default class BookListItem extends React.PureComponent {
 
   state = {
     isDeleteBookDialogOpen: false,
+    isEditBookDialogOpen: false,
   }
 
   /**
@@ -30,6 +33,13 @@ export default class BookListItem extends React.PureComponent {
    */
   onCloseDeleteBookDialog = () => {
     this.setState({ isDeleteBookDialogOpen: false });
+  }
+
+  /**
+   * Closes the Edit Book Dialog.
+   */
+  onCloseEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: false });
   }
 
   /**
@@ -47,22 +57,28 @@ export default class BookListItem extends React.PureComponent {
   }
 
   /**
+   * Opens the Edit Book Dialog.
+   */
+  onOpenEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: true });
+  }
+
+  /**
    * Generates the HTML representation of the component.
    * @returns {Element}
    */
   render() {
-    const { book, tokens } = this.props;
-    const { isDeleteBookDialogOpen } = this.state;
+    const { book, className, saveBook, tokens } = this.props;
+    const { isDeleteBookDialogOpen, isEditBookDialogOpen } = this.state;
 
     return (
-      <div className="BookListItem BookList__grid">
+      <div className={`BookListItem ${className}`}>
         <div>{book.title}</div>
-        <div>{book.authorName}</div>
         <div>{getReadingCompletionPercentage(book)}</div>
         <div className="BookListItem__options">
           <Button
             icon={<EditIcon />}
-            onClick={Function.prototype}
+            onClick={this.onOpenEditBookDialog}
             title={tokens.global.edit}
           />
 
@@ -72,6 +88,15 @@ export default class BookListItem extends React.PureComponent {
             title={tokens.global.delete}
           />
         </div>
+
+        <EditBookDialog
+          book={book}
+          isOpen={isEditBookDialogOpen}
+          onClose={this.onCloseEditBookDialog}
+          saveBook={saveBook}
+          title={tokens.BookListItem.editBook}
+          tokens={tokens}
+        />
 
         <Dialog
           actions={

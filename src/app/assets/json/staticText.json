@@ -6,7 +6,8 @@
     },
     "BookListItem": {
       "confirmDeleteBook": "Are you sure you want to delete \"{0}\"?",
-      "deleteBook": "Delete Book"
+      "deleteBook": "Delete Book",
+      "editBook": "Edit Book"
     },
     "global": {
       "bookProperty": {
@@ -21,8 +22,8 @@
       },
       "close": "Close",
       "confirm": "Confirm",
-      "edit": "Edit",
       "delete": "Delete",
+      "edit": "Edit",
       "options": "Options",
       "save": "Save"
     }
