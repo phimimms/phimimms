@@ -5,9 +5,11 @@
       "bookCatalog": "Book Catalog"
     },
     "BookListItem": {
-      "confirmDeleteBook": "Are you sure you want to delete \"{0}\"?",
       "deleteBook": "Delete Book",
       "editBook": "Edit Book"
+    },
+    "DeleteDialog": {
+      "confirmDelete": "Are you sure you want to delete \"{0}\"?"
     },
     "global": {
       "bookProperty": {

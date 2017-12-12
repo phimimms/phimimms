@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/Button/Button';
-import Dialog from 'components/Dialog/Dialog';
+import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 import ProgressBar from 'components/ProgressBar/ProgressBar';
 import { getReadingCompletionPercentage } from 'util/book';
@@ -105,26 +105,14 @@ export default class BookListItem extends React.PureComponent {
           tokens={tokens}
         />
 
-        <Dialog
-          actions={
-            [
-              <Button
-                isFlat={true}
-                label={tokens.global.close}
-                onClick={this.onCloseDeleteBookDialog}
-              />,
-              <Button
-                isFlat={true}
-                label={tokens.global.confirm}
-                onClick={this.onDeleteBook}
-              />,
-            ]
-          }
+        <DeleteDialog
           isOpen={isDeleteBookDialogOpen}
+          name={book.title}
+          onClose={this.onCloseDeleteBookDialog}
+          onDelete={this.onDeleteBook}
           title={tokens.BookListItem.deleteBook}
-        >
-          <div>{tokens.formatString(tokens.BookListItem.confirmDeleteBook, book.title)}</div>
-        </Dialog>
+          tokens={tokens}
+        />
       </div>
     );
   }
