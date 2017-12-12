@@ -9,8 +9,12 @@
   user-select:      none;
 }
 
-.BookListItem__options {
+.BookListItem__option {
+  margin: 0 $medium;
+}
+
+.BookListItem__option-container {
   display:          flex;
-  justify-content:  space-around;
+  justify-content:  center;
   width:            100%;
 }

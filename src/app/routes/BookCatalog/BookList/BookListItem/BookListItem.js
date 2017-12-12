@@ -82,14 +82,16 @@ export default class BookListItem extends React.PureComponent {
           value={readingCompletionPercentage}
         />
 
-        <div className="BookListItem__options">
+        <div className="BookListItem__option-container">
           <Button
+            className="BookListItem__option"
             icon={<EditIcon />}
             onClick={this.onOpenEditBookDialog}
             title={tokens.global.edit}
           />
 
           <Button
+            className="BookListItem__option"
             icon={<DeleteIcon />}
             onClick={this.onOpenDeleteBookDialog}
             title={tokens.global.delete}
