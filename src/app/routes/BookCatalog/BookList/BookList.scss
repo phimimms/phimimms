@@ -40,7 +40,7 @@
   align-items:      center;
   display:          flex;
   justify-content:  space-between;
-  padding:          $medium $medium--2x;
+  padding:          $medium ($large--1x + $small);
 }
 
 .BookList__title {
