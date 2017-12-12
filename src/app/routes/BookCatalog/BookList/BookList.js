@@ -66,8 +66,8 @@ export default class BookList extends React.PureComponent {
       <div className="BookList">
         <div className="BookList__content">
 
-          <div className="BookList__title">
-            <div>{tokens.BookList.bookCatalog}</div>
+          <div className="BookList__header">
+            <div className="BookList__title">{tokens.BookList.bookCatalog}</div>
 
             <Button
               icon={<AddIcon />}
@@ -76,7 +76,7 @@ export default class BookList extends React.PureComponent {
             />
           </div>
 
-          <div className="BookList__header BookList__grid">
+          <div className="BookList__grid-header BookList__grid">
             <div>{tokens.global.bookProperty.title}</div>
             <div>{tokens.global.bookProperty.completion}</div>
             <div>{tokens.global.options}</div>

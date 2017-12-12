@@ -27,7 +27,7 @@
   justify-items:          center;
 }
 
-.BookList__header {
+.BookList__grid-header {
   background-color: $text-background-color;
   border-radius:    $small--2x;
   cursor:           default;
@@ -36,12 +36,16 @@
   user-select:      none;
 }
 
-.BookList__title {
+.BookList__header {
   align-items:      center;
   display:          flex;
-  font-size:        $medium--2x;
-  font-weight:      bold;
   justify-content:  space-between;
   padding:          $medium $medium--2x;
-  user-select:      none;
+}
+
+.BookList__title {
+  color:        black;
+  font-size:    $medium--2x;
+  font-weight:  bold;
+  user-select:  none;
 }
