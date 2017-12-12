@@ -10,6 +10,7 @@ import React from 'react';
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
+import ProgressBar from 'components/ProgressBar/ProgressBar';
 import { getReadingCompletionPercentage } from 'util/book';
 
 import './BookListItem.scss';
@@ -71,10 +72,16 @@ export default class BookListItem extends React.PureComponent {
     const { book, className, saveBook, tokens } = this.props;
     const { isDeleteBookDialogOpen, isEditBookDialogOpen } = this.state;
 
+    const readingCompletionPercentage = getReadingCompletionPercentage(book)
+
     return (
       <div className={`BookListItem ${className}`}>
         <div>{book.title}</div>
-        <div>{getReadingCompletionPercentage(book)}</div>
+
+        <ProgressBar
+          value={readingCompletionPercentage}
+        />
+
         <div className="BookListItem__options">
           <Button
             icon={<EditIcon />}

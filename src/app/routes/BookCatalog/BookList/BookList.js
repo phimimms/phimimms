@@ -78,7 +78,7 @@ export default class BookList extends React.PureComponent {
 
           <div className="BookList__header BookList__grid">
             <div>{tokens.global.bookProperty.title}</div>
-            <div>{tokens.global.bookProperty.progress}</div>
+            <div>{tokens.global.bookProperty.completion}</div>
             <div>{tokens.global.options}</div>
           </div>
 

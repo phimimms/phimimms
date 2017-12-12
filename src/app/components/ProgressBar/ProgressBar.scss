@@ -1,0 +1,14 @@
+@import '~assets/scss/sizes';
+
+.ProgressBar {
+  align-items:      center;
+  display:          flex;
+  justify-content:  space-between;
+  width:            100%;
+}
+
+.ProgressBar__label {
+  display:          flex;
+  justify-content:  flex-end;
+  width:            $large--2x;
+}

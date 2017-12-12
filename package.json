@@ -43,7 +43,9 @@
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.0",
     "redux-localstorage": "^0.4.1",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "tinycolor": "0.0.1",
+    "tinygradient": "^0.3.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
