@@ -1,10 +1,10 @@
 {
   "en": {
-    "BookList": {
+    "BookCatalog": {
       "addBook": "Add New Book",
-      "bookCatalog": "Book Catalog"
+      "title": "Book Catalog"
     },
-    "BookListItem": {
+    "BookList": {
       "deleteBook": "Delete Book",
       "editBook": "Edit Book"
     },

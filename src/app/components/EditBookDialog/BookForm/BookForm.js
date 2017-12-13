@@ -171,7 +171,7 @@ export default class BookForm extends React.PureComponent {
   onIsKindleChange = () => {
     this.setState({
       isKindle: !this.state.isKindle,
-      length: this.props.book.length,
+      length: 0,
     });
   }
 

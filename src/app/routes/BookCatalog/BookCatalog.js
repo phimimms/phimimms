@@ -2,6 +2,7 @@
  * @module routes/BookCatalog
  */
 
+import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -12,8 +13,27 @@ import {
   fetchBooks,
   saveBook as saveBookAction,
 } from 'actions/book';
+import Button from 'components/Button/Button';
+import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
+import './BookCatalog.scss';
 import BookList from './BookList/BookList';
+
+/**
+ * The default values of the new book.
+ * @readonly
+ * @static
+ * @type  {Object}
+ */
+const defaultBook = {
+  authorName: '',
+  currentPageNumber: 0,
+  firstPageNumber: 0,
+  isKindle: false,
+  lastPageNumber: 0,
+  length: 0,
+  title: '',
+};
 
 class BookCatalog extends React.PureComponent {
   static propTypes = {
@@ -24,6 +44,10 @@ class BookCatalog extends React.PureComponent {
     fetchBooks: PropTypes.func.isRequired,
     saveBook: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
+  }
+
+  state = {
+    isEditBookDialogOpen: false,
   }
 
   /**
@@ -42,18 +66,55 @@ class BookCatalog extends React.PureComponent {
   }
 
   /**
+   * Closes the Edit Book Dialog.
+   */
+  onCloseEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: false });
+  }
+
+  /**
+   * Opens the Edit Book Dialog.
+   */
+  onOpenEditBookDialog = () => {
+    this.setState({ isEditBookDialogOpen: true });
+  }
+
+  /**
    * Generates the HTML representation of the component.
    * @returns {Element}
    */
   render() {
     const { books, deleteBook, saveBook, tokens } = this.props;
+    const { isEditBookDialogOpen } = this.state;
 
     return (
       <div className="BookCatalog">
-        <BookList
-          books={books}
-          deleteBook={deleteBook}
+        <div className="BookCatalog__content">
+
+          <div className="BookCatalog__header">
+            <div className="BookCatalog__title">{tokens.BookCatalog.title}</div>
+
+            <Button
+              icon={<AddIcon />}
+              onClick={this.onOpenEditBookDialog}
+              title={tokens.BookCatalog.addBook}
+            />
+          </div>
+
+          <BookList
+            books={books}
+            deleteBook={deleteBook}
+            saveBook={saveBook}
+            tokens={tokens}
+          />
+        </div>
+
+        <EditBookDialog
+          book={defaultBook}
+          isOpen={isEditBookDialogOpen}
+          onClose={this.onCloseEditBookDialog}
           saveBook={saveBook}
+          title={tokens.BookCatalog.addBook}
           tokens={tokens}
         />
       </div>

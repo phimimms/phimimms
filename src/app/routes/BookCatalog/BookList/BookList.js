@@ -2,31 +2,14 @@
  * @module BookCatalog/BookList
  */
 
-import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import Button from 'components/Button/Button';
+import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
 import './BookList.scss';
 import BookListItem from './BookListItem/BookListItem';
-
-/**
- * The default values of the new book.
- * @readonly
- * @static
- * @type      {Object}
- */
-const defaultBook = {
-  authorName: '',
-  currentPageNumber: 0,
-  firstPageNumber: 0,
-  isKindle: false,
-  lastPageNumber: 0,
-  length: 0,
-  title: '',
-};
 
 export default class BookList extends React.PureComponent {
   static propTypes = {
@@ -37,21 +20,47 @@ export default class BookList extends React.PureComponent {
   }
 
   state = {
+    isDeleteBookDialogOpen: false,
     isEditBookDialogOpen: false,
+    selectedBook: null,
+  }
+
+  /**
+   * Closes the Delete Book Dialog.
+   */
+  onCloseDeleteBookDialog = () => {
+    this.setState({ isDeleteBookDialogOpen: false, selectedBook: null });
   }
 
   /**
    * Closes the Edit Book Dialog.
    */
   onCloseEditBookDialog = () => {
-    this.setState({ isEditBookDialogOpen: false });
+    this.setState({ isEditBookDialogOpen: false, selectedBook: null });
+  }
+
+  /**
+   * Deletes the selected book.
+   */
+  onDeleteBook = () => {
+    this.props.deleteBook(this.state.selectedBook._id);
+    this.onCloseDeleteBookDialog();
+  }
+
+  /**
+   * Opens the Delete Book Dialog.
+   * @param {module:adapters/book~Book} selectedBook  The new selected book.
+   */
+  onOpenDeleteBookDialog = (selectedBook) => {
+    this.setState({ isDeleteBookDialogOpen: true, selectedBook });
   }
 
   /**
    * Opens the Edit Book Dialog.
+   * @param {module:adapters/book~Book} selectedBook  The new selected book.
    */
-  onOpenEditBookDialog = () => {
-    this.setState({ isEditBookDialogOpen: true });
+  onOpenEditBookDialog = (selectedBook) => {
+    this.setState({ isEditBookDialogOpen: true, selectedBook });
   }
 
   /**
@@ -59,53 +68,49 @@ export default class BookList extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { books, deleteBook, saveBook, tokens } = this.props;
-    const { isEditBookDialogOpen } = this.state;
+    const { books, saveBook, tokens } = this.props;
+    const { isDeleteBookDialogOpen, isEditBookDialogOpen, selectedBook } = this.state;
 
     return (
       <div className="BookList">
-        <div className="BookList__content">
-
-          <div className="BookList__header">
-            <div className="BookList__title">{tokens.BookList.bookCatalog}</div>
-
-            <Button
-              icon={<AddIcon />}
-              onClick={this.onOpenEditBookDialog}
-              title={tokens.BookList.addBook}
-            />
-          </div>
-
-          <div className="BookList__grid-header BookList__grid">
-            <div>{tokens.global.bookProperty.title}</div>
-            <div>{tokens.global.bookProperty.completion}</div>
-            <div>{tokens.global.options}</div>
-          </div>
-
-          <div className="BookList__divider" />
-
-          {
-            books.map((book) => {
-              return (
-                <BookListItem
-                  book={book}
-                  className="BookList__grid"
-                  deleteBook={deleteBook}
-                  key={book._id}
-                  saveBook={saveBook}
-                  tokens={tokens}
-                />
-              );
-            })
-          }
+        <div className="BookList__grid-header BookList__grid">
+          <div>{tokens.global.bookProperty.title}</div>
+          <div>{tokens.global.bookProperty.completion}</div>
+          <div>{tokens.global.options}</div>
         </div>
 
+        <div className="BookList__divider" />
+
+        {
+          books.map((book) => {
+            return (
+              <BookListItem
+                book={book}
+                className="BookList__grid"
+                key={book._id}
+                onOpenDeleteBookDialog={this.onOpenDeleteBookDialog}
+                onOpenEditBookDialog={this.onOpenEditBookDialog}
+                tokens={tokens}
+              />
+            );
+          })
+        }
+
         <EditBookDialog
-          book={defaultBook}
+          book={selectedBook || {}}
           isOpen={isEditBookDialogOpen}
           onClose={this.onCloseEditBookDialog}
           saveBook={saveBook}
-          title={tokens.BookList.addBook}
+          title={tokens.BookList.editBook}
+          tokens={tokens}
+        />
+
+        <DeleteDialog
+          isOpen={isDeleteBookDialogOpen}
+          name={selectedBook ? selectedBook.title : ''}
+          onClose={this.onCloseDeleteBookDialog}
+          onDelete={this.onDeleteBook}
+          title={tokens.BookList.deleteBook}
           tokens={tokens}
         />
       </div>

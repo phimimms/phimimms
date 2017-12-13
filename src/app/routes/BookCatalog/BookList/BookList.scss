@@ -1,16 +1,6 @@
 @import '~assets/scss/colors';
 @import '~assets/scss/sizes';
 
-.BookList {
-  display:          flex;
-  justify-content:  center;
-  width:            100%;
-}
-
-.BookList__content {
-  width:  $max-content-width;
-}
-
 .BookList__divider {
   background-color:   black;
   border-radius:      $small--3x;
@@ -34,18 +24,4 @@
   font-weight:      bold;
   padding:          $small--2x;
   user-select:      none;
-}
-
-.BookList__header {
-  align-items:      center;
-  display:          flex;
-  justify-content:  space-between;
-  padding:          $medium ($large--1x + $small);
-}
-
-.BookList__title {
-  color:        black;
-  font-size:    $medium--2x;
-  font-weight:  bold;
-  user-select:  none;
 }

@@ -8,60 +8,32 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/Button/Button';
-import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
-import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 import ProgressBar from 'components/ProgressBar/ProgressBar';
 import { getReadingCompletionPercentage } from 'util/book';
 
 import './BookListItem.scss';
 
-export default class BookListItem extends React.PureComponent {
+class BookListItem extends React.PureComponent {
   static propTypes = {
     book: PropTypes.object.isRequired,
     className: PropTypes.string.isRequired,
-    deleteBook: PropTypes.func.isRequired,
-    saveBook: PropTypes.func.isRequired,
+    onOpenDeleteBookDialog: PropTypes.func.isRequired,
+    onOpenEditBookDialog: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
   }
 
-  state = {
-    isDeleteBookDialogOpen: false,
-    isEditBookDialogOpen: false,
-  }
-
   /**
-   * Closes the Delete Book Dialog.
-   */
-  onCloseDeleteBookDialog = () => {
-    this.setState({ isDeleteBookDialogOpen: false });
-  }
-
-  /**
-   * Closes the Edit Book Dialog.
-   */
-  onCloseEditBookDialog = () => {
-    this.setState({ isEditBookDialogOpen: false });
-  }
-
-  /**
-   * Deletes the book represented by the component.
-   */
-  onDeleteBook = () => {
-    this.props.deleteBook(this.props.book._id);
-  }
-
-  /**
-   * Opens the Delete Book Dialog.
+   * Invokes the provided handler to open the Delete Book Dialog.
    */
   onOpenDeleteBookDialog = () => {
-    this.setState({ isDeleteBookDialogOpen: true });
+    this.props.onOpenDeleteBookDialog(this.props.book);
   }
 
   /**
-   * Opens the Edit Book Dialog.
+   * Invokes the provided handler to open the Edit Book Dialog.
    */
   onOpenEditBookDialog = () => {
-    this.setState({ isEditBookDialogOpen: true });
+    this.props.onOpenEditBookDialog(this.props.book);
   }
 
   /**
@@ -69,10 +41,9 @@ export default class BookListItem extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { book, className, saveBook, tokens } = this.props;
-    const { isDeleteBookDialogOpen, isEditBookDialogOpen } = this.state;
+    const { book, className, tokens } = this.props;
 
-    const readingCompletionPercentage = getReadingCompletionPercentage(book)
+    const readingCompletionPercentage = getReadingCompletionPercentage(book);
 
     return (
       <div className={`BookListItem ${className}`}>
@@ -97,25 +68,9 @@ export default class BookListItem extends React.PureComponent {
             title={tokens.global.delete}
           />
         </div>
-
-        <EditBookDialog
-          book={book}
-          isOpen={isEditBookDialogOpen}
-          onClose={this.onCloseEditBookDialog}
-          saveBook={saveBook}
-          title={tokens.BookListItem.editBook}
-          tokens={tokens}
-        />
-
-        <DeleteDialog
-          isOpen={isDeleteBookDialogOpen}
-          name={book.title}
-          onClose={this.onCloseDeleteBookDialog}
-          onDelete={this.onDeleteBook}
-          title={tokens.BookListItem.deleteBook}
-          tokens={tokens}
-        />
       </div>
     );
   }
 }
+
+export default BookListItem;
