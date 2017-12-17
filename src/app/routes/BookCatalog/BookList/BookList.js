@@ -7,8 +7,10 @@ import React from 'react';
 
 import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
+import Popover, { orientation } from 'components/Popover/Popover';
 
 import './BookList.scss';
+import BookDetails from './BookDetails/BookDetails';
 import BookListItem from './BookListItem/BookListItem';
 
 export default class BookList extends React.PureComponent {
@@ -20,6 +22,8 @@ export default class BookList extends React.PureComponent {
   }
 
   state = {
+    bookDetailsAnchor: null,
+    isBookDetailsPopoverOpen: false,
     isDeleteBookDialogOpen: false,
     isEditBookDialogOpen: false,
     selectedBook: null,
@@ -29,14 +33,20 @@ export default class BookList extends React.PureComponent {
    * Closes the Delete Book Dialog.
    */
   onCloseDeleteBookDialog = () => {
-    this.setState({ isDeleteBookDialogOpen: false, selectedBook: null });
+    this.setState({
+      isDeleteBookDialogOpen: false,
+      selectedBook: null,
+    });
   }
 
   /**
    * Closes the Edit Book Dialog.
    */
   onCloseEditBookDialog = () => {
-    this.setState({ isEditBookDialogOpen: false, selectedBook: null });
+    this.setState({
+      isEditBookDialogOpen: false,
+      selectedBook: null,
+    });
   }
 
   /**
@@ -48,19 +58,49 @@ export default class BookList extends React.PureComponent {
   }
 
   /**
-   * Opens the Delete Book Dialog.
-   * @param {module:adapters/book~Book} selectedBook  The new selected book.
+   * Deselects the book and closes the Book Details Popover.
    */
-  onOpenDeleteBookDialog = (selectedBook) => {
-    this.setState({ isDeleteBookDialogOpen: true, selectedBook });
+  onDeselectBook = () => {
+    this.setState({
+      bookDetailsAnchor: null,
+      isBookDetailsPopoverOpen: false,
+      selectedBook: null,
+    });
+  }
+
+  /**
+   * Opens the Delete Book Dialog.
+   */
+  onOpenDeleteBookDialog = () => {
+    this.setState({
+      bookDetailsAnchor: null,
+      isBookDetailsPopoverOpen: false,
+      isDeleteBookDialogOpen: true,
+    });
   }
 
   /**
    * Opens the Edit Book Dialog.
-   * @param {module:adapters/book~Book} selectedBook  The new selected book.
    */
-  onOpenEditBookDialog = (selectedBook) => {
-    this.setState({ isEditBookDialogOpen: true, selectedBook });
+  onOpenEditBookDialog = () => {
+    this.setState({
+      bookDetailsAnchor: null,
+      isBookDetailsPopoverOpen: false,
+      isEditBookDialogOpen: true,
+    });
+  }
+
+  /**
+   * Aelects the book and opens the Book Details Popover.
+   * @param {module:adapters/book~Book} selectedBook  The new selected book.
+   * @param {Element}                   anchor        The anchor to the Book Details Popover.
+   */
+  onSelectBook = (selectedBook, anchor) => {
+    this.setState({
+      bookDetailsAnchor: anchor,
+      isBookDetailsPopoverOpen: true,
+      selectedBook,
+    });
   }
 
   /**
@@ -69,32 +109,46 @@ export default class BookList extends React.PureComponent {
    */
   render() {
     const { books, saveBook, tokens } = this.props;
-    const { isDeleteBookDialogOpen, isEditBookDialogOpen, selectedBook } = this.state;
+    const {
+      bookDetailsAnchor,
+      isBookDetailsPopoverOpen,
+      isDeleteBookDialogOpen,
+      isEditBookDialogOpen,
+      selectedBook,
+    } = this.state;
 
     return (
       <div className="BookList">
-        <div className="BookList__grid-header BookList__grid">
-          <div>{tokens.global.bookProperty.title}</div>
-          <div>{tokens.global.bookProperty.completion}</div>
-          <div>{tokens.global.options}</div>
-        </div>
-
-        <div className="BookList__divider" />
-
         {
           books.map((book) => {
+            const isSelected = (!!selectedBook && selectedBook._id === book._id);
             return (
               <BookListItem
                 book={book}
-                className="BookList__grid"
                 key={book._id}
-                onOpenDeleteBookDialog={this.onOpenDeleteBookDialog}
-                onOpenEditBookDialog={this.onOpenEditBookDialog}
-                tokens={tokens}
+                isSelected={isSelected}
+                onSelect={isSelected ? this.onDeselectBook : this.onSelectBook}
               />
             );
           })
         }
+
+        <Popover
+          anchor={bookDetailsAnchor}
+          anchorOrigin={{ horizontal: orientation.right, vertical: orientation.top }}
+          className="BookList__book-details"
+          isOpen={isBookDetailsPopoverOpen}
+          onClose={this.onDeselectBook}
+          targetOrigin={{ horizontal: orientation.left, vertical: orientation.top }}
+        >
+          <BookDetails
+            book={selectedBook}
+            onCloseBookDetailsPopover={this.onDeselectBook}
+            onOpenDeleteBookDialog={this.onOpenDeleteBookDialog}
+            onOpenEditBookDialog={this.onOpenEditBookDialog}
+            tokens={tokens}
+          />
+        </Popover>
 
         <EditBookDialog
           book={selectedBook || {}}

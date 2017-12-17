@@ -8,6 +8,7 @@ import React from 'react';
 
 export default class InputField extends React.PureComponent {
   static propTypes = {
+    isFullWidth: PropTypes.bool,
     label: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
     value: PropTypes.any.isRequired,
@@ -23,12 +24,13 @@ export default class InputField extends React.PureComponent {
   }
 
   render() {
-    const { label, value, ...props } = this.props;
+    const { isFullWidth = true, label, value, ...props } = this.props;
 
     return (
       <TextField
         {...props}
         floatingLabelText={label}
+        fullWidth={isFullWidth}
         onChange={this.onChange}
         value={value}
       />

@@ -1,27 +1,3 @@
-@import '~assets/scss/colors';
-@import '~assets/scss/sizes';
-
-.BookList__divider {
-  background-color:   black;
-  border-radius:      $small--3x;
-  height:             $small--3x;
-  margin:             $small--1x 0;
-  width:              100%;
-}
-
-.BookList__grid {
-  align-items:            center;
-  color:                  $text-color;
-  display:                grid;
-  grid-template-columns:  repeat(3, 1fr);
-  justify-items:          center;
-}
-
-.BookList__grid-header {
-  background-color: $text-background-color;
-  border-radius:    $small--2x;
-  cursor:           default;
-  font-weight:      bold;
-  padding:          $small--2x;
-  user-select:      none;
+.BookList__book-details {
+  height: 164px !important;
 }

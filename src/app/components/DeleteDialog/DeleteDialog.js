@@ -11,7 +11,7 @@ function DeleteDialog({ isOpen, name, onClose, onDelete, title, tokens }) {
         [
           <Button
             isFlat={true}
-            label={tokens.global.close}
+            label={tokens.global.cancel}
             onClick={onClose}
           />,
           <Button

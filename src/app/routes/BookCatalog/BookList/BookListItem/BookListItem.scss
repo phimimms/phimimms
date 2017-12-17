@@ -2,19 +2,27 @@
 @import '~assets/scss/sizes';
 
 .BookListItem {
-  background-color: $text-background-color;
-  border-radius:    $small--2x;
-  margin-bottom:    $small;
-  padding:          $small--1x;
-  user-select:      none;
+  border:         $small--3x solid $secondary-color;
+  border-radius:  $small--2x;
+  display:        inline-block;
+  margin:         0 $small;
+
+  button {
+    height: 160px !important;
+    width:  120px !important;
+  }
 }
 
-.BookListItem__option {
-  margin: 0 $medium;
+.BookListItem--selected {
+  border-color: $selected-color;
 }
 
-.BookListItem__option-container {
+.BookListItem__cover-image {
+  height: 160px;
+  width:  120px;
+}
+
+.BookListItem__cover-image-container {
   display:          flex;
   justify-content:  center;
-  width:            100%;
 }

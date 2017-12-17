@@ -6,6 +6,10 @@ const bookSchema = new mongoose.Schema({
    */
   authorName: String,
   /**
+   * The URL to the image of the book's cover art.
+   */
+  coverImageURL: String,
+  /**
    * The page number representing the book's reading progression.
    * If the book is on the Kindle, the value is expressed as a percentage [0, 100].
    */

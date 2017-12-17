@@ -14,14 +14,18 @@
     "global": {
       "bookProperty": {
         "author": "Author",
-        "completion": "Completion",
+        "coverImage": "Cover Image URL",
         "currentPage": "Current Page Number",
+        "currentPercent": "Current Page Percent",
         "firstPage": "First Page Number",
+        "firstPercent": "First Page Percent",
         "isKindle": "is Kindle",
         "lastPage": "Last Page Number",
+        "lastPercent": "Last Page Percent",
         "length": "Length",
         "title": "Title"
       },
+      "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
       "delete": "Delete",

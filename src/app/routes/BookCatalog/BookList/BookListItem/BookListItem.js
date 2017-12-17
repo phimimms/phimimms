@@ -2,38 +2,43 @@
  * @module BookList/BookListItem
  */
 
-import DeleteIcon from 'material-ui/svg-icons/action/delete';
-import EditIcon from 'material-ui/svg-icons/content/create';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Button from 'components/Button/Button';
-import ProgressBar from 'components/ProgressBar/ProgressBar';
-import { getReadingCompletionPercentage } from 'util/book';
 
 import './BookListItem.scss';
 
 class BookListItem extends React.PureComponent {
   static propTypes = {
     book: PropTypes.object.isRequired,
-    className: PropTypes.string.isRequired,
-    onOpenDeleteBookDialog: PropTypes.func.isRequired,
-    onOpenEditBookDialog: PropTypes.func.isRequired,
-    tokens: PropTypes.object.isRequired,
+    isSelected: PropTypes.bool.isRequired,
+    onSelect: PropTypes.func.isRequired,
+  }
+
+  constructor(props) {
+    super(props);
+
+    /**
+     * The root element of the component.
+     * @private
+     * @type  {Element|null}
+     */
+    this._element = null;
   }
 
   /**
-   * Invokes the provided handler to open the Delete Book Dialog.
+   * Captures a reference to the root element of the component.
    */
-  onOpenDeleteBookDialog = () => {
-    this.props.onOpenDeleteBookDialog(this.props.book);
+  componentDidMount() {
+    this._element = document.getElementById(`BookListItem__${this.props.book._id}`);
   }
 
   /**
-   * Invokes the provided handler to open the Edit Book Dialog.
+   * Invokes the provided handler to select the book represented by the component.
    */
-  onOpenEditBookDialog = () => {
-    this.props.onOpenEditBookDialog(this.props.book);
+  onSelect = () => {
+    this.props.onSelect(this.props.book, this._element);
   }
 
   /**
@@ -41,33 +46,23 @@ class BookListItem extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { book, className, tokens } = this.props;
-
-    const readingCompletionPercentage = getReadingCompletionPercentage(book);
+    const { book, isSelected } = this.props;
 
     return (
-      <div className={`BookListItem ${className}`}>
-        <div>{book.title}</div>
-
-        <ProgressBar
-          value={readingCompletionPercentage}
+      <div
+        id={`BookListItem__${book._id}`}
+        className={`BookListItem${isSelected ? ' BookListItem--selected' : ''}`}
+      >
+        <Button
+          icon={
+            <img
+              className="BookListItem__cover-image"
+              src={book.coverImageURL}
+            />
+          }
+          isFlat={true}
+          onClick={this.onSelect}
         />
-
-        <div className="BookListItem__option-container">
-          <Button
-            className="BookListItem__option"
-            icon={<EditIcon />}
-            onClick={this.onOpenEditBookDialog}
-            title={tokens.global.edit}
-          />
-
-          <Button
-            className="BookListItem__option"
-            icon={<DeleteIcon />}
-            onClick={this.onOpenDeleteBookDialog}
-            title={tokens.global.delete}
-          />
-        </div>
       </div>
     );
   }

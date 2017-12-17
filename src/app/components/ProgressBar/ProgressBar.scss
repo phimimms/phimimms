@@ -8,7 +8,9 @@
 }
 
 .ProgressBar__label {
+  cursor:           default;
   display:          flex;
   justify-content:  flex-end;
+  user-select:      none;
   width:            $large--2x;
 }

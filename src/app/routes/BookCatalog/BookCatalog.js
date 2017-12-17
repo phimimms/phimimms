@@ -27,6 +27,7 @@ import BookList from './BookList/BookList';
  */
 const defaultBook = {
   authorName: '',
+  coverImageURL: '',
   currentPageNumber: 0,
   firstPageNumber: 0,
   isKindle: false,

@@ -75,7 +75,7 @@ export default class NewBookDialog extends React.PureComponent {
           [
             <Button
               isFlat={true}
-              label={tokens.global.close}
+              label={tokens.global.cancel}
               onClick={onClose}
             />,
             <Button

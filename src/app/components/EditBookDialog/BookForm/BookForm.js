@@ -57,6 +57,7 @@ export default class BookForm extends React.PureComponent {
   isSaveValid = (state) => {
     const {
       authorName,
+      coverImageURL,
       currentPageNumber,
       firstPageNumber,
       isKindle,
@@ -67,6 +68,10 @@ export default class BookForm extends React.PureComponent {
 
     /* Ensure all values are valid */
     if (!authorName.length) {
+      return false;
+    }
+
+    if (!coverImageURL.length) {
       return false;
     }
 
@@ -86,6 +91,10 @@ export default class BookForm extends React.PureComponent {
 
     /* Ensure all values are updated */
     if (authorName !== this.props.book.authorName) {
+      return true;
+    }
+
+    if (coverImageURL !== this.props.book.coverImageURL) {
       return true;
     }
 
@@ -123,6 +132,14 @@ export default class BookForm extends React.PureComponent {
    */
   onAuthorNameChange = (value) => {
     this.setState({ authorName: value });
+  }
+
+  /**
+   * Updates the cover image URL of the book.
+   * @param {string}  value The new value of the cover image URL.
+   */
+  onCoverImageChange = (value) => {
+    this.setState({ coverImageURL: value });
   }
 
   /**
@@ -222,9 +239,10 @@ export default class BookForm extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { tokens } = this.props;
+    const { bookProperty } = this.props.tokens.global;
     const {
       authorName,
+      coverImageURL,
       currentPageNumber,
       firstPageNumber,
       isKindle,
@@ -238,14 +256,14 @@ export default class BookForm extends React.PureComponent {
         <div className="BookForm__row">
           <InputField
             className="BookForm__field"
-            label={tokens.global.bookProperty.title}
+            label={bookProperty.title}
             onChange={this.onTitleChange}
             value={title}
           />
 
           <InputField
             className="BookForm__field"
-            label={tokens.global.bookProperty.author}
+            label={bookProperty.author}
             onChange={this.onAuthorNameChange}
             value={authorName}
           />
@@ -254,23 +272,32 @@ export default class BookForm extends React.PureComponent {
         <div className="BookForm__row">
           <InputField
             className="BookForm__field"
-            label={tokens.global.bookProperty.firstPage}
+            label={isKindle ? bookProperty.firstPercent : bookProperty.firstPage}
             onChange={this.onFirstPageNumberChange}
             value={firstPageNumber}
           />
 
           <InputField
             className="BookForm__field"
-            label={tokens.global.bookProperty.currentPage}
+            label={isKindle ? bookProperty.currentPercent : bookProperty.currentPage}
             onChange={this.onCurrentPageNumberChange}
             value={currentPageNumber}
           />
 
           <InputField
             className="BookForm__field"
-            label={tokens.global.bookProperty.lastPage}
+            label={isKindle ? bookProperty.lastPercent : bookProperty.lastPage}
             onChange={this.onLastPageNumberChange}
             value={lastPageNumber}
+          />
+        </div>
+
+        <div className="BookForm__row">
+          <InputField
+            className="BookForm__field"
+            label={bookProperty.coverImage}
+            onChange={this.onCoverImageChange}
+            value={coverImageURL}
           />
         </div>
 
@@ -279,12 +306,13 @@ export default class BookForm extends React.PureComponent {
             className="BookForm__field"
             isChecked={isKindle}
             onChange={this.onIsKindleChange}
-            label={tokens.global.bookProperty.isKindle}
+            label={bookProperty.isKindle}
           />
 
           <InputField
             className={`BookForm__field${isKindle ? '' : ' BookForm__field--hidden'}`}
-            label={tokens.global.bookProperty.length}
+            isFullWidth={false}
+            label={bookProperty.length}
             onChange={isKindle ? this.onLengthChange : Function.prototype}
             value={length}
           />

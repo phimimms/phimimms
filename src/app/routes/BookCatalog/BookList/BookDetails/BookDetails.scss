@@ -1,0 +1,39 @@
+@import '~assets/scss/sizes';
+
+.BookDetails {
+  display:        grid;
+  justify-items:  center;
+  padding:        $small;
+  padding-top:    0;
+}
+
+.BookDetails__author {
+  padding-bottom: $small;
+}
+
+.BookDetails__close-row {
+  cursor:         pointer;
+  justify-self:   end;
+  padding-top:    $small--1x;
+  font-size:      $small;
+  text-transform: uppercase;
+
+  svg {
+    zoom: 75%;
+  }
+}
+
+.BookDetails__option {
+  margin: 0 $medium;
+}
+
+.BookDetails__option-container {
+  display:          flex;
+  justify-content:  center;
+  padding-top:      $small;
+  width:            100%;
+}
+
+.BookDetails__title {
+  font-weight:  bold;
+}

@@ -10,6 +10,7 @@ import { defaultURL } from 'dictionary/network';
  * The entity to represent a book.
  * @typedef   {Object}  Book
  * @property  {String}  authorName        The full name of the book's author.
+ * @property  {String}  coverImageURL     The URL to the image of the book's cover art.
  * @property  {Number}  currentPageNumber The page number representing the book's reading progression.
  * @property  {Number}  firstPageNumber   The page number of the book's first page.
  * @property  {Boolean} isKindle          Indicates whether the book is on the Kindle.
