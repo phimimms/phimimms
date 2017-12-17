@@ -22,6 +22,21 @@ import { defaultURL } from 'dictionary/network';
 const url = `${defaultURL}/books`;
 
 /**
+ * Sanitizes the values of the given book.
+ * @param   {module:adapters/book~Book} book  The book entity.
+ * @returns {module:adapters/book~Book}
+ */
+function sanitizeBook(book) {
+  const { authorName, coverImageURL, title } = book;
+
+  book.authorName = authorName.trim();
+  book.coverImageURL = encodeURI(coverImageURL.trim());
+  book.title = title.trim();
+
+  return book;
+}
+
+/**
  * Deletes the book corresponding to the given identifier.
  * @param   {string}  bookId  The identifier of the book to delete.
  * @returns {Promise}
@@ -61,7 +76,7 @@ export function getDeadline() {
  * @returns {Promise}
  */
 export function saveBook(book) {
-  book = Object.assign({}, book);
+  book = sanitizeBook({ ...book });
 
   if (book._id) {
     /* Updates the existing book */

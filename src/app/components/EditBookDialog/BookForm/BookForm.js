@@ -91,10 +91,18 @@ export default class BookForm extends React.PureComponent {
 
     /* Ensure all values are updated */
     if (authorName !== this.props.book.authorName) {
+      if (authorName.trim() === this.props.book.authorName.trim()) {
+        return false;
+      }
+
       return true;
     }
 
     if (coverImageURL !== this.props.book.coverImageURL) {
+      if (coverImageURL.trim() === this.props.book.coverImageURL.trim()) {
+        return false;
+      }
+
       return true;
     }
 
@@ -119,6 +127,10 @@ export default class BookForm extends React.PureComponent {
     }
 
     if (title !== this.props.book.title) {
+      if (title.trim() === this.props.book.title.trim()) {
+        return false;
+      }
+
       return true;
     }
 
