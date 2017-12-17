@@ -15,7 +15,7 @@ import { defaultURL } from 'dictionary/network';
  * @property  {Number}  firstPageNumber   The page number of the book's first page.
  * @property  {Boolean} isKindle          Indicates whether the book is on the Kindle.
  * @property  {Number}  lastPageNumber    The page number of the book's last page.
- * @property  {Number}  length            The number of pages in the books.
+ * @property  {Number}  numberOfPages     The length of the book in terms of pages.
  * @property  {String}  title             The title of the book.
  */
 

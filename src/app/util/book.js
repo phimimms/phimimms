@@ -17,7 +17,7 @@
 function getCurrentPageNumber(book) {
   if (book.isKindle) {
     return Math.floor(
-      book.length * book.currentPageNumber /
+      book.numberOfPages * book.currentPageNumber /
       (book.lastPageNumber - book.firstPageNumber) / 100
     );
   }
@@ -33,7 +33,7 @@ function getCurrentPageNumber(book) {
 function getReadingGoal(book, readingGoalPageNumber) {
   if (book.isKindle) {
     return Math.floor(
-      readingGoalPageNumber * (book.lastPageNumber - book.firstPageNumber) / book.length
+      readingGoalPageNumber * (book.lastPageNumber - book.firstPageNumber) / book.numberOfPages
     );
   }
   return readingGoalPageNumber;
@@ -47,7 +47,7 @@ function getReadingGoal(book, readingGoalPageNumber) {
 function getRemainingNumberOfPages(book) {
   if (book.isKindle) {
     return Math.floor(
-      book.length * (book.lastPageNumber - book.currentPageNumber) /
+      book.numberOfPages * (book.lastPageNumber - book.currentPageNumber) /
       (book.lastPageNumber - book.firstPageNumber) / 100
     );
   }
@@ -134,7 +134,7 @@ export function getSchedule(books, deadline) {
       });
 
       if (book.isKindle) {
-        dailyNumberOfPages -= book.length - currentPageNumber;
+        dailyNumberOfPages -= book.numberOfPages - currentPageNumber;
       } else {
         dailyNumberOfPages -= book.lastPageNumber - currentPageNumber;
       }

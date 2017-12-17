@@ -62,7 +62,7 @@ export default class BookForm extends React.PureComponent {
       firstPageNumber,
       isKindle,
       lastPageNumber,
-      length,
+      numberOfPages,
       title,
     } = state;
 
@@ -81,7 +81,7 @@ export default class BookForm extends React.PureComponent {
       return false;
     }
 
-    if (isKindle && !length) {
+    if (isKindle && !numberOfPages) {
       return false;
     }
 
@@ -122,7 +122,7 @@ export default class BookForm extends React.PureComponent {
       return true;
     }
 
-    if (isKindle && length !== this.props.book.length) {
+    if (isKindle && numberOfPages !== this.props.book.numberOfPages) {
       return true;
     }
 
@@ -200,7 +200,7 @@ export default class BookForm extends React.PureComponent {
   onIsKindleChange = () => {
     this.setState({
       isKindle: !this.state.isKindle,
-      length: 0,
+      numberOfPages: 0,
     });
   }
 
@@ -228,14 +228,14 @@ export default class BookForm extends React.PureComponent {
    * Updates the length of the book.
    * @param {string}  value The new value of the length.
    */
-  onLengthChange = (value) => {
+  onNumberOfPagesChange = (value) => {
     value = Number(value);
 
     if (!Number.isInteger(value) || value < 0) {
       return;
     }
 
-    this.setState({ length: value });
+    this.setState({ numberOfPages: value });
   }
 
   /**
@@ -259,7 +259,7 @@ export default class BookForm extends React.PureComponent {
       firstPageNumber,
       isKindle,
       lastPageNumber,
-      length,
+      numberOfPages,
       title,
     } = this.state;
 
@@ -324,9 +324,9 @@ export default class BookForm extends React.PureComponent {
           <InputField
             className={`BookForm__field${isKindle ? '' : ' BookForm__field--hidden'}`}
             isFullWidth={false}
-            label={bookProperty.length}
-            onChange={isKindle ? this.onLengthChange : Function.prototype}
-            value={length}
+            label={bookProperty.numberOfPages}
+            onChange={isKindle ? this.onNumberOfPagesChange : Function.prototype}
+            value={numberOfPages}
           />
         </div>
       </div>

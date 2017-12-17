@@ -29,9 +29,9 @@ const bookSchema = new mongoose.Schema({
    */
   lastPageNumber: Number,
   /**
-   * The length of the book.
+   * The length of the book in terms of pages.
    */
-  length: Number,
+  numberOfPages: Number,
   /**
    * The title of the book.
    */

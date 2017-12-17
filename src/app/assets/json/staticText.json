@@ -22,7 +22,7 @@
         "isKindle": "is Kindle",
         "lastPage": "Last Page Number",
         "lastPercent": "Last Page Percent",
-        "length": "Length",
+        "numberOfPages": "Number of Pages",
         "title": "Title"
       },
       "cancel": "Cancel",

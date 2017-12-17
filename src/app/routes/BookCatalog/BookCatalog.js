@@ -32,7 +32,7 @@ const defaultBook = {
   firstPageNumber: 0,
   isKindle: false,
   lastPageNumber: 0,
-  length: 0,
+  numberOfPages: 0,
   title: '',
 };
 
