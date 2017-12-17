@@ -2,7 +2,7 @@
  * @module components/Checkbox
  */
 
-import CheckboxMUI from 'material-ui/Checkbox';
+import { Checkbox as CheckboxMUI } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 

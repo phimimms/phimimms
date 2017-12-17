@@ -22,7 +22,7 @@
   width:  120px;
 }
 
-.BookListItem__cover-image-container {
-  display:          flex;
-  justify-content:  center;
+.BookListItem__loading {
+  background-color: $text-background-color;
+  position:         absolute;
 }

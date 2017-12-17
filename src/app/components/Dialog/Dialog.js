@@ -2,7 +2,7 @@
  * @module components/Dialog
  */
 
-import DialogMUI from 'material-ui/Dialog';
+import { Dialog as DialogMUI } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 

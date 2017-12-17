@@ -2,7 +2,7 @@
  * @module components/InputField
  */
 
-import TextField from 'material-ui/TextField';
+import { TextField } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 

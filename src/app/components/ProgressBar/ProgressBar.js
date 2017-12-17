@@ -2,7 +2,7 @@
  * @module components/ProgressBar
  */
 
-import LinearProgress from 'material-ui/LinearProgress';
+import { LinearProgress } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 import tinygradient from 'tinygradient';

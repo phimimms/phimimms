@@ -1,5 +1,4 @@
-import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
+import { FlatButton, RaisedButton } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 

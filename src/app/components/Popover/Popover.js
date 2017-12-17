@@ -2,7 +2,7 @@
  * @module components/Popover
  */
 
-import PopoverMUI from 'material-ui/Popover';
+import { Popover as PopoverMUI } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 
