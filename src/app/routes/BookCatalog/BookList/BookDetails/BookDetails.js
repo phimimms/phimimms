@@ -1,6 +1,6 @@
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
 import CloseIcon from 'material-ui/svg-icons/content/clear';
-import EditIcon from 'material-ui/svg-icons/content/create';
+import EditIcon from 'material-ui/svg-icons/image/edit';
 import PropTypes from 'prop-types';
 import React from 'react';
 

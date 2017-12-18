@@ -1,4 +1,4 @@
-import createHistory from 'history/createBrowserHistory'; // eslint-disable-line
+import createHistory from 'history/createBrowserHistory';
 import { applyMiddleware, compose, createStore } from 'redux';
 import persistState from 'redux-localstorage';
 import { routerMiddleware } from 'react-router-redux';

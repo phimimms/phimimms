@@ -13,8 +13,9 @@ import 'assets/icomoon/style.css';
 import { history } from 'store/configureStore';
 
 import './App.scss';
+import Header from './Header/Header';
 
-function App({ directionality }) {
+function App({ directionality, pathname, tokens }) {
   const BookCatalog = asyncComponent({
     resolve: () => import('routes/BookCatalog/BookCatalog'),
   });
@@ -25,6 +26,12 @@ function App({ directionality }) {
   return (
     <ConnectedRouter history={history}>
       <div className={`App ${directionality}`} dir={directionality}>
+        <Header
+          history={history}
+          pathname={pathname}
+          tokens={tokens}
+        />
+
         <div className="App__content">
           <Route
             exact
@@ -44,11 +51,15 @@ function App({ directionality }) {
 
 App.propTypes = {
   directionality: PropTypes.string.isRequired,
+  pathname: PropTypes.string.isRequired,
+  tokens: PropTypes.object.isRequired,
 };
 
-function mapStateToProps({ localization: { directionality } }) {
+function mapStateToProps({ localization: { directionality, tokens }, router: { location } }) {
   return {
     directionality,
+    pathname: location ? location.pathname : '',
+    tokens,
   };
 }
 

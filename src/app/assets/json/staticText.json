@@ -32,6 +32,13 @@
       "edit": "Edit",
       "options": "Options",
       "save": "Save"
+    },
+    "Header": {
+      "back": "Back",
+      "title": {
+        "bookCatalog": "Book Catalog",
+        "home": "phimimms"
+      }
     }
   }
 }

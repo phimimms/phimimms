@@ -1,4 +1,4 @@
-@import '~assets/scss/colors.scss';
+@import '~assets/scss/colors';
 
 .App {
   display:    flex;
@@ -9,6 +9,7 @@
 
 .App__content {
   background-color: $background-color;
+  display:          flex;
   height:           100%;
   width:            100%;
 }
