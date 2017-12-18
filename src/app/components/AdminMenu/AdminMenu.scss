@@ -1,0 +1,29 @@
+@import '~assets/scss/colors';
+@import '~assets/scss/sizes';
+
+.AdminMenu {
+  background-color: $light-color;
+  border-radius:    $small--1x;
+  color:            white;
+  display:          flex;
+  justify-content:  center;
+  margin:           $small;
+}
+
+.AdminMenu__content {
+  margin: $small;
+}
+
+.AdminMenu__content-container {
+  border:         $small--2x solid $dark-color;
+  border-radius:  $small--1x;
+  max-width:      $max-content-width;
+  width:          100%;
+}
+
+.AdminMenu__title {
+  background-color: $dark-color;
+  font-size:        $medium--1x;
+  font-weight:      bold;
+  padding:          $small--1x;
+}

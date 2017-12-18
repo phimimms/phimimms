@@ -13,6 +13,7 @@ import {
   fetchBooks,
   saveBook as saveBookAction,
 } from 'actions/book';
+import AdminMenu from 'components/AdminMenu/AdminMenu';
 import Button from 'components/Button/Button';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
@@ -92,15 +93,15 @@ class BookCatalog extends React.PureComponent {
       <div className="BookCatalog">
         <div className="BookCatalog__content">
 
-          <div className="BookCatalog__header">
-            <div className="BookCatalog__title">{tokens.BookCatalog.title}</div>
-
+          <AdminMenu
+            tokens={tokens}
+          >
             <Button
               icon={<AddIcon />}
               onClick={this.onOpenEditBookDialog}
               title={tokens.BookCatalog.addBook}
             />
-          </div>
+          </AdminMenu>
 
           <BookList
             books={books}

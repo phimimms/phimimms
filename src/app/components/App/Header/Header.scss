@@ -3,7 +3,7 @@
 
 .Header {
   align-items:      center;
-  background-color: $primary-color;
+  background-color: $dark-color;
   color:            white;
   display:          flex;
   height:           $large--2x;
@@ -32,7 +32,8 @@
 .Header__content {
   display:          flex;
   justify-content:  space-between;
-  width:            $max-content-width;
+  max-width:        $max-content-width;
+  width:            100%;
 }
 
 .Header__content-container {

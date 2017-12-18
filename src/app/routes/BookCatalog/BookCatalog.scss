@@ -7,14 +7,8 @@
 }
 
 .BookCatalog__content {
-  width:  $max-content-width;
-}
-
-.BookCatalog__header {
-  align-items:      center;
-  display:          flex;
-  justify-content:  space-between;
-  padding:          $medium ($large--1x + $small);
+  max-width:  $max-content-width;
+  width:      100%;
 }
 
 .BookCatalog__title {

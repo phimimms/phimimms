@@ -1,8 +1,10 @@
 {
   "en": {
+    "AdminMenu": {
+      "title": "Administration Menu"
+    },
     "BookCatalog": {
-      "addBook": "Add New Book",
-      "title": "Book Catalog"
+      "addBook": "Add New Book"
     },
     "BookList": {
       "deleteBook": "Delete Book",
