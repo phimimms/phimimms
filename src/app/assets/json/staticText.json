@@ -6,7 +6,7 @@
     "BookCatalog": {
       "addBook": "Add New Book"
     },
-    "BookList": {
+    "BookLists": {
       "deleteBook": "Delete Book",
       "editBook": "Edit Book"
     },

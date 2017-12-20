@@ -1,5 +1,5 @@
 /**
- * @module BookList/BookListItem
+ * @module BookLists/BookListItem
  */
 
 import PropTypes from 'prop-types';

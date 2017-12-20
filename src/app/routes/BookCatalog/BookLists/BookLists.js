@@ -1,5 +1,5 @@
 /**
- * @module BookCatalog/BookList
+ * @module BookCatalog/BookLists
  */
 
 import PropTypes from 'prop-types';
@@ -9,11 +9,11 @@ import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 import Popover, { orientation } from 'components/Popover/Popover';
 
-import './BookList.scss';
+import './BookLists.scss';
 import BookDetails from './BookDetails/BookDetails';
 import BookListItem from './BookListItem/BookListItem';
 
-export default class BookList extends React.PureComponent {
+export default class BookLists extends React.PureComponent {
   static propTypes = {
     books: PropTypes.array.isRequired,
     deleteBook: PropTypes.func.isRequired,
@@ -118,7 +118,7 @@ export default class BookList extends React.PureComponent {
     } = this.state;
 
     return (
-      <div className="BookList">
+      <div className="BookLists">
         {
           books.map((book) => {
             const isSelected = (!!selectedBook && selectedBook._id === book._id);
@@ -136,7 +136,7 @@ export default class BookList extends React.PureComponent {
         <Popover
           anchor={bookDetailsAnchor}
           anchorOrigin={{ horizontal: orientation.right, vertical: orientation.top }}
-          className="BookList__book-details"
+          className="BookLists__book-details"
           isOpen={isBookDetailsPopoverOpen}
           onClose={this.onDeselectBook}
           targetOrigin={{ horizontal: orientation.left, vertical: orientation.top }}
@@ -155,7 +155,7 @@ export default class BookList extends React.PureComponent {
           isOpen={isEditBookDialogOpen}
           onClose={this.onCloseEditBookDialog}
           saveBook={saveBook}
-          title={tokens.BookList.editBook}
+          title={tokens.BookLists.editBook}
           tokens={tokens}
         />
 
@@ -164,7 +164,7 @@ export default class BookList extends React.PureComponent {
           name={selectedBook ? selectedBook.title : ''}
           onClose={this.onCloseDeleteBookDialog}
           onDelete={this.onDeleteBook}
-          title={tokens.BookList.deleteBook}
+          title={tokens.BookLists.deleteBook}
           tokens={tokens}
         />
       </div>

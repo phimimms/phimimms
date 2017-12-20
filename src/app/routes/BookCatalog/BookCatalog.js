@@ -18,7 +18,7 @@ import Button from 'components/Button/Button';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
 import './BookCatalog.scss';
-import BookList from './BookList/BookList';
+import BookLists from './BookLists/BookLists';
 
 /**
  * The default values of the new book.
@@ -103,7 +103,7 @@ class BookCatalog extends React.PureComponent {
             />
           </AdminMenu>
 
-          <BookList
+          <BookLists
             books={books}
             deleteBook={deleteBook}
             saveBook={saveBook}
