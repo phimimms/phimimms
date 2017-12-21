@@ -251,7 +251,7 @@ export default class BookForm extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { bookProperty } = this.props.tokens.global;
+    const { bookProperty } = this.props.tokens.BookForm;
     const {
       authorName,
       coverImageURL,

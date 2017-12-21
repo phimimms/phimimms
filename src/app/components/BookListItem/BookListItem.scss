@@ -2,10 +2,11 @@
 @import '~assets/scss/sizes';
 
 .BookListItem {
-  border:         $small--3x solid $dark-color;
-  border-radius:  $small--2x;
-  display:        inline-block;
-  margin:         0 $small;
+  background-color: $text-background-color;
+  border:           $small--3x solid $dark-color;
+  border-radius:    $small--2x;
+  display:          inline-block;
+  margin:           0 $small;
 
   button {
     height: 160px !important;
@@ -20,6 +21,10 @@
 .BookListItem__cover-image {
   height: 160px;
   width:  120px;
+}
+
+.BookListItem__cover-image--hidden {
+  display:  none;
 }
 
 .BookListItem__loading {

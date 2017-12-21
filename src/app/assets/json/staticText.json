@@ -6,14 +6,7 @@
     "BookCatalog": {
       "addBook": "Add New Book"
     },
-    "BookLists": {
-      "deleteBook": "Delete Book",
-      "editBook": "Edit Book"
-    },
-    "DeleteDialog": {
-      "confirmDelete": "Are you sure you want to delete \"{0}\"?"
-    },
-    "global": {
+    "BookForm": {
       "bookProperty": {
         "author": "Author",
         "coverImage": "Cover Image URL",
@@ -26,7 +19,16 @@
         "lastPercent": "Last Page Percent",
         "numberOfPages": "Number of Pages",
         "title": "Title"
-      },
+      }
+    },
+    "BookLists": {
+      "deleteBook": "Delete Book",
+      "editBook": "Edit Book"
+    },
+    "DeleteDialog": {
+      "confirmDelete": "Are you sure you want to delete \"{0}\"?"
+    },
+    "global": {
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",
@@ -41,6 +43,9 @@
         "bookCatalog": "Book Catalog",
         "home": "phimimms"
       }
+    },
+    "UnfinishedBookList": {
+      "title": "Currently Reading"
     }
   }
 }

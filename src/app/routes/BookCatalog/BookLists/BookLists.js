@@ -11,7 +11,7 @@ import Popover, { orientation } from 'components/Popover/Popover';
 
 import './BookLists.scss';
 import BookDetails from './BookDetails/BookDetails';
-import BookListItem from './BookListItem/BookListItem';
+import UnfinishedBookList from './UnfinishedBookList/UnfinishedBookList';
 
 export default class BookLists extends React.PureComponent {
   static propTypes = {
@@ -119,19 +119,13 @@ export default class BookLists extends React.PureComponent {
 
     return (
       <div className="BookLists">
-        {
-          books.map((book) => {
-            const isSelected = (!!selectedBook && selectedBook._id === book._id);
-            return (
-              <BookListItem
-                book={book}
-                key={book._id}
-                isSelected={isSelected}
-                onSelect={isSelected ? this.onDeselectBook : this.onSelectBook}
-              />
-            );
-          })
-        }
+        <UnfinishedBookList
+          books={books}
+          onDeselectBook={this.onDeselectBook}
+          onSelectBook={this.onSelectBook}
+          selectedBook={selectedBook}
+          tokens={tokens}
+        />
 
         <Popover
           anchor={bookDetailsAnchor}

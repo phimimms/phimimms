@@ -1,5 +1,5 @@
 /**
- * @module BookLists/BookListItem
+ * @module components/BookListItem
  */
 
 import PropTypes from 'prop-types';
@@ -21,6 +21,7 @@ class BookListItem extends React.PureComponent {
     super(props);
 
     this.state = {
+      isCoverImageLinkBroken: false,
       isCoverImageLoaded: false,
     };
 
@@ -37,6 +38,13 @@ class BookListItem extends React.PureComponent {
    */
   componentDidMount() {
     this._element = document.getElementById(`BookListItem__${this.props.book._id}`);
+  }
+
+  /**
+   * Updates the state to indicate that the cover image failed to load.
+   */
+  onCoverImageFailed = () => {
+    this.setState({ isCoverImageLinkBroken: true });
   }
 
   /**
@@ -59,7 +67,7 @@ class BookListItem extends React.PureComponent {
    */
   render() {
     const { book, isSelected } = this.props;
-    const { isCoverImageLoaded } = this.state;
+    const { isCoverImageLinkBroken, isCoverImageLoaded } = this.state;
 
     return (
       <div
@@ -73,13 +81,17 @@ class BookListItem extends React.PureComponent {
         <Button
           icon={
             <img
-              className="BookListItem__cover-image"
+              className={
+                `BookListItem__cover-image${isCoverImageLinkBroken ? ' BookListItem__cover-image--hidden' : ''}`
+              }
+              onError={this.onCoverImageFailed}
               onLoad={this.onCoverImageLoaded}
               src={book.coverImageURL}
             />
           }
           isFlat={true}
           onClick={this.onSelect}
+          title={book.title}
         />
       </div>
     );

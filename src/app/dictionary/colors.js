@@ -2,11 +2,17 @@
  * @module dictionary/colors
  */
 
-export const backgroundColor = '#0496FF';
-export const primaryColor = '#031A6B';
-export const secondaryColor = '#2541B2';
-export const selectedColor = '#FF6B35';
-export const warningColor = '#F03A47';
+export const darkColor = '#070707';
+export const lightColor = '#e8f0ff';
 
-export const textBackgroundColor = '#EFEFEF';
+export const primaryBackgroundColor = '#07beb8';
+export const secondaryBackgroundColor = '#c1eeff';
+
+export const primaryColor = '#054a91';
+export const secondaryColor = '#3e7cb1';
+
+export const selectedColor = '#ff6b35';
+export const warningColor = '#f03a47';
+
+export const textBackgroundColor = '#efefef';
 export const textColor = '#343434';
