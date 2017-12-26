@@ -6,6 +6,10 @@ const bookSchema = new mongoose.Schema({
    */
   authorName: String,
   /**
+   * The category of the book.
+   */
+  category: String,
+  /**
    * The URL to the image of the book's cover art.
    */
   coverImageURL: String,
@@ -32,6 +36,10 @@ const bookSchema = new mongoose.Schema({
    * The length of the book in terms of pages.
    */
   numberOfPages: Number,
+  /**
+   * The rating of the book.
+   */
+  rating: Number,
   /**
    * The title of the book.
    */

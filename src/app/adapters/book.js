@@ -9,14 +9,16 @@ import { defaultURL } from 'dictionary/network';
 /**
  * The entity to represent a book.
  * @typedef   {Object}  Book
- * @property  {String}  authorName        The full name of the book's author.
- * @property  {String}  coverImageURL     The URL to the image of the book's cover art.
- * @property  {Number}  currentPageNumber The page number representing the book's reading progression.
- * @property  {Number}  firstPageNumber   The page number of the book's first page.
- * @property  {Boolean} isKindle          Indicates whether the book is on the Kindle.
- * @property  {Number}  lastPageNumber    The page number of the book's last page.
- * @property  {Number}  numberOfPages     The length of the book in terms of pages.
- * @property  {String}  title             The title of the book.
+ * @property  {string}  authorName        The full name of the book's author.
+ * @property  {string}  category          The category of the book.
+ * @property  {string}  coverImageURL     The URL to the image of the book's cover art.
+ * @property  {number}  currentPageNumber The page number representing the book's reading progression.
+ * @property  {number}  firstPageNumber   The page number of the book's first page.
+ * @property  {boolean} isKindle          Indicates whether the book is on the Kindle.
+ * @property  {number}  lastPageNumber    The page number of the book's last page.
+ * @property  {number}  numberOfPages     The length of the book in terms of pages.
+ * @property  {number}  rating            The rating of the book.
+ * @property  {string}  title             The title of the book.
  */
 
 const url = `${defaultURL}/books`;

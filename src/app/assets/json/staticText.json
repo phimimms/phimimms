@@ -9,6 +9,7 @@
     "BookForm": {
       "bookProperty": {
         "author": "Author",
+        "category": "Category",
         "coverImage": "Cover Image URL",
         "currentPage": "Current Page Number",
         "currentPercent": "Current Page Percent",
@@ -18,8 +19,10 @@
         "lastPage": "Last Page Number",
         "lastPercent": "Last Page Percent",
         "numberOfPages": "Number of Pages",
+        "rating": "Rating",
         "title": "Title"
-      }
+      },
+      "selectCategory": "Select Category"
     },
     "BookLists": {
       "deleteBook": "Delete Book",
@@ -29,6 +32,12 @@
       "confirmDelete": "Are you sure you want to delete \"{0}\"?"
     },
     "global": {
+      "bookCategory": {
+        "health": "Health",
+        "philosophy": "Philosophy",
+        "professional": "Professional",
+        "software": "Software"
+      },
       "cancel": "Cancel",
       "close": "Close",
       "confirm": "Confirm",

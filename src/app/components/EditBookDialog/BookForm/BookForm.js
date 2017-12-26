@@ -2,11 +2,14 @@
  * @module EditBookDialog/BookForm
  */
 
+import { MenuItem } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 
 import Checkbox from 'components/Checkbox/Checkbox';
+import DropDownMenu from 'components/DropDownMenu/DropDownMenu';
 import InputField from 'components/InputField/InputField';
+import { categories } from 'dictionary/book';
 
 import './BookForm.scss';
 
@@ -57,6 +60,7 @@ export default class BookForm extends React.PureComponent {
   isSaveValid = (state) => {
     const {
       authorName,
+      category,
       coverImageURL,
       currentPageNumber,
       firstPageNumber,
@@ -68,6 +72,10 @@ export default class BookForm extends React.PureComponent {
 
     /* Ensure all values are valid */
     if (!authorName.length) {
+      return false;
+    }
+
+    if (!category.length) {
       return false;
     }
 
@@ -89,12 +97,16 @@ export default class BookForm extends React.PureComponent {
       return false;
     }
 
-    /* Ensure all values are updated */
+    /* Ensure at least one value updated */
     if (authorName !== this.props.book.authorName) {
       if (authorName.trim() === this.props.book.authorName.trim()) {
         return false;
       }
 
+      return true;
+    }
+
+    if (category !== this.props.book.category) {
       return true;
     }
 
@@ -144,6 +156,14 @@ export default class BookForm extends React.PureComponent {
    */
   onAuthorNameChange = (value) => {
     this.setState({ authorName: value });
+  }
+
+  /**
+   * Updates the category of the book.
+   * @param {string}  value The new value of the category.
+   */
+  onCategoryChange = (value) => {
+    this.setState({ category: value });
   }
 
   /**
@@ -251,9 +271,10 @@ export default class BookForm extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { bookProperty } = this.props.tokens.BookForm;
+    const { BookForm: { bookProperty, selectCategory }, global: { bookCategory } } = this.props.tokens;
     const {
       authorName,
+      category,
       coverImageURL,
       currentPageNumber,
       firstPageNumber,
@@ -313,21 +334,46 @@ export default class BookForm extends React.PureComponent {
           />
         </div>
 
-        <div className="BookForm__row--short">
-          <Checkbox
-            className="BookForm__field"
-            isChecked={isKindle}
-            onChange={this.onIsKindleChange}
-            label={bookProperty.isKindle}
-          />
+        <div className="BookForm__row BookForm__row--centered">
+          <div className="BookForm__row--centered">
+            <Checkbox
+              className="BookForm__field"
+              isChecked={isKindle}
+              onChange={this.onIsKindleChange}
+              label={bookProperty.isKindle}
+            />
 
-          <InputField
-            className={`BookForm__field${isKindle ? '' : ' BookForm__field--hidden'}`}
-            isFullWidth={false}
-            label={bookProperty.numberOfPages}
-            onChange={isKindle ? this.onNumberOfPagesChange : Function.prototype}
-            value={numberOfPages}
-          />
+            <InputField
+              className={`BookForm__field${isKindle ? '' : ' BookForm__field--hidden'}`}
+              isFullWidth={false}
+              label={bookProperty.numberOfPages}
+              onChange={isKindle ? this.onNumberOfPagesChange : Function.prototype}
+              value={numberOfPages}
+            />
+          </div>
+
+          <DropDownMenu
+            onChange={this.onCategoryChange}
+            value={category}
+          >
+            <MenuItem
+              label={selectCategory}
+              style={{ display: 'none' }}
+              value={''}
+            />
+
+            {
+              categories.map((c) => {
+                return (
+                  <MenuItem
+                    key={c}
+                    primaryText={bookCategory[c]}
+                    value={c}
+                  />
+                );
+              })
+            }
+          </DropDownMenu>
         </div>
       </div>
     );

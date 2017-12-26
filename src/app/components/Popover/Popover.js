@@ -6,21 +6,14 @@ import { Popover as PopoverMUI } from 'material-ui';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-/**
- * The supported values for the horizontal and vertical orientations in relation
- * to the component's anchor and target element.
- * @type  {Object.<string>}
- */
-export const orientation = {
-  bottom: 'bottom',
-  center: 'center',
-  left: 'left',
-  middle: 'middle',
-  right: 'right',
-  top: 'top',
-};
+export default class Popover extends React.PureComponent {
+  static propTypes = {
+    anchor: PropTypes.instanceOf(Element),
+    children: PropTypes.node.isRequired,
+    isOpen: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+  }
 
-class Popover extends React.PureComponent {
   /**
    * Invokes the provided handler to close the component.
    * @param {string}  reason  Expresses the cause of the event trigger.
@@ -53,12 +46,3 @@ class Popover extends React.PureComponent {
     );
   }
 }
-
-Popover.propTypes = {
-  anchor: PropTypes.instanceOf(Element),
-  children: PropTypes.node.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  onClose: PropTypes.func.isRequired,
-};
-
-export default Popover;

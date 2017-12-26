@@ -28,12 +28,14 @@ import BookLists from './BookLists/BookLists';
  */
 const defaultBook = {
   authorName: '',
+  category: '',
   coverImageURL: '',
   currentPageNumber: 0,
   firstPageNumber: 0,
   isKindle: false,
   lastPageNumber: 0,
   numberOfPages: 0,
+  rating: 0,
   title: '',
 };
 

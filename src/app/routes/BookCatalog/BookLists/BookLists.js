@@ -7,7 +7,8 @@ import React from 'react';
 
 import DeleteDialog from 'components/DeleteDialog/DeleteDialog';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
-import Popover, { orientation } from 'components/Popover/Popover';
+import Popover from 'components/Popover/Popover';
+import { orientation } from 'dictionary/element';
 
 import './BookLists.scss';
 import BookDetails from './BookDetails/BookDetails';
