@@ -25,6 +25,7 @@
       "selectCategory": "Select Category"
     },
     "BookLists": {
+      "currentlyReading": "Currently Reading",
       "deleteBook": "Delete Book",
       "editBook": "Edit Book"
     },
@@ -52,9 +53,6 @@
         "bookCatalog": "Book Catalog",
         "home": "phimimms"
       }
-    },
-    "UnfinishedBookList": {
-      "title": "Currently Reading"
     }
   }
 }

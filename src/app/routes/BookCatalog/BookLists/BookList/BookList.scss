@@ -1,12 +1,12 @@
 @import '~assets/scss/colors';
 @import '~assets/scss/sizes';
 
-.FinishedBookList {
+.BookList {
   color:  white;
   margin: $small;
 }
 
-.FinishedBookList__title {
+.BookList__title {
   background-color:         $dark-color;
   border-top-left-radius:   $small--1x;
   border-top-right-radius:  $small--1x;

@@ -12,8 +12,7 @@ import { orientation } from 'dictionary/element';
 
 import './BookLists.scss';
 import BookDetails from './BookDetails/BookDetails';
-import FinishedBookLists from './FinishedBookLists/FinishedBookLists';
-import UnfinishedBookList from './UnfinishedBookList/UnfinishedBookList';
+import BookList from './BookList/BookList';
 
 export default class BookLists extends React.PureComponent {
   static propTypes = {
@@ -156,23 +155,30 @@ export default class BookLists extends React.PureComponent {
 
     return (
       <div className="BookLists">
-        <UnfinishedBookList
+        <BookList
           books={unfinishedBooks}
           languageCode={languageCode}
           onDeselectBook={this.onDeselectBook}
           onSelectBook={this.onSelectBook}
           selectedBook={selectedBook}
-          tokens={tokens}
+          title={tokens.BookLists.currentlyReading}
         />
 
-        <FinishedBookLists
-          books={finishedBooks}
-          languageCode={languageCode}
-          onDeselectBook={this.onDeselectBook}
-          onSelectBook={this.onSelectBook}
-          selectedBook={selectedBook}
-          tokens={tokens}
-        />
+        {
+          Array.from(finishedBooks).map(([category, categoryBooks]) => {
+            return (
+              <BookList
+                books={categoryBooks}
+                key={category}
+                languageCode={languageCode}
+                onDeselectBook={this.onDeselectBook}
+                onSelectBook={this.onSelectBook}
+                selectedBook={selectedBook}
+                title={tokens.global.bookCategory[category]}
+              />
+            );
+          })
+        }
 
         <Popover
           anchor={bookDetailsAnchor}

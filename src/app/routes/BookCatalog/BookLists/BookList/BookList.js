@@ -1,21 +1,21 @@
 /**
- * @module BookLists/UnfinishedBookList
+ * @module BookLists/BookList
  */
 
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import BookListItem from 'components/BookListItem/BookListItem';
 import { compareAlphabetically } from 'util/string';
 
-import './UnfinishedBookList.scss';
+import './BookList.scss';
+import BookListItem from './BookListItem/BookListItem';
 
-function UnfinishedBookList({ books, languageCode, onDeselectBook, onSelectBook, selectedBook, tokens }) {
+function UnfinishedBookList({ books, languageCode, onDeselectBook, onSelectBook, selectedBook, title }) {
   return (
-    <div className="UnfinishedBookList">
-      <div className="UnfinishedBookList__title">{tokens.UnfinishedBookList.title}</div>
+    <div className="BookList">
+      <div className="BookList__title">{title}</div>
 
-      <div className="UnfinishedBookList__content">
+      <div>
         {
           books.sort(compareAlphabetically('title', languageCode)).map((book) => {
             const isSelected = (!!selectedBook && selectedBook._id === book._id);
@@ -41,7 +41,7 @@ UnfinishedBookList.propTypes = {
   onDeselectBook: PropTypes.func.isRequired,
   onSelectBook: PropTypes.func.isRequired,
   selectedBook: PropTypes.object,
-  tokens: PropTypes.object.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default UnfinishedBookList;
