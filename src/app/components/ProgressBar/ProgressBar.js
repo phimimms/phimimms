@@ -11,8 +11,12 @@ import './ProgressBar.scss';
 
 const gradient = tinygradient('red', 'yellow', 'green').rgb(50);
 
+/**
+ * @param   {number}  value A number in the range of [0, 100].
+ * @returns {Element}
+ */
 function ProgressBar({ value, ...props }) {
-  const color = gradient[Math.floor(value / 2)].toHexString();
+  const color = gradient[Math.floor(value / 2) - 1].toHexString();
 
   return (
     <div className="ProgressBar">

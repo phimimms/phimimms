@@ -12,5 +12,6 @@
   background:       linear-gradient(135deg, $secondary-background-color, $primary-background-color);
   display:          flex;
   height:           100%;
+  overflow:         hidden;
   width:            100%;
 }

@@ -46,6 +46,7 @@ class BookCatalog extends React.PureComponent {
     deleteBook: PropTypes.func.isRequired,
     fetchBookDeadline: PropTypes.func.isRequired,
     fetchBooks: PropTypes.func.isRequired,
+    languageCode: PropTypes.string.isRequired,
     saveBook: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
   }
@@ -88,7 +89,7 @@ class BookCatalog extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { books, deleteBook, saveBook, tokens } = this.props;
+    const { books, deleteBook, languageCode, saveBook, tokens } = this.props;
     const { isEditBookDialogOpen } = this.state;
 
     return (
@@ -108,6 +109,7 @@ class BookCatalog extends React.PureComponent {
           <BookLists
             books={books}
             deleteBook={deleteBook}
+            languageCode={languageCode}
             saveBook={saveBook}
             tokens={tokens}
           />
@@ -126,10 +128,11 @@ class BookCatalog extends React.PureComponent {
   }
 }
 
-function mapStateToProps({ bookCatalog: { books, deadline }, localization: { tokens } }) {
+function mapStateToProps({ bookCatalog: { books, deadline }, localization: { code, tokens } }) {
   return {
     books,
     bookDeadline: deadline,
+    languageCode: code.split('-').shift(),
     tokens,
   };
 }
