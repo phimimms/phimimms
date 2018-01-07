@@ -18,6 +18,7 @@ export default class BookLists extends React.PureComponent {
   static propTypes = {
     books: PropTypes.array.isRequired,
     deleteBook: PropTypes.func.isRequired,
+    isDialogDisabled: PropTypes.bool.isRequired,
     languageCode: PropTypes.string.isRequired,
     saveBook: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
@@ -142,7 +143,7 @@ export default class BookLists extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { languageCode, saveBook, tokens } = this.props;
+    const { isDialogDisabled, languageCode, saveBook, tokens } = this.props;
     const {
       bookDetailsAnchor,
       isBookDetailsPopoverOpen,
@@ -184,7 +185,7 @@ export default class BookLists extends React.PureComponent {
           anchor={bookDetailsAnchor}
           anchorOrigin={{ horizontal: orientation.right, vertical: orientation.top }}
           className="BookLists__book-details"
-          isOpen={isBookDetailsPopoverOpen}
+          isOpen={!isDialogDisabled && isBookDetailsPopoverOpen}
           onClose={this.onDeselectBook}
           targetOrigin={{ horizontal: orientation.left, vertical: orientation.top }}
         >
@@ -199,7 +200,7 @@ export default class BookLists extends React.PureComponent {
 
         <EditBookDialog
           book={selectedBook || {}}
-          isOpen={isEditBookDialogOpen}
+          isOpen={!isDialogDisabled && isEditBookDialogOpen}
           onClose={this.onCloseEditBookDialog}
           saveBook={saveBook}
           title={tokens.BookLists.editBook}
@@ -207,7 +208,7 @@ export default class BookLists extends React.PureComponent {
         />
 
         <DeleteDialog
-          isOpen={isDeleteBookDialogOpen}
+          isOpen={!isDialogDisabled && isDeleteBookDialogOpen}
           name={selectedBook ? selectedBook.title : ''}
           onClose={this.onCloseDeleteBookDialog}
           onDelete={this.onDeleteBook}

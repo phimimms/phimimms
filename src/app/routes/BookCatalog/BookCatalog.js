@@ -157,6 +157,7 @@ class BookCatalog extends React.PureComponent {
           <BookLists
             books={books}
             deleteBook={deleteBook}
+            isDialogDisabled={isEditBookDialogOpen}
             languageCode={languageCode}
             saveBook={saveBook}
             tokens={tokens}
