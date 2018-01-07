@@ -3,6 +3,8 @@
  */
 
 import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
+import Guid from 'guid';
+import PerfectScrollbar from 'perfect-scrollbar';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
@@ -51,12 +53,32 @@ class BookCatalog extends React.PureComponent {
     tokens: PropTypes.object.isRequired,
   }
 
-  state = {
-    isEditBookDialogOpen: false,
+  /**
+   * Instantiates the component.
+   * @param {Object}  props The property definition.
+   */
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isEditBookDialogOpen: false,
+    };
+
+    /**
+     * The unique identifier of the component.
+     * @type  {string}
+     */
+    this._id = Guid.raw();
+
+    /**
+     * The vertical scrollbar for the content of the component.
+     * @type  {Object|null}
+     */
+    this._scrollbar = null;
   }
 
   /**
-   * Fetches the data required by the component.
+   * Fetches the data required by the component and instantiates the scrollbar.
    */
   componentDidMount() {
     const { bookDeadline, books } = this.props;
@@ -68,6 +90,19 @@ class BookCatalog extends React.PureComponent {
     if (!books.length) {
       this.props.fetchBooks();
     }
+
+    this._scrollbar = new PerfectScrollbar(document.getElementById(`BookCatalog__${this._id}`), {
+      suppressScrollX: true,
+      wheelPropagation: true,
+    });
+  }
+
+  /**
+   * Dereferences the scrollbar.
+   */
+  componentWillUnmount() {
+    this._scrollbar.destroy();
+    this._scrollbar = null;
   }
 
   /**
@@ -93,7 +128,7 @@ class BookCatalog extends React.PureComponent {
     const { isEditBookDialogOpen } = this.state;
 
     return (
-      <div className="BookCatalog">
+      <div id={`BookCatalog__${this._id}`} className="BookCatalog">
         <div className="BookCatalog__content">
 
           <AdminMenu

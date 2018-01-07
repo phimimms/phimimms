@@ -2,6 +2,7 @@
  * @module components/App
  */
 
+import 'perfect-scrollbar/css/perfect-scrollbar.css';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { asyncComponent } from 'react-async-component';

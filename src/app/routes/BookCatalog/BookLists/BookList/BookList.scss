@@ -6,6 +6,13 @@
   margin: $small;
 }
 
+.BookList__content {
+  display:        flex;
+  padding-bottom: $medium;
+  position:       relative;
+  width:          100%;
+}
+
 .BookList__title {
   background-color:         $dark-color;
   border-top-left-radius:   $small--1x;
