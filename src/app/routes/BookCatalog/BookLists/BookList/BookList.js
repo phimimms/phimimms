@@ -50,6 +50,8 @@ export default class UnfinishedBookList extends React.PureComponent {
       suppressScrollY: true,
       wheelPropagation: true,
     });
+
+    window.addEventListener('resize', this.onUpdateScrollbar);
   }
 
   /**
@@ -58,6 +60,17 @@ export default class UnfinishedBookList extends React.PureComponent {
   componentWillUnmount() {
     this._scrollbar.destroy();
     this._scrollbar = null;
+
+    window.removeEventListener('resize', this.onUpdateScrollbar);
+  }
+
+  /**
+   * Updates the scrollbar.
+   */
+  onUpdateScrollbar = () => {
+    if (this._scrollbar) {
+      this._scrollbar.update();
+    }
   }
 
   /**
