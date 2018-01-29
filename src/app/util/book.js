@@ -18,7 +18,7 @@ function getCurrentPageNumber(book) {
   if (book.isKindle) {
     return Math.floor(
       book.numberOfPages * book.currentPageNumber /
-      (book.lastPageNumber - book.firstPageNumber) / 100
+      (book.lastPageNumber - book.firstPageNumber + 1)
     );
   }
   return book.currentPageNumber;
@@ -33,7 +33,7 @@ function getCurrentPageNumber(book) {
 function getReadingGoal(book, readingGoalPageNumber) {
   if (book.isKindle) {
     return Math.floor(
-      readingGoalPageNumber * (book.lastPageNumber - book.firstPageNumber) / book.numberOfPages
+      readingGoalPageNumber * (book.lastPageNumber - book.firstPageNumber + 1) / book.numberOfPages
     );
   }
   return readingGoalPageNumber;
@@ -47,8 +47,8 @@ function getReadingGoal(book, readingGoalPageNumber) {
 function getRemainingNumberOfPages(book) {
   if (book.isKindle) {
     return Math.floor(
-      book.numberOfPages * (book.lastPageNumber - book.currentPageNumber) /
-      (book.lastPageNumber - book.firstPageNumber) / 100
+      book.numberOfPages * (book.lastPageNumber - book.currentPageNumber + 1) /
+      (book.lastPageNumber - book.firstPageNumber + 1)
     );
   }
   return book.lastPageNumber - book.currentPageNumber + 1;
@@ -76,27 +76,9 @@ function getTotalRemainingNumberOfPages(books) {
  */
 export function getReadingCompletionPercentage(book) {
   return Math.floor(
-    (book.currentPageNumber - book.firstPageNumber) /
-    (book.lastPageNumber - book.firstPageNumber) * 100
+    (book.currentPageNumber - book.firstPageNumber + 1) /
+    (book.lastPageNumber - book.firstPageNumber + 1) * 100
   );
-}
-
-/**
- * Returns the presentational string of the given book's schedule.
- * @param   {module:util/book~BookSchedule} bookSchedule  The schedule of the book.
- * @returns {string}
- */
-export function getPresentationSchedule({ book, readingGoal }) {
-  // TODO: Support localization
-  if (readingGoal === book.lastPageNumber) {
-    return `Finish "${book.title}"`;
-  }
-
-  if (book.isKindle) {
-    return `Read "${book.title}" to ${readingGoal}%`;
-  }
-
-  return `Read "${book.title}" to Page ${readingGoal}`;
 }
 
 /**
@@ -149,4 +131,6 @@ export function getSchedule(books, deadline) {
 
     return schedule;
   }
+
+  return schedule;
 }

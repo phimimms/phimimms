@@ -93,8 +93,19 @@ function getEntry(isDev) {
   return {
     app: [...middlewares, './src/client/index'],
     vendor: [
-      'axios', 'prop-types', 'react', 'react-async-component', 'react-dom',
-      'react-redux', 'react-router-dom', 'redux', 'redux-localstorage', 'redux-thunk',
+      'axios',
+      'guid',
+      'material-ui',
+      'perfect-scrollbar',
+      'prop-types',
+      'react',
+      'react-async-component',
+      'react-redux',
+      'react-router-dom',
+      'react-router-redux',
+      'redux',
+      'tinycolor',
+      'tinygradient',
     ],
   };
 }

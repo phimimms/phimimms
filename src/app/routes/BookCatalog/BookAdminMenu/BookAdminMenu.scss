@@ -1,0 +1,26 @@
+@import "~assets/scss/colors";
+@import "~assets/scss/sizes";
+
+.BookAdminMenu__content {
+  align-items:      center;
+  display:          flex;
+  justify-content:  space-between;
+}
+
+.BookAdminMenu__deadline {
+  display:  flex;
+}
+
+.BookAdminMenu__item {
+  margin: 0 $small;
+}
+
+.BookAdminMenu__book-schedule-title {
+  border-bottom:  $small--3x solid $text-color;
+  font-weight:    bold;
+  padding-bottom: $small--3x;
+}
+
+.BookAdminMenu__book-schedule {
+  margin: $small--2x $small--1x;
+}

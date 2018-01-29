@@ -53,11 +53,14 @@ router.route('/books/deadline')
   .put((req, res) => {
     let { date } = req.body;
 
-    if (!(date instanceof Date)) {
-      return res.status(500).send({ error: 'The provided deadline is not a Date object.' });
+    date = Date.parse(date);
+
+    if (Number.isNaN(date)) {
+      return res.status(500).send({ error: 'The provided date is invalid' });
     }
 
-    date = date.setHours(23, 59, 59, 999);
+    date = new Date(date);
+    date.setHours(23, 59, 59, 999);
 
     BookDeadline.findOneAndUpdate({ _id: deadlineId }, { date }, { new: true, upsert: true },
       (error, deadline) => {

@@ -7,9 +7,12 @@ import React from 'react';
 
 import './AdminMenu.scss';
 
-function AdminMenu({ children, tokens }) {
+function AdminMenu({ children, tokens, ...props }) {
   return (
-    <div className="AdminMenu">
+    <div
+      {...props}
+      className="AdminMenu"
+    >
       <div className="AdminMenu__content-container">
         <div className="AdminMenu__title">{tokens.AdminMenu.title}</div>
 

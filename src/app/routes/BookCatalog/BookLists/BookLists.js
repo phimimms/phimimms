@@ -16,12 +16,13 @@ import BookList from './BookList/BookList';
 
 export default class BookLists extends React.PureComponent {
   static propTypes = {
-    books: PropTypes.array.isRequired,
     deleteBook: PropTypes.func.isRequired,
+    finishedBooks: PropTypes.object.isRequired,
     isDialogDisabled: PropTypes.bool.isRequired,
     languageCode: PropTypes.string.isRequired,
     saveBook: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
+    unfinishedBooks: PropTypes.array.isRequired,
   }
 
   state = {
@@ -30,38 +31,6 @@ export default class BookLists extends React.PureComponent {
     isDeleteBookDialogOpen: false,
     isEditBookDialogOpen: false,
     selectedBook: null,
-  }
-
-  /**
-   * The books categorized by completion.
-   * @type      {Object}
-   * @property  {Map.<string, Array.<module:adapters/book~Book>>} finishedBooks
-   *                                                              The map of categories to finished books.
-   * @property  {Array.<module:adapters/book~Book>}               unfinishedBooks
-   *                                                              The list of unfinished books.
-   */
-  get categorizedBooks() {
-    const { books } = this.props;
-
-    const finishedBooks = new Map();
-    const unfinishedBooks = [];
-
-    for (const book of books) {
-      if (book.currentPageNumber !== book.lastPageNumber) {
-        unfinishedBooks.push(book);
-        continue;
-      }
-
-      const { category } = book;
-
-      if (finishedBooks.has(category)) {
-        finishedBooks.get(category).push(book);
-        continue;
-      }
-      finishedBooks.set(category, [ book ]);
-    }
-
-    return { finishedBooks, unfinishedBooks };
   }
 
   /**
@@ -143,7 +112,7 @@ export default class BookLists extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { isDialogDisabled, languageCode, saveBook, tokens } = this.props;
+    const { finishedBooks, isDialogDisabled, languageCode, saveBook, tokens, unfinishedBooks } = this.props;
     const {
       bookDetailsAnchor,
       isBookDetailsPopoverOpen,
@@ -151,8 +120,6 @@ export default class BookLists extends React.PureComponent {
       isEditBookDialogOpen,
       selectedBook,
     } = this.state;
-
-    const { finishedBooks, unfinishedBooks } = this.categorizedBooks;
 
     return (
       <div className="BookLists">

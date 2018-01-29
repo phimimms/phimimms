@@ -2,7 +2,6 @@
  * @module routes/BookCatalog
  */
 
-import AddIcon from 'material-ui/svg-icons/content/add-circle-outline';
 import Guid from 'guid';
 import PerfectScrollbar from 'perfect-scrollbar';
 import PropTypes from 'prop-types';
@@ -14,12 +13,12 @@ import {
   fetchBookDeadline,
   fetchBooks,
   saveBook as saveBookAction,
+  saveBookDeadline as saveBookDeadlineAction,
 } from 'actions/book';
-import AdminMenu from 'components/AdminMenu/AdminMenu';
-import Button from 'components/Button/Button';
 import EditBookDialog from 'components/EditBookDialog/EditBookDialog';
 
 import './BookCatalog.scss';
+import BookAdminMenu from './BookAdminMenu/BookAdminMenu';
 import BookLists from './BookLists/BookLists';
 
 /**
@@ -50,6 +49,7 @@ class BookCatalog extends React.PureComponent {
     fetchBooks: PropTypes.func.isRequired,
     languageCode: PropTypes.string.isRequired,
     saveBook: PropTypes.func.isRequired,
+    saveBookDeadline: PropTypes.func.isRequired,
     tokens: PropTypes.object.isRequired,
   }
 
@@ -110,6 +110,38 @@ class BookCatalog extends React.PureComponent {
   }
 
   /**
+   * The books categorized by completion.
+   * @type      {Object}
+   * @property  {Map.<string, Array.<module:adapters/book~Book>>} finishedBooks
+   *                                                              The map of categories to finished books.
+   * @property  {Array.<module:adapters/book~Book>}               unfinishedBooks
+   *                                                              The list of unfinished books.
+   */
+  get categorizedBooks() {
+    const { books } = this.props;
+
+    const finishedBooks = new Map();
+    const unfinishedBooks = [];
+
+    for (const book of books) {
+      if (book.currentPageNumber !== book.lastPageNumber) {
+        unfinishedBooks.push(book);
+        continue;
+      }
+
+      const { category } = book;
+
+      if (finishedBooks.has(category)) {
+        finishedBooks.get(category).push(book);
+        continue;
+      }
+      finishedBooks.set(category, [ book ]);
+    }
+
+    return { finishedBooks, unfinishedBooks };
+  }
+
+  /**
    * Closes the Edit Book Dialog.
    */
   onCloseEditBookDialog = () => {
@@ -137,30 +169,31 @@ class BookCatalog extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { books, deleteBook, languageCode, saveBook, tokens } = this.props;
+    const { bookDeadline, deleteBook, languageCode, saveBook, saveBookDeadline, tokens } = this.props;
     const { isEditBookDialogOpen } = this.state;
+
+    const { finishedBooks, unfinishedBooks } = this.categorizedBooks;
 
     return (
       <div id={`BookCatalog__${this._id}`} className="BookCatalog">
         <div className="BookCatalog__content">
 
-          <AdminMenu
+          <BookAdminMenu
+            bookDeadline={bookDeadline}
+            onOpenAddBookDialog={this.onOpenEditBookDialog}
+            saveBookDeadline={saveBookDeadline}
             tokens={tokens}
-          >
-            <Button
-              icon={<AddIcon />}
-              onClick={this.onOpenEditBookDialog}
-              title={tokens.BookCatalog.addBook}
-            />
-          </AdminMenu>
+            unfinishedBooks={unfinishedBooks}
+          />
 
           <BookLists
-            books={books}
             deleteBook={deleteBook}
+            finishedBooks={finishedBooks}
             isDialogDisabled={isEditBookDialogOpen}
             languageCode={languageCode}
             saveBook={saveBook}
             tokens={tokens}
+            unfinishedBooks={unfinishedBooks}
           />
         </div>
 
@@ -191,6 +224,7 @@ const mapDispatchToProps = {
   fetchBookDeadline,
   fetchBooks,
   saveBook: saveBookAction,
+  saveBookDeadline: saveBookDeadlineAction,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BookCatalog);

@@ -16,7 +16,8 @@ const gradient = tinygradient('red', 'yellow', 'green').rgb(50);
  * @returns {Element}
  */
 function ProgressBar({ value, ...props }) {
-  const color = gradient[Math.floor(value / 2) - 1].toHexString();
+  const index = Math.max(0, Math.round(value / 2) - 1);
+  const color = gradient[index].toHexString();
 
   return (
     <div className="ProgressBar">

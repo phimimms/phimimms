@@ -7,7 +7,7 @@ import PerfectScrollbar from 'perfect-scrollbar';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { compareAlphabetically } from 'util/string';
+import { compareAlphabetically } from 'util/localization';
 
 import './BookList.scss';
 import BookListItem from './BookListItem/BookListItem';

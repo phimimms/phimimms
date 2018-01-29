@@ -3,6 +3,15 @@
     "AdminMenu": {
       "title": "Administration Menu"
     },
+    "BookAdminMenu": {
+      "bookSchedule": {
+        "finishBook": "Finish \"{0}\"",
+        "readBook": "Read \"{0}\" to Page {1}",
+        "readKindle": "Read \"{0}\" to {1}%"
+      },
+      "deadline": "Deadline",
+      "goal": "Today's Goal"
+    },
     "BookCatalog": {
       "addBook": "Add New Book"
     },

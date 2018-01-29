@@ -4,7 +4,7 @@
 .AdminMenu {
   background-color: $light-color;
   border-radius:    $small--1x;
-  color:            white;
+  color:            $text-color;
   display:          flex;
   justify-content:  center;
   margin:           $small;
@@ -23,6 +23,7 @@
 
 .AdminMenu__title {
   background-color: $dark-color;
+  color:            white;
   font-size:        $medium--1x;
   padding:          $small--1x;
 }

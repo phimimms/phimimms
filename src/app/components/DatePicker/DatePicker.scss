@@ -1,0 +1,11 @@
+@import "~assets/scss/colors";
+
+.DatePicker {
+  width:  160px;
+
+  div, input {
+    color:  $secondary-color !important;
+    cursor: pointer !important;
+    width:  160px !important;
+  }
+}
