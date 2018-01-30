@@ -44,6 +44,26 @@ router.route('/books/deadline')
         return res.status(500).send(error);
       }
 
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      /* Set the deadline to today if it's undefined or in the past */
+      if (!deadline.date || today.getTime() > new Date(deadline.date).getTime()) {
+        today.setHours(23, 59, 59, 999);
+
+        BookDeadline.findOneAndUpdate({ _id: deadlineId }, { date: today }, { new: true, upsert: true },
+          (e, dl) => {
+            if (e) {
+              return res.status(500).send(e);
+            }
+
+            res.json(dl);
+          }
+        );
+
+        return;
+      }
+
       res.json(deadline);
     });
   })

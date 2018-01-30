@@ -82,11 +82,14 @@ export default class BookAdminMenu extends React.PureComponent {
             </div>
           </div>
 
-          <Button
-            icon={<AddIcon />}
-            onClick={onOpenAddBookDialog}
-            title={tokens.BookCatalog.addBook}
-          />
+          <div>
+            <Button
+              className="BookAdminMenu__item"
+              icon={<AddIcon />}
+              onClick={onOpenAddBookDialog}
+              title={tokens.BookCatalog.addBook}
+            />
+          </div>
         </div>
       </AdminMenu>
     );
