@@ -82,7 +82,11 @@ export default class UnfinishedBookList extends React.PureComponent {
 
     return (
       <div className="BookList">
-        <div className="BookList__title">{title}</div>
+        <div className="BookList__header">
+          <div>{title}</div>
+
+          <div className="BookList__counter">{books.length}</div>
+        </div>
 
         <div id={`BookList__content__${this._id}`} className="BookList__content">
           {

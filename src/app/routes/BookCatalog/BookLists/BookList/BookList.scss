@@ -13,11 +13,25 @@
   width:          100%;
 }
 
-.BookList__title {
-  background-color:         $dark-color;
+.BookList__counter {
+  align-items:      center;
+  background-color: $text-background-color;
+  border-radius:    50%;
+  color:            $text-color;
+  display:          flex;
+  height:           $large--1x;
+  justify-content:  center;
+  width:            $large--1x;
+}
+
+.BookList__header {
+  align-items:              center;
+  background-color:         $secondary-color;
   border-top-left-radius:   $small--1x;
   border-top-right-radius:  $small--1x;
-  font-size:                $medium--1x;
+  display:                  flex;
+  font-size:                $medium--2x;
+  justify-content:          space-between;
   margin-bottom:            $small--1x;
-  padding:                  $small--1x;
+  padding:                  $small--1x $small;
 }
