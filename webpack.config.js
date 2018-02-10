@@ -9,7 +9,7 @@ module.exports = function getWebpackConfig() {
 
   const extractSass = new ExtractTextPlugin({
     disable: isDev,
-    filename: 'styles.css',
+    filename: 'style.css',
   });
 
   return {
