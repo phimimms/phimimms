@@ -107,5 +107,5 @@ export function saveDeadline(date) {
     data: { date },
     method: 'PUT',
     url: `${url}/deadline`,
-  }).then(({ data }) => { return { date: data.date }; });
+  }).then(({ data }) => data.date);
 }
