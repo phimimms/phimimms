@@ -2,10 +2,10 @@
  * @module BookLists/BookList
  */
 
-import Guid from 'guid';
 import PerfectScrollbar from 'perfect-scrollbar';
 import PropTypes from 'prop-types';
 import React from 'react';
+import uuid from 'uuid/v4';
 
 import { compareAlphabetically } from 'util/localization';
 
@@ -33,7 +33,7 @@ export default class UnfinishedBookList extends React.PureComponent {
      * The unique identifier of the component.
      * @type  {string}
      */
-    this._id = Guid.raw();
+    this._id = uuid();
 
     /**
      * The horizontal scrollbar for the content of the component.

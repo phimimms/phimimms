@@ -94,7 +94,6 @@ function getEntry(isDev) {
     app: [...middlewares, './src/client/index'],
     vendor: [
       'axios',
-      'guid',
       'material-ui',
       'perfect-scrollbar',
       'prop-types',
@@ -106,6 +105,7 @@ function getEntry(isDev) {
       'redux',
       'tinycolor',
       'tinygradient',
+      'uuid',
     ],
   };
 }
