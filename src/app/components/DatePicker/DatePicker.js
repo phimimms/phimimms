@@ -6,10 +6,16 @@ import { DatePicker as DatePickerMUI } from 'material-ui';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { connect } from 'react-redux';
 
 import './DatePicker.scss';
 
 class DatePicker extends React.PureComponent {
+  static propTypes = {
+    languageCode: PropTypes.string.isRequired,
+    onChange: PropTypes.func.isRequired,
+  }
+
   /**
    * Returns the presentational representation of the component's value.
    * @param   {Date}    value The value of the component.
@@ -33,21 +39,24 @@ class DatePicker extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { ...props } = this.props;
+    const { languageCode, ...props } = this.props;
 
     return (
       <DatePickerMUI
         {...props}
         className="DatePicker"
         formatDate={this.formatDate}
+        locale={languageCode}
         onChange={this.onChange}
       />
     );
   }
 }
 
-DatePicker.propTypes = {
-  onChange: PropTypes.func.isRequired,
-};
+function mapStateToProps({ localization: code }) {
+  return {
+    languageCode: code,
+  };
+}
 
-export default DatePicker;
+export default connect(mapStateToProps)(DatePicker);
