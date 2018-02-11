@@ -53,7 +53,7 @@ class DatePicker extends React.PureComponent {
   }
 }
 
-function mapStateToProps({ localization: code }) {
+function mapStateToProps({ localization: { code } }) {
   return {
     languageCode: code,
   };
