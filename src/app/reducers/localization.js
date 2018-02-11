@@ -2,17 +2,17 @@
  * @module reducers/localization
  */
 
-import { LANGUAGE__UPDATE } from 'actions/actionTypes';
+import { LANGUAGE__UPDATE } from 'dictionary/action';
 import initialState from 'store/initialState';
 import { getApplicationTokens, getLanguageDirectionality } from 'util/localization';
 
-export default function localization(state = initialState.localization, action) {
-  switch (action.type) {
+export default function localization(state = initialState.localization, { error, payload, type }) {
+  switch (type) {
     case LANGUAGE__UPDATE.FAILURE:
-      console.warn(`Unsupported language: ${action.languageCode}`);
+      console.warn(`Unsupported language: ${error}`);
       return state;
     case LANGUAGE__UPDATE.SUCCESS:
-      return updateLocalizationState(action.languageCode);
+      return updateLocalizationState(payload);
     default:
       return state;
   }

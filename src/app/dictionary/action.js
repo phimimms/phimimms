@@ -1,19 +1,8 @@
 /**
- * @module actions/actionTypes
+ * @module dictionary/action
  */
 
-/**
- * Creates the failure, request, and success type derivatives for the given action type.
- * @param   {string}  type  The action type.
- * @returns {Object}
- */
-function createActionType(type) {
-  return {
-    FAILURE: `${type}__FAILURE`,
-    REQUEST: `${type}__REQUEST`,
-    SUCCESS: `${type}__SUCCESS`,
-  };
-}
+import { createActionType } from 'util/action';
 
 /* book */
 export const BOOK__DELETE = createActionType('BOOK__DELETE');

@@ -16,7 +16,9 @@ import {
   BOOK__SAVE,
   BOOK_DEADLINE__FETCH,
   BOOK_DEADLINE__SAVE,
-} from './actionTypes';
+} from 'dictionary/action';
+
+import { createAction } from 'util/action';
 
 /**
  * Deletes the book corresponding to the given identifier.
@@ -24,19 +26,7 @@ import {
  * @returns {Function}
  */
 export function deleteBook(bookId) {
-  return (dispatch) => {
-    return deleteBookAdapter(bookId)
-      .then(
-        () => dispatch(deleteBookSuccess(bookId)),
-        (e) => dispatch(deleteBookFailure(e))
-      );
-  };
-}
-function deleteBookFailure(error) {
-  return { type: BOOK__DELETE.FAILURE, error };
-}
-function deleteBookSuccess(bookId) {
-  return { type: BOOK__DELETE.SUCCESS, bookId };
+  return createAction(BOOK__DELETE, () => deleteBookAdapter(bookId));
 }
 
 /**
@@ -44,19 +34,7 @@ function deleteBookSuccess(bookId) {
  * @returns {Function}
  */
 export function fetchBookDeadline() {
-  return (dispatch) => {
-    return getDeadline()
-      .then(
-        (deadline) => dispatch(fetchBookDeadlineSuccess(deadline)),
-        (e) => dispatch(fetchBookDeadlineFailure(e))
-      );
-  };
-}
-function fetchBookDeadlineFailure(error) {
-  return { type: BOOK_DEADLINE__FETCH.FAILURE, error };
-}
-function fetchBookDeadlineSuccess(deadline) {
-  return { type: BOOK_DEADLINE__FETCH.SUCCESS, deadline };
+  return createAction(BOOK_DEADLINE__FETCH, () => getDeadline());
 }
 
 /**
@@ -64,19 +42,7 @@ function fetchBookDeadlineSuccess(deadline) {
  * @returns {Function}
  */
 export function fetchBooks() {
-  return (dispatch) => {
-    return getAllBooks()
-      .then(
-        (books) => dispatch(fetchBooksSuccess(books)),
-        (e) => dispatch(fetchBooksFailure(e))
-      );
-  };
-}
-export function fetchBooksFailure(error) {
-  return { type: BOOK__FETCH.FAILURE, error };
-}
-export function fetchBooksSuccess(books) {
-  return { type: BOOK__FETCH.SUCCESS, books };
+  return createAction(BOOK__FETCH, () => getAllBooks());
 }
 
 /**
@@ -85,19 +51,7 @@ export function fetchBooksSuccess(books) {
  * @returns {Function}
  */
 export function saveBook(book) {
-  return (dispatch) => {
-    return saveBookAdapter(book)
-      .then(
-        (b) => dispatch(saveBookSuccess(b)),
-        (e) => dispatch(saveBookFailure(e))
-      );
-  };
-}
-export function saveBookFailure(error) {
-  return { type: BOOK__SAVE.FAILURE, error };
-}
-export function saveBookSuccess(book) {
-  return { type: BOOK__SAVE.SUCCESS, book };
+  return createAction(BOOK__SAVE, () => saveBookAdapter(book));
 }
 
 /**
@@ -106,17 +60,5 @@ export function saveBookSuccess(book) {
  * @returns {Function}
  */
 export function saveBookDeadline(deadline) {
-  return (dispatch) => {
-    return saveDeadline(deadline)
-      .then(
-        (d) => dispatch(saveBookDeadlineSuccess(d)),
-        (e) => dispatch(saveBookDeadlineFailure(e))
-      );
-  };
-}
-export function saveBookDeadlineFailure(error) {
-  return { type: BOOK_DEADLINE__SAVE.FAILURE, error };
-}
-export function saveBookDeadlineSuccess(deadline) {
-  return { type: BOOK_DEADLINE__SAVE.SUCCESS, deadline };
+  return createAction(BOOK_DEADLINE__SAVE, () => saveDeadline(deadline));
 }

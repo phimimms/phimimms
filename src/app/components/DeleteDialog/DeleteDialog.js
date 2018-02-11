@@ -3,6 +3,7 @@ import React from 'react';
 
 import Button from 'components/Button/Button';
 import Dialog from 'components/Dialog/Dialog';
+import { formatToken } from 'util/localization';
 
 function DeleteDialog({ isOpen, name, onClose, onDelete, title, tokens }) {
   return (
@@ -24,7 +25,7 @@ function DeleteDialog({ isOpen, name, onClose, onDelete, title, tokens }) {
       isOpen={isOpen}
       title={title}
     >
-      <div>{tokens.formatString(tokens.DeleteDialog.confirmDelete, name)}</div>
+      <div>{formatToken(tokens.DeleteDialog.confirmDelete, name)}</div>
     </Dialog>
   );
 }

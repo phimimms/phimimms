@@ -2,9 +2,9 @@
  * @module actions/localization
  */
 
+import { LANGUAGE__UPDATE } from 'dictionary/action';
 import { supportedLanguages } from 'dictionary/language';
-
-import { LANGUAGE__UPDATE } from './actionTypes';
+import { createAction } from 'util/action';
 
 /**
  * Updates the application language to the language corresponding to the given code.
@@ -12,20 +12,14 @@ import { LANGUAGE__UPDATE } from './actionTypes';
  * @returns {Function}
  */
 export function updateLanguage(languageCode) {
-  return (dispatch) => {
-    return new Promise((resolve) => {
+  return createAction(LANGUAGE__UPDATE, () => {
+    return new Promise((resolve, reject) => {
       if (~Object.keys(supportedLanguages).indexOf(languageCode)) {
         /* Supported language */
-        return resolve(dispatch(updateLanguageSuccess(languageCode)));
+        return resolve(languageCode);
       }
       /* Unsupported language */
-      return resolve(dispatch(updateLanguageFailure(languageCode)));
+      return reject(languageCode);
     });
-  };
-}
-function updateLanguageFailure(languageCode) {
-  return { type: LANGUAGE__UPDATE.FAILURE, languageCode };
-}
-function updateLanguageSuccess(languageCode) {
-  return { type: LANGUAGE__UPDATE.SUCCESS, languageCode };
+  });
 }

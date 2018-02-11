@@ -10,6 +10,7 @@ import AdminMenu from 'components/AdminMenu/AdminMenu';
 import Button from 'components/Button/Button';
 import DatePicker from 'components/DatePicker/DatePicker';
 import { getSchedule } from 'util/book';
+import { formatToken } from 'util/localization';
 
 import './BookAdminMenu.scss';
 
@@ -31,14 +32,14 @@ export default class BookAdminMenu extends React.PureComponent {
     const { tokens } = this.props;
 
     if (readingGoal === book.lastPageNumber) {
-      return tokens.formatString(tokens.BookAdminMenu.bookSchedule.finishBook, book.title);
+      return formatToken(tokens.BookAdminMenu.bookSchedule.finishBook, book.title);
     }
 
     if (book.isKindle) {
-      return tokens.formatString(tokens.BookAdminMenu.bookSchedule.readKindle, book.title, readingGoal);
+      return formatToken(tokens.BookAdminMenu.bookSchedule.readKindle, book.title, readingGoal);
     }
 
-    return tokens.formatString(tokens.BookAdminMenu.bookSchedule.readBook, book.title, readingGoal);
+    return formatToken(tokens.BookAdminMenu.bookSchedule.readBook, book.title, readingGoal);
   }
 
   /**

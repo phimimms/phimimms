@@ -8,20 +8,22 @@ import {
   BOOK__SAVE,
   BOOK_DEADLINE__FETCH,
   BOOK_DEADLINE__SAVE,
-} from 'actions/actionTypes';
+} from 'dictionary/action';
 import initialState from 'store/initialState';
 
-export default function bookCatalog(state = initialState.bookCatalog, action) {
-  switch(action.type) {
+export default function bookCatalog(state = initialState.bookCatalog, { payload, type }) {
+  switch(type) {
     case BOOK__DELETE.SUCCESS:
-      return deleteBook(state, action.bookId);
+      return deleteBook(state, payload);
     case BOOK__FETCH.SUCCESS:
-      return Object.assign({}, state, { books: action.books });
+      return Object.assign({}, state, { books: payload });
     case BOOK__SAVE.SUCCESS:
-      return saveBook(state, action.book);
+      return saveBook(state, payload);
+    case BOOK_DEADLINE__FETCH.REQUEST:
+      return Object.assign({}, state, { deadline: null });
     case BOOK_DEADLINE__FETCH.SUCCESS:
     case BOOK_DEADLINE__SAVE.SUCCESS:
-      return Object.assign({}, state, { deadline: action.deadline });
+      return Object.assign({}, state, { deadline: payload });
     default:
       return state;
   }

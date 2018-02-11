@@ -47,7 +47,7 @@ export function deleteBook(bookId) {
   return axios({
     method: 'DELETE',
     url: `${url}/${bookId}`,
-  }).then(res => res.data);
+  }).then(({ data }) => data);
 }
 
 /**
@@ -58,7 +58,7 @@ export function getAllBooks() {
   return axios({
     method: 'GET',
     url,
-  }).then(res => res.data);
+  }).then(({ data }) => data);
 }
 
 /**
@@ -69,7 +69,7 @@ export function getDeadline() {
   return axios({
     method: 'GET',
     url: `${url}/deadline`,
-  }).then(res => res.data.date);
+  }).then(({ data: { date } }) => date);
 }
 
 /**
@@ -86,7 +86,7 @@ export function saveBook(book) {
       data: book,
       method: 'PUT',
       url: `${url}/${book._id}`,
-    }).then(res => res.data);
+    }).then(({ data }) => data);
   }
 
   /* Saves the new book */
@@ -94,7 +94,7 @@ export function saveBook(book) {
     data: book,
     method: 'POST',
     url,
-  }).then(res => res.data);
+  }).then(({ data }) => data);
 }
 
 /**
@@ -107,5 +107,5 @@ export function saveDeadline(date) {
     data: { date },
     method: 'PUT',
     url: `${url}/deadline`,
-  }).then(res => res.data.date);
+  }).then(({ data }) => { return { date: data.date }; });
 }

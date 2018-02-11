@@ -52,6 +52,16 @@ export function compareAlphabetically(prop, languageCode, isDescending = true) {
 }
 
 /**
+ * Returns the formatted token.
+ * @param   {string}          token The string template token.
+ * @param   {Array.<string>}  args  The arguments to the string template.
+ * @returns {string}
+ */
+export function formatToken(token, ...args) {
+  return getApplicationTokens().formatString(token, ...args);
+}
+
+/**
  * Returns the localized static text of the application.
  * @returns {Object}
  */

@@ -48,7 +48,7 @@ router.route('/books/deadline')
       today.setHours(0, 0, 0, 0);
 
       /* Set the deadline to today if it's undefined or in the past */
-      if (!deadline.date || today.getTime() > new Date(deadline.date).getTime()) {
+      if (!deadline || today.getTime() > new Date(deadline.date).getTime()) {
         today.setHours(23, 59, 59, 999);
 
         BookDeadline.findOneAndUpdate({ _id: deadlineId }, { date: today }, { new: true, upsert: true },
