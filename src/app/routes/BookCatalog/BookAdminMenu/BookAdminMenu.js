@@ -77,7 +77,7 @@ export default class BookAdminMenu extends React.PureComponent {
               <div className="BookAdminMenu__item">
                 <div className="BookAdminMenu__book-schedule-title">{tokens.BookAdminMenu.deadline}</div>
                 <DatePicker
-                  hintText={tokens.BookAdminMenu.deadline}
+                  label={tokens.BookAdminMenu.deadline}
                   minDate={new Date()}
                   onChange={saveBookDeadline}
                   value={new Date(bookDeadline)}

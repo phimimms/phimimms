@@ -12,6 +12,7 @@ import './DatePicker.scss';
 
 class DatePicker extends React.PureComponent {
   static propTypes = {
+    label: PropTypes.string,
     languageCode: PropTypes.string.isRequired,
     onChange: PropTypes.func.isRequired,
   }
@@ -39,13 +40,14 @@ class DatePicker extends React.PureComponent {
    * @returns {Element}
    */
   render() {
-    const { languageCode, ...props } = this.props;
+    const { label, languageCode, ...props } = this.props;
 
     return (
       <DatePickerMUI
         {...props}
         className="DatePicker"
         formatDate={this.formatDate}
+        hintText={label}
         locale={languageCode}
         onChange={this.onChange}
       />
@@ -59,4 +61,8 @@ function mapStateToProps({ localization: { code } }) {
   };
 }
 
-export default connect(mapStateToProps)(DatePicker);
+function mapDispatchToProps() {
+  return {};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DatePicker);

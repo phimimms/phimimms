@@ -2,6 +2,8 @@
  * @module reducers/localization
  */
 
+import moment from 'moment';
+
 import { LANGUAGE__UPDATE } from 'dictionary/action';
 import initialState from 'store/initialState';
 import { getApplicationTokens, getLanguageDirectionality } from 'util/localization';
@@ -28,6 +30,7 @@ function updateLocalizationState(code) {
   const tokens = getApplicationTokens();
 
   tokens.setLanguage(code);
+  moment.locale(code);
 
   return { code, directionality, tokens };
 }
