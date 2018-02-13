@@ -1,9 +1,9 @@
 import createHistory from 'history/createBrowserHistory';
 import { applyMiddleware, compose, createStore } from 'redux';
-import persistState from 'redux-localstorage';
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 
+import { environment, isEnvironment } from 'util/environment';
 import createReducer from 'reducers/root';
 
 export const history = createHistory();
@@ -22,15 +22,14 @@ export default function configureStore(initialState = {}) {
     thunkMiddleware,
   ];
 
-  if (process.env.NODE_ENV !== 'production') {
+  let persistedState = {};
+
+  if (isEnvironment(environment.production)) {
+    persistedState = JSON.parse(localStorage.getItem('redux')) || {};
+  } else {
     middlewares.push(
       /* Middleware to Detect Redux State Mutation */
       require('redux-immutable-state-invariant').default()
-    );
-  } else {
-    enhancements.push(
-      /* Persist State in Local Storage */
-      persistState()
     );
   }
 
@@ -43,9 +42,17 @@ export default function configureStore(initialState = {}) {
   /* The Redux Store */
   const store = createStore(
     rootReducer,
-    initialState,
+    Object.assign({}, initialState, persistedState),
     enhancer
   );
+
+  if (isEnvironment(environment.production)) {
+    store.subscribe(() => {
+      const { localization } = store.getState();
+
+      localStorage.setItem('redux', JSON.stringify({ localization }));
+    });
+  }
 
   if (module.hot) {
     /* Enables Redux Hot Reloading */

@@ -3,7 +3,7 @@
  */
 
 /**
- * A map of language codes to their list of article terms in its respective language.
+ * The map of language codes to their list of article terms in its respective language.
  * @readonly
  * @type  {Object}
  */

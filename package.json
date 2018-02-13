@@ -4,7 +4,7 @@
   "scripts": {
     "prebuild": "npm-run-all clean:client clean:server && mkdir \"src/client/dist\"",
     "build": "npm-run-all build:client build:server",
-    "build:client": "babel-node util/build-client.js",
+    "build:client": "NODE_ENV=production webpack",
     "build:server": "rollup --config rollup.config.js",
     "clean": "npm-run-all clean:client clean:docs clean:server clean:test",
     "clean:client": "rimraf src/client/dist",
@@ -12,13 +12,13 @@
     "clean:server": "rimraf src/server/server.compiled.js",
     "clean:test": "rimraf coverage",
     "dev": "npm run dev:server & npm run dev:client",
-    "dev:client": "webpack-dev-server",
+    "dev:client": "NODE_ENV=development webpack-dev-server",
     "dev:server": "nodemon src/server/server.js --exec babel-node",
     "predocs": "npm run clean:docs && mkdir \"docs\"",
     "docs": "jsdoc -r src/app -d docs",
     "lint": "eslint src/app",
     "start": "node src/server/server.compiled.js",
-    "test": "jest src/app --config jest.json"
+    "test": "NODE_ENV=test jest src/app --config jest.json"
   },
   "author": "Philippe Mimms",
   "description": "All Things Philippe Mimms",
@@ -44,7 +44,6 @@
     "react-router-redux": "next",
     "react-tap-event-plugin": "^3.0.2",
     "redux": "^3.7.0",
-    "redux-localstorage": "^0.4.1",
     "redux-thunk": "^2.2.0",
     "tinycolor": "0.0.1",
     "tinygradient": "^0.3.1",

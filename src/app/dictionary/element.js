@@ -5,6 +5,7 @@
 /**
  * The supported values for the horizontal and vertical orientations in relation
  * to a component's anchor and target element.
+ * @readonly
  * @type  {Object.<string>}
  */
 export const orientation = {
