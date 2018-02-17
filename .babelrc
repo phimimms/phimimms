@@ -1,5 +1,5 @@
 {
-  "plugins": ["react-hot-loader/babel", "syntax-async-functions", "syntax-dynamic-import"],
+  "plugins": ["react-hot-loader/babel", "syntax-dynamic-import"],
   "presets": [
       [ "env", { "targets": { "browsers": "last 2 versions", "node": "current" } } ],
       "react",
