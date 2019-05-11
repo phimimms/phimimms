@@ -1,0 +1,14 @@
+:root {
+  --small--3x:  .125rem;
+  --small--2x:  .25rem;
+  --small--1x:  .5rem;
+  --small:      .75rem;
+  --medium:     1rem;
+  --medium--1x: 1.25rem;
+  --medium--2x: 1.5rem;
+  --medium--3x: 1.75rem;
+  --large:      2rem;
+  --large--1x:  3rem;
+  --large--2x:  4rem;
+  --large--3x:  5rem;
+}
