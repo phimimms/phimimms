@@ -6,7 +6,6 @@ module.exports = {
   "moduleFileExtensions": [ "js", "json", "svelte", "ts" ],
   "roots": [ "src/app" ],
   "transform": {
-    "\\.svelte$": "svelte-jest",
     "\\.ts$": "ts-jest",
   },
 };
