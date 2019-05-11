@@ -1,76 +1,108 @@
-/* eslint-disable import/unambiguous */
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
 module.exports = function getWebpackConfig() {
-  const isDev = (process.env.NODE_ENV !== 'production');
-
-  const extractSass = new ExtractTextPlugin({
-    disable: isDev,
-    filename: 'style.css',
-  });
+  const isDev = (process.env.NODE_ENV === 'development');
 
   return {
     devServer: {
       compress: true,
       historyApiFallback: true,
       hot: true,
+      inline: true,
       port: 3001,
       proxy: {
-        '/api': 'http://localhost:3000',
+        '/v1': 'http://localhost:3000',
       },
       stats: 'errors-only',
+      watchOptions: {
+        ignored: [
+          'node_modules',
+        ],
+      },
     },
 
-    devtool: isDev ? 'inline-source-map' : 'hidden-source-map',
+    devtool: isDev ? 'cheap-module-eval-source-map' : 'source-map',
 
-    entry: getEntry(isDev),
+    entry: {
+      app: path.join(__dirname, 'src/client/index.js'),
+    },
 
     module: {
       rules: [
         {
           test: /\.(css|scss)$/,
-          use: getStyleLoader(extractSass),
-        },
-        {
-          test: /\.(eot|svg|ttf)(\?[a-z0-9]+)?$/,
-          loader: 'file-loader',
-        },
-        {
-          test: /\.(gif|jpg|png)$/,
           use: [
             {
-              loader: 'url-loader',
-              options: { limit: 8192 },
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                hmr: isDev,
+              },
+            },
+            { loader: 'css-loader' },
+            {
+              loader: 'postcss-loader',
+              options: {
+                plugins() {
+                  return [
+                    require('precss'),
+                    require('autoprefixer'),
+                  ];
+                },
+              },
             },
           ],
         },
         {
-          test: /\.js$/,
-          exclude: [/node_modules/],
+          test: /\.svelte$/,
+          exclude: /node_modules/,
           use: [
-            { loader: 'babel-loader' },
+            {
+              loader: 'svelte-loader',
+              options: {
+                emitCss: true,
+                hotReload: isDev,
+              },
+            },
+            {
+              loader: `preprocess-loader?${isDev ? '+DEVELOPMENT' : ''}`,
+            },
           ],
         },
         {
-          test: /\.woff(2)?(\?[a-z0-9]+)?$/,
-          loader: 'url-loader?limit=10000&mimetype=application/font-woff',
+          test: /\.ts$/,
+          exclude: /node_modules/,
+          use: 'awesome-typescript-loader',
         },
       ],
     },
 
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            chunks: 'all',
+            minChunks: 2,
+            name: 'vendor',
+            test: /node_modules/,
+          },
+        },
+      },
+    },
+
     output: {
       filename: '[name].[hash].js',
-      path: path.join(__dirname, 'src/client/dist'),
+      path: path.join(__dirname, 'public'),
       publicPath: '/',
     },
 
-    plugins: [...getPlugins(isDev), extractSass],
+    plugins: getPlugins(isDev),
 
     resolve: {
-      extensions: ['.js', '.json'],
+      extensions: [ '.js', '.json', '.svelte', '.ts' ],
+      mainFields: [ 'svelte', 'browser', 'module', 'main' ],
       modules: [
         path.join(__dirname, 'src/app'),
         'node_modules',
@@ -79,92 +111,27 @@ module.exports = function getWebpackConfig() {
 
     target: 'web',
   };
-};
-
-function getEntry(isDev) {
-  const middlewares = [];
-
-  if (isDev) {
-    middlewares.push(
-      'react-hot-loader/patch'
-    );
-  }
-
-  return {
-    app: [...middlewares, './src/client/index'],
-    vendor: [
-      'axios',
-      'material-ui',
-      'perfect-scrollbar',
-      'prop-types',
-      'react',
-      'react-async-component',
-      'react-redux',
-      'react-router-dom',
-      'react-router-redux',
-      'redux',
-      'tinycolor',
-      'tinygradient',
-      'uuid',
-    ],
-  };
 }
 
 function getPlugins(isDev) {
-  const plugins = [
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: '[name].[hash].js',
-      minChunks: Infinity,
-    }),
+  const devPlugins = [];
+
+  if (isDev) {
+    devPlugins.push(
+      new webpack.HotModuleReplacementPlugin()
+    );
+  }
+
+  return [
+    ...devPlugins,
     new HtmlWebpackPlugin({
       filename: 'index.html',
       inject: 'body',
       template: path.join(__dirname, 'src/client/index.html'),
     }),
+    new MiniCssExtractPlugin({
+      chunkFilename: '[id].css',
+      filename: '[name].[hash].css',
+    }),
   ];
-
-  if (isDev) {
-    plugins.push(
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('development'),
-        },
-      }),
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoEmitOnErrorsPlugin()
-    );
-  } else {
-    plugins.push(
-      new webpack.DefinePlugin({
-        'process.env': {
-          NODE_ENV: JSON.stringify('production'),
-        },
-      }),
-      new webpack.optimize.UglifyJsPlugin()
-    );
-  }
-
-  return plugins;
-}
-
-function getStyleLoader(extractSass) {
-  return extractSass.extract({
-    use: [
-      { loader: 'css-loader' },
-      {
-        loader: 'postcss-loader',
-        options: {
-          plugins() {
-            return [
-              require('precss'),
-              require('autoprefixer'),
-            ];
-          },
-        },
-      },
-      { loader: 'sass-loader' },
-    ],
-    fallback: 'style-loader',
-  });
 }
