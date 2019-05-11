@@ -1,3 +1,3 @@
 export function toCapitalized(str: string) {
-  return str && `${str[0].toUpperCase()}${str.slice(1)}`;
+  return str && str.split(' ').map(word => word && `${word[0].toUpperCase()}${word.slice(1)}`).join(' ');
 }

@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "baseUrl": "src/app",
-    "module": "commonjs"
-  }
+    "module": "commonjs",
+    "target": "es5",
+  },
+  "exclude": [ "src/app/**/*.test.ts" ],
 }

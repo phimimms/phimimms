@@ -2,4 +2,7 @@
   "vsicons.associations.files": [
     { "extensions": [ "svelte" ], "icon": "html" },
   ],
+  "vsicons.associations.folders": [
+    { "extensions": [ ".jest" ], "icon": "test" },
+  ],
 }

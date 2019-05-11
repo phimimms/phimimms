@@ -1,3 +1,4 @@
+.jest
 bin
 node_modules
 public
