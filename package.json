@@ -27,6 +27,7 @@
   "homepage": "https://github.com/phimimms/phimimms#readme",
   "devDependencies": {
     "@types/jest": "^24.0.12",
+    "@types/webpack-env": "^1.13.9",
     "autoprefixer": "^9.5.1",
     "awesome-typescript-loader": "^5.2.1",
     "concurrently": "^4.1.0",
@@ -39,13 +40,18 @@
     "postcss-loader": "^3.0.0",
     "precss": "^4.0.0",
     "preprocess-loader": "^0.3.0",
+    "redux-immutable-state-invariant": "^2.1.0",
     "rimraf": "^2.6.3",
-    "svelte": "^3.2.2",
+    "svelte": "^3.3.0",
     "svelte-loader": "^2.13.3",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.5",
-    "webpack": "^4.31.0",
+    "webpack": "4.28.4",
     "webpack-cli": "^3.3.2",
     "webpack-dev-server": "^3.3.1"
+  },
+  "dependencies": {
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   }
 }

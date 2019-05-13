@@ -1,7 +1,10 @@
-import App from 'components/App';
+import { createStore } from 'redux/configure';
 
 import './style.css';
 
-new App({
-  target: document.body,
-});
+createStore();
+
+import('components/App')
+  .then(({ default: App }) => new App({
+    target: document.body,
+  }));

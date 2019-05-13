@@ -6,6 +6,8 @@ const webpack = require('webpack');
 module.exports = function getWebpackConfig() {
   const isDev = (process.env.NODE_ENV === 'development');
 
+  const preprocessLoader = `preprocess-loader?${isDev ? '+DEVELOPMENT' : ''}`;
+
   return {
     devServer: {
       compress: true,
@@ -67,14 +69,17 @@ module.exports = function getWebpackConfig() {
               },
             },
             {
-              loader: `preprocess-loader?${isDev ? '+DEVELOPMENT' : ''}`,
+              loader: preprocessLoader,
             },
           ],
         },
         {
           test: /\.ts$/,
           exclude: /node_modules/,
-          use: 'awesome-typescript-loader',
+          use: [
+            { loader: 'awesome-typescript-loader' },
+            { loader: preprocessLoader },
+          ],
         },
       ],
     },

@@ -1,3 +1,21 @@
+<script>
+  import 'assets/css/foundation.css';
+  import { decrementCount, incrementCount } from 'actions/count';
+  import { toCapitalized } from 'util/string';
+
+  let name = 'world';
+</script>
+
+<div class="App">
+  <div class="App__content">
+    <h1>Hello {toCapitalized(name)}</h1>
+    <input bind:value={name} />
+
+    <input type="button" on:click={decrementCount} value="-" />
+    <input type="button" on:click={incrementCount} value="+" />
+  </div>
+</div>
+
 <style>
   .App {
     background:       linear-gradient(135deg, var(--secondary-background-color), var(--primary-background-color));
@@ -18,17 +36,3 @@
     padding-bottom: var(--small);
   }
 </style>
-
-<script>
-  import 'assets/css/foundation.css';
-  import { toCapitalized } from 'util/string';
-
-  let name = 'world';
-</script>
-
-<div class="App">
-  <div class="App__content">
-    <h1>Hello {toCapitalized(name)}</h1>
-    <input bind:value={name} />
-  </div>
-</div>
