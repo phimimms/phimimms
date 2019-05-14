@@ -1,4 +1,4 @@
-import md5 from 'md5-hash';
+import { sha1 } from 'crypto-hash';
 import { applyMiddleware, compose, createStore as createReduxStore, Store } from 'redux';
 import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
 
@@ -90,12 +90,12 @@ export function createStore(): void {
 
     Promise.all(
       Object.values(storeSubscriptions)
-        .map((subscriptions: StoreSubscription[]) => subscriptions.map((subscription) => {
+        .map((subscriptions: StoreSubscription[]) => subscriptions.map(async(subscription) => {
           const { callback, mapStateToArgs } = subscription;
           let { serial: formerSerial } = subscription;
 
           const args = mapStateToArgs(state);
-          const serial = md5(JSON.stringify(args));
+          const serial = await sha1(JSON.stringify(args));
 
           if (serial === formerSerial) {
             return;
@@ -116,8 +116,8 @@ export function createStore(): void {
   }
 }
 
-export function subscribeToStore(mapStateToArgs: (object) => object, callback: (object) => void): void {
-  const subscriptionId: string = md5(callback.toString());
+export async function subscribeToStore(mapStateToArgs: (object) => object, callback: (object) => void): Promise<void> {
+  const subscriptionId: string = await sha1(callback.toString());
 
   let subscriptions: StoreSubscription[] = storeSubscriptions[subscriptionId];
   if (!subscriptions) {
@@ -138,7 +138,7 @@ export function subscribeToStore(mapStateToArgs: (object) => object, callback: (
 
   const args = mapStateToArgs(store.getState());
 
-  subscription.serial = md5(JSON.stringify(args));
+  subscription.serial = await sha1(JSON.stringify(args));
 
   callback(args);
 }
