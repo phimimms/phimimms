@@ -83,7 +83,7 @@ export function createStore(): void {
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-  store = createReduxStore(rootReducer, initialState, enhancer);
+  store = createReduxStore(rootReducer, initialState as any, enhancer);
 
   store.subscribe(() => {
     const state: {} = store.getState();
@@ -97,7 +97,7 @@ export function createStore(): void {
           const args = mapStateToArgs(state);
           const serial = md5(JSON.stringify(args));
 
-          if (formerSerial === serial) {
+          if (serial === formerSerial) {
             return;
           }
 

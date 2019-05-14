@@ -1,7 +1,7 @@
 import { toCapitalized } from './string';
 
-describe('util/string', () => {
-  test('toCapitalized()', () => {
+describe('util/string', (): void => {
+  test('toCapitalized()', (): void => {
     expect(toCapitalized('foo')).toBe('Foo');
     expect(toCapitalized('foo bar')).toBe('Foo Bar');
 
