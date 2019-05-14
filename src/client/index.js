@@ -1,4 +1,4 @@
-import { createStore } from 'redux/configure';
+import { createStore } from '.redux';
 
 import './style.css';
 

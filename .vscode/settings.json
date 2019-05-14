@@ -4,6 +4,7 @@
   ],
   "vsicons.associations.folders": [
     { "extensions": [ ".jest" ], "icon": "test" },
+    { "extensions": [ ".redux" ], "icon": "redux" },
     { "extensions": [ "dictionary" ], "icon": "library" },
   ],
 }

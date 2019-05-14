@@ -1,9 +1,19 @@
 <script>
-  import 'assets/css/foundation.css';
+  import { subscribeToStore } from '.redux';
+  import initialState from '.redux/initialState';
   import { decrementCount, incrementCount } from 'actions/count';
+  import 'assets/css/foundation.css';
   import { toCapitalized } from 'util/string';
 
+  let count = initialState.count;
   let name = 'world';
+
+  subscribeToStore(
+    ({ count }) => ({ foo: count }),
+    ({ foo }) => {
+      count = foo;
+    }
+  );
 </script>
 
 <div class="App">
@@ -13,6 +23,8 @@
 
     <input type="button" on:click={decrementCount} value="-" />
     <input type="button" on:click={incrementCount} value="+" />
+
+    <p>{count}</p>
   </div>
 </div>
 

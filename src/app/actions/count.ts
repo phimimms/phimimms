@@ -1,6 +1,6 @@
-import { COUNT__DECREMENT, COUNT__INCREMENT} from 'dictionary/actionTypes'
-import { createAction } from 'redux/configure';
+import { createAction } from '.redux';
+import { COUNT__DECREMENT, COUNT__INCREMENT } from 'dictionary/actionTypes';
 
-export const decrementCount = createAction(COUNT__DECREMENT);
+export const decrementCount = createAction({ type: COUNT__DECREMENT });
 
-export const incrementCount = createAction(COUNT__INCREMENT);
+export const incrementCount = createAction({ type: COUNT__INCREMENT });
