@@ -46,14 +46,6 @@ module.exports = function getWebpackConfig() {
             { loader: 'css-loader' },
             {
               loader: 'postcss-loader',
-              options: {
-                plugins() {
-                  return [
-                    require('precss'),
-                    require('autoprefixer'),
-                  ];
-                },
-              },
             },
           ],
         },
@@ -65,7 +57,6 @@ module.exports = function getWebpackConfig() {
               loader: 'svelte-loader',
               options: {
                 emitCss: true,
-                hotReload: isDev,
               },
             },
             {
@@ -106,7 +97,7 @@ module.exports = function getWebpackConfig() {
     plugins: getPlugins(isDev),
 
     resolve: {
-      extensions: [ '.js', '.json', '.svelte', '.ts' ],
+      extensions: [ '.svelte', '.ts', '.mjs', '.js', '.json' ],
       mainFields: [ 'svelte', 'browser', 'module', 'main' ],
       modules: [
         path.join(__dirname, 'src/app'),

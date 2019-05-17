@@ -1,7 +1,7 @@
 export interface ActionType {
-  FAILURE: string;
-  REQUEST: string;
-  SUCCESS: string;
+  readonly FAILURE: string;
+  readonly REQUEST: string;
+  readonly SUCCESS: string;
 }
 
 function createActionType(actionName: string): ActionType {

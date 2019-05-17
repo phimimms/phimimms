@@ -5,7 +5,7 @@ import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'dictionary/actionTypes';
 import createReducer from 'reducers';
 
-import initialState from './initialState';
+import initialState, { State } from './initialState';
 
 interface StoreSubscription {
   callback: (...any) => void,
@@ -18,16 +18,16 @@ const storeSubscriptions: { [ subscriptionId: string ]: StoreSubscription[] } = 
 let store: Store = null;
 
 export interface Action {
-  error?: object,
-  header: object,
-  payload?: object,
-  type: string,
+  readonly error?: object,
+  readonly header: object,
+  readonly payload?: object,
+  readonly type: string,
 }
 
 interface ActionDefinition {
   getPayload?: (...any) => Promise<any>,
   mapArgsToHeader?: (...any) => object,
-  type: ActionType,
+  readonly type: ActionType,
 }
 
 export function createAction(actionDefinition: ActionDefinition): (...any) => Promise<any> {
@@ -83,10 +83,10 @@ export function createStore(): void {
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-  store = createReduxStore(rootReducer, initialState as any, enhancer);
+  store = createReduxStore(rootReducer, initialState as object, enhancer);
 
   store.subscribe(() => {
-    const state: {} = store.getState();
+    const state: State = store.getState();
 
     Promise.all(
       Object.values(storeSubscriptions)
@@ -116,7 +116,7 @@ export function createStore(): void {
   }
 }
 
-export async function subscribeToStore(mapStateToArgs: (object) => object, callback: (object) => void): Promise<void> {
+export async function subscribeToStore(mapStateToArgs: (state: State) => object, callback: (object) => void): Promise<void> {
   const subscriptionId: string = await sha1(callback.toString());
 
   let subscriptions: StoreSubscription[] = storeSubscriptions[subscriptionId];

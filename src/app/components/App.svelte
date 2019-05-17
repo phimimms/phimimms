@@ -9,9 +9,9 @@
   let name = 'world';
 
   subscribeToStore(
-    ({ count }) => ({ foo: count }),
-    ({ foo }) => {
-      count = foo;
+    ({ count }) => ({ newCount: count }),
+    ({ newCount }) => {
+      count = newCount;
     }
   );
 </script>
