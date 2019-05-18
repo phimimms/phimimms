@@ -3,13 +3,14 @@
   import initialState from '.redux/initialState';
   import { decrementCount, incrementCount } from 'actions/count';
   import 'assets/css/foundation.css';
+  import Button from 'components/Button';
   import { toCapitalized } from 'util/string';
 
   let count = initialState.count;
   let name = 'world';
 
   subscribeToStore(
-    ({ count }) => ({ newCount: count }),
+    ({ count: newCount }) => ({ newCount }),
     ({ newCount }) => {
       count = newCount;
     }
@@ -21,10 +22,10 @@
     <h1>Hello {toCapitalized(name)}</h1>
     <input bind:value={name} />
 
-    <input type="button" on:click={decrementCount} value="-" />
-    <input type="button" on:click={incrementCount} value="+" />
+    <Button on:click={decrementCount} label="-" />
+    <Button on:click={incrementCount} label="+" />
 
-    <p>{count}</p>
+    <p>The total is {count}</p>
   </div>
 </div>
 

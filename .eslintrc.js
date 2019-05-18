@@ -61,7 +61,7 @@ module.exports = {
       "webpack": {
         "config": {
           "resolve": {
-            "extensions": [ ".js", ".json", ".svelte", ".ts" ],
+            "extensions": [ ".svelte", ".ts", ".mjs", ".js", ".json" ],
             "modules": [
               "src/app",
               "node_modules"
