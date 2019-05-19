@@ -6,7 +6,7 @@
   import Button from 'components/Button';
   import { toCapitalized } from 'util/string';
 
-  let count = initialState.count;
+  let { count } = initialState;
   let name = 'world';
 
   subscribeToStore(

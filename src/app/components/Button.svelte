@@ -17,11 +17,13 @@
 
 <style>
   div {
+    align-items:      center;
     background-color: var(--primary-color);
     border-radius:    var(--small--3x);
     color:            var(--light-color);
     cursor:           pointer;
     display:          inline-flex;
+    height:           var(--medium--2x);
     justify-content:  center;
     user-select:      none;
     width:            var(--large--3x);
