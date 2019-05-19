@@ -96,7 +96,7 @@ module.exports = {
     "comma-style": 2,
     "computed-property-spacing": [ "error", "never" ],
     "eol-last": 2,
-    "func-call-spacing": [ "error", "never" ],
+    "func-call-spacing": "off",
     "func-name-matching": 2,
     "func-names": [ "error", "never" ],
     "func-style": [ "error", "declaration" ],
@@ -156,7 +156,7 @@ module.exports = {
     "prefer-object-spread": 2,
     "quote-props": [ "error", "as-needed" ],
     "quotes": [ "error", "single", { "allowTemplateLiterals": true } ],
-    "semi": [ "error", "always" ],
+    "semi": "off",
     "semi-spacing": 2,
     "semi-style": [ "error", "last" ],
     "sort-keys": 2,
@@ -200,7 +200,20 @@ module.exports = {
     "yield-star-spacing": 2,
 
     /* TypeScript */
+    "@typescript-eslint/ban-ts-ignore": 2,
+    "@typescript-eslint/func-call-spacing": 2,
     "@typescript-eslint/indent": [ "error", 2 ],
+    "@typescript-eslint/member-naming": [ "error", { "private": "^_" } ],
+    "@typescript-eslint/member-ordering": 2,
+    "@typescript-eslint/no-extraneous-class": 2,
+    "@typescript-eslint/no-for-in-array": 2,
+    "@typescript-eslint/no-require-imports": 2,
+    "@typescript-eslint/no-this-alias": 2,
+    "@typescript-eslint/no-type-alias": 2,
+    "@typescript-eslint/no-useless-constructor": 2,
+    "@typescript-eslint/prefer-for-of": 2,
+    "@typescript-eslint/semi": 2,
+    "@typescript-eslint/unified-signatures": 2,
   },
   "settings": {
     "import/resolver": {
