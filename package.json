@@ -59,8 +59,9 @@
     "webpack-dev-server": "^3.4.1"
   },
   "dependencies": {
-    "crypto-hash": "^1.2.0",
+    "crypto-hash": "^1.2.1",
     "redux": "^4.0.1",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "uuid": "^3.3.2"
   }
 }

@@ -4,6 +4,7 @@
   import { decrementCount, incrementCount } from 'actions/count';
   import 'assets/css/foundation.css';
   import Button from 'components/Button';
+  import TextField from 'components/TextField';
   import { toCapitalized } from 'util/string';
 
   let { count } = initialState;
@@ -15,12 +16,16 @@
       count = newCount;
     }
   );
+
+  function onNameChange({ detail: { value } }) {
+    name = value;
+  }
 </script>
 
 <div class="App">
   <div class="App__content">
     <h1>Hello {toCapitalized(name)}</h1>
-    <input bind:value={name} />
+    <TextField value={name} on:change={onNameChange} />
 
     <Button on:click={decrementCount} label="-" />
     <Button on:click={incrementCount} label="+" />
