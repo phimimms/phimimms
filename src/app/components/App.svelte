@@ -34,7 +34,7 @@
   </div>
 </div>
 
-<style>
+<style lang="scss">
   .App {
     background:       linear-gradient(135deg, var(--secondary-background-color), var(--primary-background-color));
     background-color: var(--secondary-background-color);

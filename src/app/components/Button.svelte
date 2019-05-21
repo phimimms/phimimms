@@ -15,7 +15,7 @@
   {label}
 </div>
 
-<style>
+<style lang="scss">
   div {
     align-items:      center;
     background-color: var(--primary-color);
@@ -27,10 +27,10 @@
     justify-content:  center;
     user-select:      none;
     width:            var(--large--3x);
-  }
 
-  div.is-disabled {
-    background-color: var(--disabled-color);
-    cursor:           default;
+    &.is-disabled {
+      background-color: var(--disabled-color);
+      cursor:           default;
+    }
   }
 </style>

@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-require-imports, @typescript-eslint/no-var-requires, prefer-named-capture-group */
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
 const webpack = require('webpack');
 
-module.exports = function getWebpackConfig() {
+module.exports = function() {
   const isDev = (process.env.NODE_ENV === 'development');
 
   const preprocessLoader = `preprocess-loader?${isDev ? '+DEVELOPMENT' : ''}`;
@@ -35,7 +36,7 @@ module.exports = function getWebpackConfig() {
     module: {
       rules: [
         {
-          test: /\.(css|scss)$/,
+          test: /\.(css|scss)$/u,
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
@@ -50,13 +51,17 @@ module.exports = function getWebpackConfig() {
           ],
         },
         {
-          test: /\.svelte$/,
-          exclude: /node_modules/,
+          exclude: /node_modules/u,
+          test: /\.svelte$/u,
           use: [
             {
               loader: 'svelte-loader',
               options: {
                 emitCss: true,
+                preprocess: require('svelte-preprocess')({
+                  postcss: true,
+                  typescript: true,
+                }),
               },
             },
             {
@@ -65,8 +70,8 @@ module.exports = function getWebpackConfig() {
           ],
         },
         {
-          test: /\.ts$/,
-          exclude: /node_modules/,
+          exclude: /node_modules/u,
+          test: /\.ts$/u,
           use: [
             { loader: 'awesome-typescript-loader' },
             { loader: preprocessLoader },
@@ -82,7 +87,7 @@ module.exports = function getWebpackConfig() {
             chunks: 'all',
             minChunks: 2,
             name: 'vendor',
-            test: /node_modules/,
+            test: /node_modules/u,
           },
         },
       },
@@ -97,7 +102,7 @@ module.exports = function getWebpackConfig() {
     plugins: getPlugins(isDev),
 
     resolve: {
-      extensions: [ '.svelte', '.ts', '.mjs', '.js', '.json' ],
+      extensions: [ '.ts', '.mjs', '.svelte', '.js', '.json' ],
       mainFields: [ 'svelte', 'browser', 'module', 'main' ],
       modules: [
         path.join(__dirname, 'src/app'),
@@ -107,15 +112,13 @@ module.exports = function getWebpackConfig() {
 
     target: 'web',
   };
-}
+};
 
 function getPlugins(isDev) {
   const devPlugins = [];
 
   if (isDev) {
-    devPlugins.push(
-      new webpack.HotModuleReplacementPlugin()
-    );
+    devPlugins.push(new webpack.HotModuleReplacementPlugin());
   }
 
   return [
