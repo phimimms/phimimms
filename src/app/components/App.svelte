@@ -27,8 +27,8 @@
     <h1>Hello {toCapitalized(name)}</h1>
     <TextField value={name} on:change={onNameChange} />
 
-    <Button on:click={decrementCount} label="-" />
-    <Button on:click={incrementCount} label="+" />
+    <Button label="-" on:click={decrementCount} />
+    <Button label="+" on:click={incrementCount} />
 
     <p>The total is {count}</p>
   </div>
