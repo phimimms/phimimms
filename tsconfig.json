@@ -6,4 +6,7 @@
     "target": "es5",
   },
   "exclude": [ "src/app/**/*.test.ts" ],
+  "typedocOptions": {
+    "out": "public/docs",
+  },
 }
