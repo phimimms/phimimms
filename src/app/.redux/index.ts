@@ -8,13 +8,28 @@ import createReducer from 'reducers';
 import initialState, { State } from './initialState';
 
 interface StoreSubscription {
-  callback: (...any) => void,
-  mapStateToArgs: (...any) => object,
+  /**
+   * The callback of the subscription.
+   */
+  callback: (object) => void,
+  /**
+   * Maps the state of the application to the callback argument of the subscription.
+   */
+  mapStateToArg: (State) => object,
+  /**
+   * The hash of the callback argument from the former callback invocation.
+   */
   serial?: string,
 }
 
+/**
+ * The map of subscriptions to the store.
+ */
 const storeSubscriptions: { [ subscriptionId: string ]: StoreSubscription[] } = {};
 
+/**
+ * The Redux store.
+ */
 let store: Store = null;
 
 export interface Action {
@@ -25,11 +40,24 @@ export interface Action {
 }
 
 interface ActionDefinition {
+  /**
+   * Gets the payload of the action.
+   */
   getPayload?: (...any) => Promise<any>,
+  /**
+   * Maps the arguments of the payload callback to the header of the action.
+   */
   mapArgsToHeader?: (...any) => object,
+  /**
+   * The action type.
+   */
   readonly type: ActionType,
 }
 
+/**
+ * Creates the dispatch function of the action.
+ * @param actionDefinition  The definition of the action.
+ */
 export function createAction(actionDefinition: ActionDefinition): (...any) => Promise<any> {
   const {
     getPayload = () => Promise.resolve(null),
@@ -65,6 +93,9 @@ export function createAction(actionDefinition: ActionDefinition): (...any) => Pr
   }
 }
 
+/**
+ * Creates the Redux store.
+ */
 export function createStore(): void {
   const rootReducer = createReducer();
 
@@ -90,11 +121,12 @@ export function createStore(): void {
 
     Promise.all(
       Object.values(storeSubscriptions)
-        .map((subscriptions: StoreSubscription[]) => subscriptions.map(async(subscription) => {
-          const { callback, mapStateToArgs } = subscription;
+        .reduce((subscriptions, s) => subscriptions.concat(s), [])
+        .map(async(subscription) => {
+          const { callback, mapStateToArg } = subscription;
           let { serial: formerSerial } = subscription;
 
-          const args = mapStateToArgs(state);
+          const args = mapStateToArg(state);
           const serial = await sha1(JSON.stringify(args));
 
           if (serial === formerSerial) {
@@ -104,7 +136,6 @@ export function createStore(): void {
           subscription.serial = serial;
           return callback(args);
         }))
-    );
   });
 
   if (module.hot) {
@@ -116,7 +147,12 @@ export function createStore(): void {
   }
 }
 
-export async function subscribeToStore(mapStateToArgs: (state: State) => object, callback: (object) => void): Promise<void> {
+/**
+ * Subscribes to the Redux store.
+ * @param mapStateToArg Maps the state of the application to the callback argument.
+ * @param callback      The callback of the subscription.
+ */
+export async function subscribeToStore(mapStateToArg: (state: State) => object, callback: (object) => void): Promise<void> {
   const subscriptionId: string = await sha1(callback.toString());
 
   let subscriptions: StoreSubscription[] = storeSubscriptions[subscriptionId];
@@ -127,7 +163,7 @@ export async function subscribeToStore(mapStateToArgs: (state: State) => object,
 
   const subscription: StoreSubscription = {
     callback,
-    mapStateToArgs,
+    mapStateToArg,
   };
 
   subscriptions.push(subscription);
@@ -136,7 +172,7 @@ export async function subscribeToStore(mapStateToArgs: (state: State) => object,
     return;
   }
 
-  const args = mapStateToArgs(store.getState());
+  const args = mapStateToArg(store.getState());
 
   subscription.serial = await sha1(JSON.stringify(args));
 
