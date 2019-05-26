@@ -38,6 +38,7 @@
   .App {
     background:       linear-gradient(135deg, var(--secondary-background-color), var(--primary-background-color));
     background-color: var(--secondary-background-color);
+    font-family:      'Roboto', 'Helvetica', 'Arial', sans-serif;
     height:           100%;
     width:            100%;
   }
