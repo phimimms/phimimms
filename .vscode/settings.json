@@ -4,9 +4,7 @@
     "svelte",
     "typescript",
   ],
-  "vsicons.associations.files": [
-    { "extensions": [ "svelte" ], "icon": "html" },
-  ],
+  "svelte.language-server.runtime": "/Users/phimimms/.nvm/versions/node/v12.3.0/bin/node",
   "vsicons.associations.folders": [
     { "extensions": [ ".jest" ], "icon": "test" },
     { "extensions": [ ".redux" ], "icon": "redux" },
