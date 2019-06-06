@@ -32,10 +32,13 @@ const storeSubscriptions: { [ subscriptionId: string ]: StoreSubscription[] } = 
  */
 let store: Store = null;
 
-export interface Action {
-  readonly error?: object,
+export type Action = {
   readonly header: object,
   readonly payload?: object,
+  readonly type: string,
+} | {
+  readonly error: object,
+  readonly header: object,
   readonly type: string,
 }
 
