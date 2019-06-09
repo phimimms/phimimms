@@ -1,13 +1,13 @@
 package main
 
 import (
-  "github.com/gin-gonic/gin"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
-  router := gin.Default()
+	router := gin.Default()
 
-  router.Static("/", "./public")
+	router.Static("/", "./public")
 
-  router.Run(":3000")
+	router.Run(":3000")
 }
