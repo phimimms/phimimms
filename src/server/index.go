@@ -1,13 +1,9 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+  "github.com/phimimms/phimimms/router"
 )
 
 func main() {
-	router := gin.Default()
-
-	router.Static("/", "./public")
-
-	router.Run(":3000")
+  startRouter()
 }
