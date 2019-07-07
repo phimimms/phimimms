@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-  startRouter()
+  router.startRouter()
 }

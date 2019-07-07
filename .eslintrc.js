@@ -12,6 +12,12 @@ module.exports = {
     'plugin:import/typescript',
     'plugin:import/warnings',
   ],
+  overrides: [
+    {
+      files: [ '*.svelte' ],
+      processor: 'svelte3/svelte3',
+    }
+  ],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     ecmaFeatures: {
@@ -203,7 +209,7 @@ module.exports = {
     /* TypeScript */
     '@typescript-eslint/ban-ts-ignore': 2,
     '@typescript-eslint/func-call-spacing': 1,
-    '@typescript-eslint/indent': [ 2, 2 ],
+    '@typescript-eslint/indent': 'off',
     '@typescript-eslint/member-naming': [ 2, { 'private': '^_' } ],
     '@typescript-eslint/member-ordering': 2,
     '@typescript-eslint/no-extraneous-class': 2,
@@ -225,11 +231,12 @@ module.exports = {
             extensions: [ '.ts', '.mjs', '.svelte', '.js', '.json' ],
             modules: [
               'src/app',
-              'node_modules'
+              'node_modules',
             ],
           },
         },
       },
     },
-  }
+    'svelte3/ignore-styles': () => true,
+  },
 };

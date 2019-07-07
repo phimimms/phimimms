@@ -11,7 +11,7 @@
   }
 </script>
 
-<div class={`${isDisabled ? 'is-disabled': ''}`} on:click={!isDisabled ? onClick : undefined}>
+<div class={`${isDisabled ? 'is-disabled' : ''}`} on:click={!isDisabled ? onClick : undefined}>
   {label}
 </div>
 

@@ -10,12 +10,15 @@ import initialState, { State } from './initialState';
 interface StoreSubscription {
   /**
    * The callback of the subscription.
+   * @param arg The argument of the application state subscription.
    */
-  callback: (object) => void,
+  callback: (arg: object) => void,
   /**
    * Maps the state of the application to the callback argument of the subscription.
+   * @param   state The state of the application.
+   * @returns The callback argument of the subscription.
    */
-  mapStateToArg: (State) => object,
+  mapStateToArg: (state: State) => object,
   /**
    * The hash of the callback argument from the former callback invocation.
    */
@@ -25,7 +28,7 @@ interface StoreSubscription {
 /**
  * The map of subscriptions to the store.
  */
-const storeSubscriptions: { [ subscriptionId: string ]: StoreSubscription[] } = {};
+const storeSubscriptions: Map<string, StoreSubscription[]> = new Map();
 
 /**
  * The Redux store.
@@ -123,7 +126,7 @@ export function createStore(): void {
     const state: State = store.getState();
 
     Promise.all(
-      Object.values(storeSubscriptions)
+      Array.from(storeSubscriptions.values())
         .reduce((subscriptions, s) => subscriptions.concat(s), [])
         .map(async(subscription) => {
           const { callback, mapStateToArg } = subscription;
@@ -158,10 +161,10 @@ export function createStore(): void {
 export async function subscribeToStore(mapStateToArg: (state: State) => object, callback: (object) => void): Promise<void> {
   const subscriptionId: string = await sha1(callback.toString());
 
-  let subscriptions: StoreSubscription[] = storeSubscriptions[subscriptionId];
+  let subscriptions: StoreSubscription[] = storeSubscriptions.get(subscriptionId);
   if (!subscriptions) {
     subscriptions = [];
-    storeSubscriptions[subscriptionId] = subscriptions;
+    storeSubscriptions.set(subscriptionId, subscriptions);
   }
 
   const subscription: StoreSubscription = {
