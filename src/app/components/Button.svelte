@@ -1,17 +1,13 @@
-<script>
+<script lang="typescript">
   import { createEventDispatcher } from 'svelte';
 
-  export let isDisabled = false;
-  export let label;
+  export let disabled: boolean = false;
+  export let label: string;
 
   const dispatch = createEventDispatcher();
-
-  function onClick() {
-    dispatch('click');
-  }
 </script>
 
-<div class={`${isDisabled ? 'is-disabled' : ''}`} on:click={!isDisabled ? onClick : undefined}>
+<div class:disabled on:click={!disabled ? () => dispatch('click', null) : undefined}>
   {label}
 </div>
 
@@ -28,7 +24,7 @@
     user-select:      none;
     width:            var(--large--3x);
 
-    &.is-disabled {
+    &.disabled {
       background-color: var(--disabled-color);
       cursor:           default;
     }

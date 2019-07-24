@@ -1,4 +1,4 @@
-<script>
+<script lang="typescript">
   import { createEventDispatcher, onMount } from 'svelte';
   import uuid from 'uuid/v4';
 
@@ -6,18 +6,18 @@
 
   const id = `TextField__${uuid()}`;
 
-  export let isDisabled = false;
-  export let label = '';
-  export let value = '';
+  export let disabled: boolean = false;
+  export let label: string = '';
+  export let value: string = '';
 
-  let inputElement;
+  let inputElement: HTMLInputElement;
 
   onMount(() => {
     inputElement.value = value;
   });
 
-  function onChange({ target: { value: newValue } }) {
-    if (isDisabled) {
+  function onChange({ target: { value: newValue } }: { target: { value: string } }) {
+    if (disabled) {
       inputElement.value = value;
 
       return;
@@ -31,4 +31,9 @@
 {#if label}
 <label for={id}>{label}</label>
 {/if}
-<input bind:this={inputElement} id={id} type="text" on:input={onChange} />
+<input
+  bind:this={inputElement}
+  id={id}
+  type="text"
+  on:input={onChange}
+  />
