@@ -4,7 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func startRouter() {
+func Start() {
 	router := gin.Default()
 
 	router.Static("/", "./public")
