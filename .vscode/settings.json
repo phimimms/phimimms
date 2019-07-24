@@ -4,9 +4,6 @@
     "svelte",
     "typescript",
   ],
-  "go.gopath": "/Users/phimimms/.gvm/pkgsets/go1.12/global",
-  "go.goroot": "/Users/phimimms/.gvm/gos/go1.12",
-  "svelte.language-server.runtime": "/Users/phimimms/.nvm/versions/node/v12.3.0/bin/node",
   "vsicons.associations.folders": [
     { "extensions": [ ".jest" ], "icon": "test" },
     { "extensions": [ ".redux" ], "icon": "redux" },
