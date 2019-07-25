@@ -42,11 +42,11 @@ export interface Action {
   readonly type: string,
 }
 
-interface ActionDefinition {
+interface ActionDefinition<Payload> {
   /**
    * Gets the payload of the action.
    */
-  getPayload?: (...args: unknown[]) => Promise<unknown>,
+  getPayload?: (...args: unknown[]) => Promise<Payload>,
   /**
    * Maps the arguments of the payload callback to the header of the action.
    */
@@ -61,14 +61,14 @@ interface ActionDefinition {
  * Creates the dispatch function of the action.
  * @param actionDefinition  The definition of the action.
  */
-export function createAction(actionDefinition: ActionDefinition): (...args: unknown[]) => Promise<unknown> {
+export function createAction<Payload>(actionDefinition: ActionDefinition<Payload>): (...args: unknown[]) => Promise<Payload> {
   const {
-    getPayload = () => Promise.resolve(null),
+    getPayload = (...args) => Promise.resolve(null),
     mapArgsToHeader = () => ({}),
     type,
   } = actionDefinition;
 
-  return async(...args) => {
+  return async(...args): Promise<Payload> => {
     if (!store) {
       // @ifdef DEVELOPMENT
       console.warn('Cannot dispatch the following action without a store', type);
@@ -83,7 +83,7 @@ export function createAction(actionDefinition: ActionDefinition): (...args: unkn
     await thunkDispatch((dispatch) => dispatch({ header, type: type.REQUEST }));
 
     try {
-      const payload = await getPayload(...args);
+      const payload: Payload = await getPayload(...args);
 
       await thunkDispatch((dispatch) => dispatch({ header, payload, type: type.SUCCESS }));
 
