@@ -5,22 +5,22 @@ import thunkMiddleware, { ThunkDispatch } from 'redux-thunk';
 import { ActionType } from 'dictionary/actionTypes';
 import createReducer from 'reducers';
 
-import initialState, { State } from './initialState';
+import { initialState, State } from './state';
 
-interface StoreSubscription {
+interface StoreSubscription<SubscriptionArgument> {
   /**
    * The callback of the subscription.
    * @param arg The argument of the application state subscription.
    */
-  callback: (arg: object) => void,
+  callback: (arg: SubscriptionArgument) => void,
   /**
-   * Maps the state of the application to the callback argument of the subscription.
+   * Maps the state of the application to the argument of the subscription.
    * @param   state The state of the application.
-   * @returns The callback argument of the subscription.
+   * @returns The argument of the application state subscription.
    */
-  mapStateToArg: (state: State) => object,
+  mapStateToArg: (state: State) => SubscriptionArgument,
   /**
-   * The hash of the callback argument from the former callback invocation.
+   * The hash of the application state subscription argument from the former callback invocation.
    */
   serial?: string,
 }
@@ -28,20 +28,17 @@ interface StoreSubscription {
 /**
  * The map of subscriptions to the store.
  */
-const storeSubscriptions: Map<string, StoreSubscription[]> = new Map();
+const storeSubscriptions: Map<string, StoreSubscription<unknown>[]> = new Map();
 
 /**
  * The Redux store.
  */
 let store: Store = null;
 
-export type Action = {
+export interface Action {
+  readonly error?: object,
   readonly header: object,
-  readonly payload?: object,
-  readonly type: string,
-} | {
-  readonly error: object,
-  readonly header: object,
+  readonly payload?: unknown,
   readonly type: string,
 }
 
@@ -49,11 +46,11 @@ interface ActionDefinition {
   /**
    * Gets the payload of the action.
    */
-  getPayload?: (...any) => Promise<any>,
+  getPayload?: (...args: unknown[]) => Promise<unknown>,
   /**
    * Maps the arguments of the payload callback to the header of the action.
    */
-  mapArgsToHeader?: (...any) => object,
+  mapArgsToHeader?: (...args: unknown[]) => object,
   /**
    * The action type.
    */
@@ -64,7 +61,7 @@ interface ActionDefinition {
  * Creates the dispatch function of the action.
  * @param actionDefinition  The definition of the action.
  */
-export function createAction(actionDefinition: ActionDefinition): (...any) => Promise<any> {
+export function createAction(actionDefinition: ActionDefinition): (...args: unknown[]) => Promise<unknown> {
   const {
     getPayload = () => Promise.resolve(null),
     mapArgsToHeader = () => ({}),
@@ -86,7 +83,7 @@ export function createAction(actionDefinition: ActionDefinition): (...any) => Pr
     await thunkDispatch((dispatch) => dispatch({ header, type: type.REQUEST }));
 
     try {
-      const payload: object = await getPayload(...args);
+      const payload = await getPayload(...args);
 
       await thunkDispatch((dispatch) => dispatch({ header, payload, type: type.SUCCESS }));
 
@@ -120,7 +117,7 @@ export function createStore(): void {
 
   const enhancer = composeEnhancers(applyMiddleware(...middlewares));
 
-  store = createReduxStore(rootReducer, initialState as object, enhancer);
+  store = createReduxStore(rootReducer, initialState, enhancer);
 
   store.subscribe(() => {
     const state: State = store.getState();
@@ -132,15 +129,15 @@ export function createStore(): void {
           const { callback, mapStateToArg } = subscription;
           let { serial: formerSerial } = subscription;
 
-          const args = mapStateToArg(state);
-          const serial = await sha1(JSON.stringify(args));
+          const arg = mapStateToArg(state);
+          const serial = await sha1(JSON.stringify(arg));
 
           if (serial === formerSerial) {
             return;
           }
 
           subscription.serial = serial;
-          return callback(args);
+          return callback(arg);
         }))
   });
 
@@ -158,16 +155,16 @@ export function createStore(): void {
  * @param mapStateToArg Maps the state of the application to the callback argument.
  * @param callback      The callback of the subscription.
  */
-export async function subscribeToStore(mapStateToArg: (state: State) => object, callback: (object) => void): Promise<void> {
+export async function subscribeToStore(mapStateToArg: (state: State) => unknown, callback: (arg: unknown) => void): Promise<void> {
   const subscriptionId: string = await sha1(callback.toString());
 
-  let subscriptions: StoreSubscription[] = storeSubscriptions.get(subscriptionId);
+  let subscriptions: StoreSubscription<unknown>[] = storeSubscriptions.get(subscriptionId);
   if (!subscriptions) {
     subscriptions = [];
     storeSubscriptions.set(subscriptionId, subscriptions);
   }
 
-  const subscription: StoreSubscription = {
+  const subscription: StoreSubscription<unknown> = {
     callback,
     mapStateToArg,
   };
@@ -178,9 +175,9 @@ export async function subscribeToStore(mapStateToArg: (state: State) => object, 
     return;
   }
 
-  const args = mapStateToArg(store.getState());
+  const arg = mapStateToArg(store.getState());
 
-  subscription.serial = await sha1(JSON.stringify(args));
+  subscription.serial = await sha1(JSON.stringify(arg));
 
-  callback(args);
+  callback(arg);
 }

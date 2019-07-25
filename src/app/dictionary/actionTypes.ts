@@ -19,5 +19,4 @@ function createActionType(actionName: string): ActionType {
   };
 }
 
-export const COUNT__DECREMENT = createActionType('COUNT__DECREMENT');
-export const COUNT__INCREMENT = createActionType('COUNT__INCREMENT');
+export const UI_THEME__UPDATE = createActionType('UI_THEME__UPDATE');

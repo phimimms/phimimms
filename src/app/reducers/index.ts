@@ -1,12 +1,12 @@
 import { combineReducers, Reducer } from 'redux';
 
-import count from './count';
+import settings from './settings';
 
 /**
  * Creates the root reducer.
  */
 export default function createReducer(): Reducer {
   return combineReducers({
-    count,
+    settings,
   });
 }
