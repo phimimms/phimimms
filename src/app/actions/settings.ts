@@ -5,7 +5,7 @@ import { UITheme } from 'dictionary/settings';
 /**
  * Updates the UI theme of the application.
  */
-export const updateUITheme = createAction<[ UITheme ], UITheme>({
+export const updateUITheme: (uiTheme: UITheme) => Promise<UITheme> = createAction<[ UITheme ], UITheme>({
   getPayload: (uiTheme: UITheme): Promise<UITheme> => Promise.resolve(uiTheme),
   type: UI_THEME__UPDATE,
 });
