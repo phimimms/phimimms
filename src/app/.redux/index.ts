@@ -42,15 +42,15 @@ export interface Action {
   readonly type: string,
 }
 
-interface ActionDefinition<Argument extends unknown[], Payload> {
+interface ActionDefinition<Arguments extends unknown[], Payload> {
   /**
    * Gets the payload of the action.
    */
-  getPayload?: (...args: Argument) => Promise<Payload>,
+  getPayload?: (...args: Arguments) => Promise<Payload>,
   /**
    * Maps the arguments of the payload callback to the header of the action.
    */
-  mapArgsToHeader?: (...args: Argument) => object,
+  mapArgsToHeader?: (...args: Arguments) => object,
   /**
    * The action type.
    */
@@ -61,14 +61,14 @@ interface ActionDefinition<Argument extends unknown[], Payload> {
  * Creates the dispatch function of the action.
  * @param actionDefinition  The definition of the action.
  */
-export function createAction<Argument extends unknown[], Payload>(actionDefinition: ActionDefinition<Argument, Payload>): (...args: Argument) => Promise<Payload> {
+export function createAction<Arguments extends unknown[], Payload>(actionDefinition: ActionDefinition<Arguments, Payload>): (...args: Arguments) => Promise<Payload> {
   const {
     getPayload = (...args) => Promise.resolve(null),
     mapArgsToHeader = (...args) => ({}),
     type,
   } = actionDefinition;
 
-  return async(...args: Argument): Promise<Payload> => {
+  return async(...args: Arguments): Promise<Payload> => {
     if (!store) {
       // @ifdef DEVELOPMENT
       console.warn('Cannot dispatch the following action without a store', type);
