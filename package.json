@@ -52,7 +52,7 @@
     "preprocess-loader": "^0.3.0",
     "redux-immutable-state-invariant": "^2.1.0",
     "rimraf": "^2.6.3",
-    "svelte": "^3.6.4",
+    "svelte": "^3.49.0",
     "svelte-loader": "^2.13.3",
     "svelte-preprocess": "^2.14.4",
     "ts-jest": "^24.0.2",
